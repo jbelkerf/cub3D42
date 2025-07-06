@@ -6,11 +6,11 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/06 22:24:27 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/06 22:38:52 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "../include/cube.h"
 
 
 

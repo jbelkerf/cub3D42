@@ -6,11 +6,11 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:50:18 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/06 22:29:12 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/06 22:38:45 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "../include/cube.h"
 
 void	check_the_file_extention(char *file)
 {
