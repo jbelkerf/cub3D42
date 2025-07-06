@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:40:04 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/19 12:30:02 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/06 22:27:04 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ char	*do_the_job(char **left, char **line, int separator)
 	char	*tmp;
 
 	tmp = *line;
-	*line = ft_substr(tmp, 0, separator);
-	*left = ft_substr(tmp, separator, BUFFER_SIZE);
+	*line = ft_substr1(tmp, 0, separator);
+	*left = ft_substr1(tmp, separator, BUFFER_SIZE);
 	if (*line == NULL || *left == NULL)
 		return (free_p(&tmp), free_p(left), free_p(line), NULL);
 	return (free_p(&tmp), tmp = NULL, *line);
@@ -51,8 +51,8 @@ int	check_left(char **left, char **line)
 		i = check(*left);
 	if (i > 0)
 	{
-		*line = ft_substr(*left, 0, i);
-		*left = ft_substr(*left, i, BUFFER_SIZE);
+		*line = ft_substr1(*left, 0, i);
+		*left = ft_substr1(*left, i, BUFFER_SIZE);
 		if (*line == NULL || *left == NULL)
 			return (free_p(&tmp), free_p(line), free_p(left), 1);
 		free_p(&tmp);
@@ -63,7 +63,7 @@ int	check_left(char **left, char **line)
 	}
 	else if (i == 0)
 	{
-		*line = ft_strjoin(*line, *left);
+		*line = ft_strjoin1(*line, *left);
 		free_p(left);
 	}
 	return (0);
@@ -87,7 +87,7 @@ char	*read_line(int fd, char *buffer, char *line, char **left)
 			return (line);
 		}
 		buffer[read_bytes] = 0;
-		line = ft_strjoin(line, buffer);
+		line = ft_strjoin1(line, buffer);
 		if (line == NULL)
 			return (free_p(&buffer), free_p(left), NULL);
 		read_bytes = check(line);

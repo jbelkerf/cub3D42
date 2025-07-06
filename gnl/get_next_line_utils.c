@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:58:48 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/19 12:25:07 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/06 22:26:18 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*free_p(char **p)
 	return (NULL);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen1(const char *str)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup1(const char *s)
 {
 	char	*re;
 	int		i;
@@ -56,7 +56,7 @@ char	*ft_strdup(const char *s)
 	return (re);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr1(char *s, unsigned int start, size_t len)
 {
 	unsigned int	len_s;
 	unsigned int	i;
@@ -65,9 +65,9 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	i = 0;
 	if (s == NULL)
 		return (NULL);
-	len_s = ft_strlen(s);
+	len_s = ft_strlen1(s);
 	if (len_s < start)
-		return (ft_strdup(""));
+		return (ft_strdup1(""));
 	if (len_s - start < len)
 		len = len_s - start;
 	sub = (char *)malloc((len + 1) * sizeof(char));
@@ -82,7 +82,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	char	*re;
 	int		i;
@@ -91,10 +91,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = -1;
 	i = -1;
 	if (s1 == NULL)
-		s1 = ft_strdup("");
+		s1 = ft_strdup1("");
 	if (s1 == NULL)
 		return (NULL);
-	re = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	re = (char *)malloc((ft_strlen1(s1) + ft_strlen1(s2) + 1) * sizeof(char));
 	if (re == NULL)
 		return (free(s1), NULL);
 	while (s1[++j])
