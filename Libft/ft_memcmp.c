@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:09:06 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/10/25 20:54:50 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
  *
  */
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, int n)
 {
-	size_t				i;
+	int				i;
 	unsigned char		*p1;
 	unsigned char		*p2;
 

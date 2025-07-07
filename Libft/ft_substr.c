@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:02:00 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/01 13:19:23 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:39 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
  * 2- if the len + start is more than the len_s then we should modify the len to
  * ensure that the sub does not cos segv
  */
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
-	unsigned int	len_s;
+	int	len_s;
 	char			*sub;
 
 	if (s == NULL)

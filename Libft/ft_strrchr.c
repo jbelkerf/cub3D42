@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:05:29 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 16:52:09 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  */
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	int	i;
 
 	if ((unsigned char)c == 0)
 		return ((char *)(s + ft_strlen(s)));

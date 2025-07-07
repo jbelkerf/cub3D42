@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:07:35 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 13:33:50 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
  */
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	size_t	i;
-	size_t	lenght;
+	int	i;
+	int	lenght;
 
 	if (s == NULL || f == NULL)
 		return ;

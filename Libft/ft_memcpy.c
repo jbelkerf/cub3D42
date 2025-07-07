@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:09:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/03 17:08:16 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
  * if the n is 0 then the memcpy return the dst if the both memory is NULL
  * then it returns null if everything is perfect then dest is being returned
  */
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, int n)
 {
 	char	*b;
 	char	*s;
-	size_t	i;
+	int	i;
 
 	b = (char *)dest;
 	s = (char *)src;

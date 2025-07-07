@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_resource.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 16:06:59 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:21:45 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/07/07 13:41:17 by JbelkerfIse       #+#    #+#             */
+/*   Updated: 2025/07/07 13:42:49 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/cube.h"
 
-/*
- * no need for documentation but this func count the lenght of a giving string
- */
-int	ft_strlen(const char *str)
+char	**free_arr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (arr && arr[i])
 	{
+		free(arr[i]);
 		i++;
 	}
-	return (i);
+	free(arr);
+	return (NULL);
 }

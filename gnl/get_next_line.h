@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:41:44 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/06 22:25:49 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/07 11:24:37 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*get_next_line(int fd);
 char	*ft_strjoin1(char *s1, char *s2);
 int		ft_strlen1(const char *str);
 char	*ft_strdup1(const char *s);
-char	*ft_substr1(char *s, unsigned int start, size_t len);
+char	*ft_substr1(char *s, int start, int len);
 
 #endif

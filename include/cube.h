@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/06 22:39:09 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/07 18:13:56 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
@@ -30,5 +31,15 @@ typedef struct s_data
 	int		*ceil_rgb;
 }	t_data;
 
+//CHECK MAP
 void	check_map_validity(char *file);
+void	check_map_header(char *file);
+
+//TOOLS
+char	**map_to_str(char *file);
+char	*skipi_abdsami3(int file_fd);
+
+// FREE RESOURCES
+char	**free_arr(char **arr);
+
 #endif

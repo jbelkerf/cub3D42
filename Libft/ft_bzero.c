@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:58:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 12:41:24 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  *the char pointer p created because we cant change or asigne to
  *									a void pointer nor derefrence
  */
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, int n)
 {
-	size_t	i;
+	int	i;
 	char	*p;
 
 	p = (char *)s;

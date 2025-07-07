@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:05:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/01 13:20:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
  */
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 	char	*re;
 
 	if (s1 == NULL || set == NULL)

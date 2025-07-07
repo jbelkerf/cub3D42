@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:05:38 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 16:49:31 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
  * 1- if lil is '\0' then we return the whole big
  * 2- if lil is nt apearing in big we return null
  */
-char	*ft_strnstr(const char *big, const char *lil, size_t len)
+char	*ft_strnstr(const char *big, const char *lil, int len)
 {
-	size_t	j;
-	size_t	i;
+	int	j;
+	int	i;
 
 	if (*lil == '\0')
 		return ((char *)big);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:07:09 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/02 11:15:08 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:22:49 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
  * the strlcpy copy from src to dest respecting a giving size and ensuring 
  * there is a place for a null terminator
  */
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_strlcpy(char *dest, const char *src, int size)
 {
-	size_t	i;
+	int	i;
 
 	if (size == 0)
 		return (ft_strlen(src));

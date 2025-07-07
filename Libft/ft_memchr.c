@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:08:59 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 12:50:11 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
  * the memchr func look up the n byte of  memory pointed by s for the first
  * match with the int c then it return a pinter to that match in s
  */
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, int n)
 {
 	unsigned char	*p;
-	size_t			i;
+	int			i;
 
 	i = 0;
 	p = (unsigned char *)s;

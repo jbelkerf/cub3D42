@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:09:20 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 13:15:24 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  *     	   ####
  * 3- there is no overlap     return 0
  */
-static int	check_overl(char *d, char *s, size_t n)
+static int	check_overl(char *d, char *s, int n)
 {
 	if (s < d && s + n > d)
 		return (1);
@@ -36,11 +36,11 @@ static int	check_overl(char *d, char *s, size_t n)
 /*
  * the r_cpy reverse copy start the copy from the end
  */
-static void	*r_cpy(void *dest, const void *src, size_t n)
+static void	*r_cpy(void *dest, const void *src, int n)
 {
 	unsigned char	*b;
 	unsigned char	*s;
-	size_t			i;
+	int			i;
 
 	b = (unsigned char *)dest;
 	s = (unsigned char *)src;
@@ -58,7 +58,7 @@ static void	*r_cpy(void *dest, const void *src, size_t n)
 /*
  * the memmove func check if the src and the dest is null then it returns null
  */
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, int n)
 {
 	char	*s;
 	char	*d;

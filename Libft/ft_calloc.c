@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:58:43 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 12:45:05 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
  * allocate the total memory neeeded using malloc then it send the memory to
  * the bzero func to set it to 0
  */
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(int nmemb, int size)
 {
 	void	*p;
-	size_t	t;
+	int	t;
 
 	t = nmemb * size;
 	if (!t)

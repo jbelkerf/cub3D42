@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:07:18 by jbelkerf          #+#    #+#             */
-/*   Updated: 2024/11/04 16:40:57 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:22:16 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
  * 1- if size less then len_d  ten the len_d == size return is len_s + size
  * 2- if in size there's a room for src or a part of it then we return default
  */
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+int	ft_strlcat(char *dst, const char *src, int size)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	if (size == 0)
 		return (ft_strlen(src));
