@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:01:24 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:24:01 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/09 16:23:26 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*ft_memchr(const void *s, int c, int n);
 int		ft_memcmp(const void *s1, const void *s2, int n);
 int		ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_strrchr(const char *s, int c);
-char	*ft_strchr(const char *s, int c);
+char	*ft_strchr(const char *s, char c);
 void	*ft_memmove(void *dest, const void *src, int n);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
@@ -66,4 +66,5 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, int n);
+char	*ft_strchr2(const char *s, char c);
 #endif

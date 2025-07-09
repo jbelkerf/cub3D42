@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 13:42:32 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/09 16:15:05 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ typedef struct s_data
 //CHECK MAP
 void	check_map_validity(char *file);
 void	check_map_header(char *file);
-void	check_map_walls(char **map);
+void	check_map_walls(char **map, int length);
 
 //TOOLS
-char	**map_to_str(char *file);
+char	**map_to_str(char *file, int *length, int *width);
 char	*skipi_abdsami3(int file_fd);
 
 //ERRORS

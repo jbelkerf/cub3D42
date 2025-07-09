@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 15:30:05 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/09 13:07:30 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*resize_str(char *str, int new_size)
 	char	*re;
 
 	re = ft_calloc(new_size, sizeof(char));
-	ft_strlcpy(re, str, ft_strlen(str));
+	ft_strlcpy(re, str, ft_strlen(str) + 1);
 	free(str);
 	return (re);
 }
@@ -66,15 +66,15 @@ int	count_line(char *file, int *max_len)
 	return (line_count);
 }
 
-char	**map_to_str(char *file)
+char	**map_to_str(char *file, int *length, int *width)
 {
 	int		fd;
 	char	*line;
 	char	**re;
 	int		i;
-	int		max_len;
 
-	re = malloc((count_line(file, &max_len) + 1) * sizeof(char *));
+	*length = count_line(file, width);
+	re = malloc((*length + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
 	while (1)
 	{
@@ -94,7 +94,7 @@ char	**map_to_str(char *file)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = 0;
-		re[i] = resize_str(line, max_len);
+		re[i] = resize_str(line, *width);
 		i++;
 		line = get_next_line(fd);
 	}

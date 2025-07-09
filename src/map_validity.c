@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:50:18 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 15:33:26 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/09 16:27:14 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	check_map_symbols(char **map)
 void	check_map_validity(char *file)
 {
 	char	**map;
+	int		length;
+	int		width;
 
 	printf(GREEN "checking map's readablity...\n" RESET);
 	check_the_file_readablity(file);
@@ -85,7 +87,10 @@ void	check_map_validity(char *file)
 	printf(GREEN "done!\nchecking map's header...\n" RESET);
 	check_map_header(file);
 	printf(GREEN "done!\nchecking map's symbols...\n" RESET);
-	map = map_to_str(file);
+	map = map_to_str(file, &length, &width);
 	check_map_symbols(map);
-	// check_map_walls(map);
+	printf(GREEN "done!\nchecking map's walls...\n" RESET);
+	check_map_walls(map, length);
+	printf(GREEN "done!\n" RESET);
+	free_arr(map);
 }

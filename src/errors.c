@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:25:06 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 14:45:52 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/09 13:29:07 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	put_error(char *err)
 {
-	printf(RED "Error\n");
+	printf(RED "Error\n\t");
 	printf(RED "%s\n" RESET, err);
 	exit(1);
 }
