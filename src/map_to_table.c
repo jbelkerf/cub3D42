@@ -6,13 +6,23 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/07 18:11:18 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/08 15:30:05 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
 
-int	count_line(char *file)
+char	*resize_str(char *str, int new_size)
+{
+	char	*re;
+
+	re = ft_calloc(new_size, sizeof(char));
+	ft_strlcpy(re, str, ft_strlen(str));
+	free(str);
+	return (re);
+}
+
+int	count_line(char *file, int *max_len)
 {
 	int		fd;
 	int		line_count;
@@ -33,6 +43,7 @@ int	count_line(char *file)
 	str = skipi_abdsami3(fd);
 	if (str)
 	{
+		*max_len = ft_strlen(str);
 		line_count++;
 		free(str);
 	}
@@ -41,6 +52,8 @@ int	count_line(char *file)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
+		if (*max_len < ft_strlen(str))
+			*max_len = ft_strlen(str);
 		line_count++;
 		free(str);
 	}
@@ -59,8 +72,9 @@ char	**map_to_str(char *file)
 	char	*line;
 	char	**re;
 	int		i;
+	int		max_len;
 
-	re = malloc((count_line(file) + 1) * sizeof(char *));
+	re = malloc((count_line(file, &max_len) + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
 	while (1)
 	{
@@ -80,7 +94,7 @@ char	**map_to_str(char *file)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = 0;
-		re[i] = line;
+		re[i] = resize_str(line, max_len);
 		i++;
 		line = get_next_line(fd);
 	}

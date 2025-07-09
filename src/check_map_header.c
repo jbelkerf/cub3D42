@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 13:38:59 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/08 15:37:22 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	match_rgb(char *line)
 	while (line[i] == ' ')
 		i++;
 	colors = ft_split(line + i, ',');
+	free(line);
 	i = 0;
 	while (colors[i] && i < 3)
 	{
@@ -84,12 +85,9 @@ void	match_rgb(char *line)
 	}
 	if (i != 3 || colors[3])
 		err = "invalid rgb";
+	free_arr(colors);
 	if (err)
-	{
-		free_arr(colors);
-		free(line);
 		put_error(err);
-	}
 }
 
 /*
