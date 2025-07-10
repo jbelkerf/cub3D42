@@ -1,0 +1,6 @@
+MLX42/*
+MLX42/
+*.o
+*.a
+*.dSYM/
+cub3D
