@@ -27,6 +27,7 @@ $(NAME): $(SRC)
 		echo "$(GRN)mlx exist$(RESET)";\
 	else\
 		echo "$(YEL)MLX42 not found, setuping it...$(RESET)";\
+		rm -rf MLX42;\
 		git clone https://github.com/codam-coding-college/MLX42.git ;\
 		cd MLX42 && cmake -B build && cmake --build build;\
 		cd -;\
