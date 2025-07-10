@@ -2,7 +2,7 @@ NAME=cub3D
 
 OS:=$(shell uname -s)
 ifeq ($(OS),Darwin)
-	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit
+	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L ~/.brew/opt/glfw/lib -l glfw3
 else
 	LFLAGS := -glfw
 endif
@@ -10,10 +10,12 @@ endif
 RED=\033[0;31m
 GRN=\033[0;32m
 YEL=\033[1;33m
+ORA= \033[38;5;208m
 RESET=\033[0m
 
 CC=cc
 CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
+MLX=./MLX42/build/libmlx42.a
 
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c src/free_resource.c \
@@ -23,6 +25,16 @@ SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 all: $(NAME)
 $(NAME): $(SRC)
 	@make -C Libft
+	@echo "$(ORA)  _______           ______   ______   ______  $(RESET)"
+	@echo "$(ORA) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
+	@echo "$(ORA) | (    \/| )   ( || (   ) )\/   \  \| (  \  )$(RESET)"
+	@echo "$(ORA) | |      | |   | || (__/ /    ___) /| |   ) |$(RESET)"
+	@echo "$(ORA) | |      | |   | ||  __ (    (___ ( | |   | |$(RESET)"
+	@echo "$(ORA) | |      | |   | || (  \ \       ) \| |   ) |$(RESET)"
+	@echo "$(ORA) | (____/\| (___) || )___) )/\___/  /| (__/  )$(RESET)"
+	@echo "$(ORA) (_______/(_______)|/ \___/ \______/ (______/ $(RESET)"
+                                                   
+
 	@if find . -name "libmlx42.a" | grep -q .;then\
 		echo "$(GRN)mlx exist$(RESET)";\
 	else\
@@ -33,7 +45,7 @@ $(NAME): $(SRC)
 		cd -;\
 		fi
 	
-	$(CC) $(CFLAGS) $(SRC) Libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
 
 clean:
 	make clean -C Libft

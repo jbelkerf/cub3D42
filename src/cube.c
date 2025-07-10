@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/10 15:34:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/10 18:31:26 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Usage: ./cube <map_file>\n", 2), 1);
+		put_error("Usage: ./cube <map_file>");
 	check_map_validity(av[1]);
 	fill_the_data(&data, av[1]);
 	// print_data(&data);  //!debuging perposes
+	data.mlx = mlx_init(1000, 1000, "cub3D", 1);
+	if (!data.mlx)
+	{
+		free_arr(data.map);
+		put_error("mlx_init error");
+	}
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 }

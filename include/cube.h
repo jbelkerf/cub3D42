@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/10 15:47:40 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/07/10 17:54:18 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_data
 {
+	mlx_t	*mlx;
 	char	**map;
 	int		map_length;
 	int		map_width;
