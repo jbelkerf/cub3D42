@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/10 17:54:18 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/05 20:41:38 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,32 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 # include <stdio.h>
 #include "../MLX42/include/MLX42/MLX42.h"
 
+# define player_texture "textures/p.png" //!to be removed
+# define floor_texture "textures/0.png" //!to be removed
+# define wall_texture "textures/1.png" //!to  be removed
+# define ROTATE_DEG 5
+# define FOV 70.0
+# define SCALE 50
+# define MOVE_PIX 4
+
+typedef struct s_imgs
+{
+	mlx_image_t	*player;
+	mlx_image_t	*floor;
+	mlx_image_t	*wall;
+	mlx_image_t *ray;
+}	t_imgs;
+
+typedef struct s_player
+{
+	double	p_x;
+	double	p_y;
+	double	angle;
+}	t_player;
 typedef struct s_data
 {
 	mlx_t	*mlx;
@@ -33,6 +56,8 @@ typedef struct s_data
 	char	*east_texture;
 	int		floor_rgb[3];
 	int		ceil_rgb[3];
+	t_player *player;
+	t_imgs	imgs;
 }	t_data;
 
 //CHECK MAP
@@ -52,5 +77,11 @@ void	put_error(char *err);
 
 // FREE RESOURCES
 char	**free_arr(char **arr);
+
+// Raycast
+void raycast(t_data *data);
+
+// Rotate
+void rotate(mlx_key_data_t keydata, void *param);
 
 #endif
