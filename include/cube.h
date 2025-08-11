@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/05 20:41:38 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/11 15:09:21 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,8 @@ void raycast(t_data *data);
 
 // Rotate
 void rotate(mlx_key_data_t keydata, void *param);
+
+// render 2d 
+mlx_image_t	*create_render(mlx_t *mlx, char *img_file, int symbol, char **map);
 
 #endif

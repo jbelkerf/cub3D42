@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/05 20:41:52 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/11 15:11:28 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,41 +51,7 @@ void	locate_player(t_data *data, char **map)
 // 	for (i = 0; i < data->map_length; i++)
 // 		printf("%s\n", data->map[i]);
 // }
-void	render_img(char **map, mlx_t *mlx, mlx_image_t *wall_img, char symbol)
-{
-	int		y;
-	int		x;
-	char	c;
 
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			c = map[y][x];
-			if (c == symbol || (symbol == '0' && (c == 'N' || c == 'C')))
-				mlx_image_to_window(mlx, wall_img, x * SCALE, y * SCALE);
-			x++;
-		}
-		y++;
-	}
-}
-
-mlx_image_t	*create_render(mlx_t *mlx, char *img_file, int symbol, char **map)
-{
-	mlx_texture_t	*img_tex;
-	mlx_image_t		*img;
-
-	img_tex = mlx_load_png(img_file);
-	// if (!img_tex)
-	// 	free_map_and_error("texture can't be loaded", &map);
-	img = mlx_texture_to_image(mlx, img_tex);
-	mlx_delete_texture(img_tex);
-	mlx_resize_image(img, SCALE, SCALE);
-	render_img(map, mlx, img, symbol);
-	return (img);
-}
 void	get_images(t_data *data)
 {
 	mlx_image_t	*img;
@@ -110,8 +76,11 @@ void move_player(void *param)
 		mlx_close_window(data->mlx);
 	if(mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
-		data->imgs.player->instances[0].y -= MOVE_PIX;
-		data->player->p_y -= MOVE_PIX;
+		double dx = cos(data->player->angle * M_PI / 180.0);
+		double dy = sin(data->player->angle * M_PI / 180.0);
+		data->imgs.player->instances[0].y += 5 * dy;
+		data->imgs.player->instances[0].x += 5 * dx;
+		// data->player->p_y -= MOVE_PIX;
 		raycast(data);
 	}
 	if(mlx_is_key_down(data->mlx, MLX_KEY_S))
@@ -143,22 +112,22 @@ void raycast(t_data *data)
 	double ang = data->player->angle - (FOV / 2);
 	while (ang <= data->player->angle + (FOV / 2))
 	{
-		int m = 0;
-		int x = data->player->p_x + (SCALE / 2);
-		int y = data->player->p_y + (SCALE / 2);
+		double m = 0;
+		double x = data->imgs.player->instances[0].x + (SCALE / 2);
+		double y = data->imgs.player->instances[0].y + (SCALE / 2);
 		double dx = cos(ang * M_PI / 180.0);
 		double dy = sin(ang * M_PI / 180.0);
 		while (m < 1000)
 		{
-			int xx;
-			int yy;
-			xx = x + (int)(dx  * m);
-			yy = y + (int)(dy * m);
-			if (data->map[yy / SCALE][xx / SCALE] == '1' || !(xx <( data->map_width * SCALE ) && yy < (data->map_length * SCALE)  && xx > 0 && yy > 0))
+			double xx;
+			double yy;
+			xx = x + (double)(dx  * m);
+			yy = y + (double)(dy * m);
+			if (data->map[(int)(yy / SCALE)][(int)(xx / SCALE)] == '1' || !(xx <( data->map_width * SCALE ) && yy < (data->map_length * SCALE)  && xx > 0 && yy > 0))
 				break ;
 			mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
-			// ((uint32_t *)data->imgs.ray->pixels)[yy * data->map_width *  SCALE + xx] = 0xff00ff00;
-			m++;	
+			// ((udouble32_t *)data->imgs.ray->pixels)[yy * data->map_width *  SCALE + xx] = 0xff00ff00;
+			m+=1;	
 		}
 		rays++;
 		ang += 1;
@@ -206,7 +175,6 @@ int	main(int ac, char **av)
 	}
 	get_images(&data);
 	mlx_loop_hook(data.mlx, move_player, (void *)&data);
-	// mlx_loop_hook(data.mlx, rotate, (void *)&data);
 	mlx_key_hook(data.mlx, rotate, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
