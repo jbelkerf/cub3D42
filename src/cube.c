@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/11 15:11:28 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/11 17:33:58 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	locate_player(t_data *data, char **map)
 		{
 			if (map[i][j] == 'N')
 			{
-				data->player->p_x = j * SCALE;
-				data->player->p_y = i * SCALE;
+				data->player->p_x = j * SCALE2D;
+				data->player->p_y = i * SCALE2D;
 				break ;
 			}
 			j++;
@@ -36,33 +36,57 @@ void	locate_player(t_data *data, char **map)
 	data->player->angle = 0;
 }
 
-// void print_data(t_data *data)
-// {
-// 	int i;
 
-// 	printf("Map Length: %d\n", data->map_length);
-// 	printf("Map Width: %d\n", data->map_width);
-// 	printf("North Texture: %s\n", data->north_texture);
-// 	printf("South Texture: %s\n", data->south_texture);
-// 	printf("West Texture: %s\n", data->west_texture);
-// 	printf("East Texture: %s\n", data->east_texture);
-// 	printf("Floor RGB: [%d, %d, %d]\n", data->floor_rgb[0], data->floor_rgb[1], data->floor_rgb[2]);
-// 	printf("Ceiling RGB: [%d, %d, %d]\n", data->ceil_rgb[0], data->ceil_rgb[1], data->ceil_rgb[2]);
-// 	for (i = 0; i < data->map_length; i++)
-// 		printf("%s\n", data->map[i]);
-// }
+unsigned	get_color(int *cols)
+{
+	return (cols[0] << 24 | cols[1] << 16 | cols[2] << 8 | VISIBILTY);
+}
+
+void rnder_floor_and_ceil(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < (data->pixel_height / 8))
+	{
+		x = 0;
+		while (x < data->pixel_width)
+		{
+			mlx_put_pixel(data->imgs.C3D, x, y, get_color(data->ceil_rgb));
+			// printf("1\n");
+			x += 1;
+		}
+		y += 1;
+	}
+	y = (data->pixel_height / 8) * 7;
+	while (y < data->pixel_height)
+	{
+		x = 0;
+		while (x < data->pixel_width)
+		{
+			mlx_put_pixel(data->imgs.C3D, x, y,  get_color(data->floor_rgb));
+			x += 1;
+		}
+		y += 1;
+	}
+	
+}
 
 void	get_images(t_data *data)
 {
 	mlx_image_t	*img;
 
+	data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+	mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
+	rnder_floor_and_ceil(data);
 	img = create_render(data->mlx, floor_texture, '0', data->map);
 	data->imgs.floor = img;
 	img = create_render(data->mlx, wall_texture, '1', data->map);
 	data->imgs.wall = img;
 	img = create_render(data->mlx, player_texture, 'N', data->map);
 	data->imgs.player = img;
-	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE, data->map_length * SCALE);
+	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE2D, data->map_length * SCALE2D);
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
 	raycast(data);
 }
@@ -78,9 +102,8 @@ void move_player(void *param)
 	{
 		double dx = cos(data->player->angle * M_PI / 180.0);
 		double dy = sin(data->player->angle * M_PI / 180.0);
-		data->imgs.player->instances[0].y += 5 * dy;
-		data->imgs.player->instances[0].x += 5 * dx;
-		// data->player->p_y -= MOVE_PIX;
+		data->imgs.player->instances[0].y += 2 * dy;
+		data->imgs.player->instances[0].x += 2 * dx;
 		raycast(data);
 	}
 	if(mlx_is_key_down(data->mlx, MLX_KEY_S))
@@ -103,37 +126,6 @@ void move_player(void *param)
 	}
 }
 
-void raycast(t_data *data)
-{
-	int rays=0;
-	mlx_delete_image(data->mlx, data->imgs.ray);
-	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE, data->map_length * SCALE);
-	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
-	double ang = data->player->angle - (FOV / 2);
-	while (ang <= data->player->angle + (FOV / 2))
-	{
-		double m = 0;
-		double x = data->imgs.player->instances[0].x + (SCALE / 2);
-		double y = data->imgs.player->instances[0].y + (SCALE / 2);
-		double dx = cos(ang * M_PI / 180.0);
-		double dy = sin(ang * M_PI / 180.0);
-		while (m < 1000)
-		{
-			double xx;
-			double yy;
-			xx = x + (double)(dx  * m);
-			yy = y + (double)(dy * m);
-			if (data->map[(int)(yy / SCALE)][(int)(xx / SCALE)] == '1' || !(xx <( data->map_width * SCALE ) && yy < (data->map_length * SCALE)  && xx > 0 && yy > 0))
-				break ;
-			mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
-			// ((udouble32_t *)data->imgs.ray->pixels)[yy * data->map_width *  SCALE + xx] = 0xff00ff00;
-			m+=1;	
-		}
-		rays++;
-		ang += 1;
-	}
-	printf("rays %d\n",rays);
-}
 
 void rotate(mlx_key_data_t keydata, void *param)
 {
@@ -142,16 +134,24 @@ void rotate(mlx_key_data_t keydata, void *param)
 	data = param;
 	if (keydata.key == MLX_KEY_RIGHT)
 	{
-		printf("right\n");
+		// printf("right\n");
 		data->player->angle = fmod(data->player->angle + ROTATE_DEG, 360.0);
 		raycast(data);
 	}
 	if (keydata.key == MLX_KEY_LEFT)
 	{
-		printf("lft\n");
+		// printf("lft\n");
 		data->player->angle = fmod(data->player->angle - ROTATE_DEG + 360.0, 360.0);
 		raycast(data);
 	}
+}
+
+void set_data(t_data *data)
+{
+	locate_player(data, data->map);
+	data->map_width -= 1;
+	data->pixel_width = data->map_width * SCALE2D * SCALE3D;
+	data->pixel_height =  data->map_length * SCALE2D * SCALE3D;
 }
 
 int	main(int ac, char **av)
@@ -164,10 +164,8 @@ int	main(int ac, char **av)
 	data.player = &player;
 	check_map_validity(av[1]);
 	fill_the_data(&data, av[1]);
-	locate_player(&data, (data.map));
-	// print_data(&data);  //!debuging purposes
-	data.map_width = data.map_width -1 ;
-	data.mlx = mlx_init(data.map_width * SCALE, data.map_length * SCALE, "cub3D", false);
+	set_data(&data);
+	data.mlx = mlx_init(data.pixel_width, data.pixel_height, "cub3D", false);
 	if (!data.mlx)
 	{
 		free_arr(data.map);

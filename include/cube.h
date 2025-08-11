@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/11 15:09:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/11 17:33:35 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
 # define wall_texture "textures/1.png" //!to  be removed
 # define ROTATE_DEG 5
 # define FOV 70.0
-# define SCALE 50
+# define SCALE2D 20
+# define SCALE3D 3
 # define MOVE_PIX 4
-
+# define VISIBILTY 255
 typedef struct s_imgs
 {
 	mlx_image_t	*player;
 	mlx_image_t	*floor;
 	mlx_image_t	*wall;
 	mlx_image_t *ray;
+	mlx_image_t	*C3D;
 }	t_imgs;
 
 typedef struct s_player
@@ -50,12 +52,16 @@ typedef struct s_data
 	char	**map;
 	int		map_length;
 	int		map_width;
+	int		pixel_width;
+	int		pixel_height;
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
 	char	*east_texture;
 	int		floor_rgb[3];
 	int		ceil_rgb[3];
+	int		ceil_start;
+	int		floor_start;
 	t_player *player;
 	t_imgs	imgs;
 }	t_data;

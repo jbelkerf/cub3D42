@@ -10,7 +10,7 @@ endif
 RED=\033[0;31m
 GRN=\033[0;32m
 YEL=\033[1;33m
-ORA= \033[38;5;208m
+ORANGE= \033[38;5;208m
 RESET=\033[0m
 
 CC=cc
@@ -20,19 +20,20 @@ MLX=./MLX42/build/libmlx42.a
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c src/free_resource.c \
 	src/map_to_table.c src/check_map_header.c  src/errors.c\
-	src/check_walls.c src/fill_the_data.c src/create_and_render.c
+	src/check_walls.c src/fill_the_data.c src/create_and_render.c\
+	src/raycast.c
 
 all: $(NAME)
 $(NAME): $(SRC)
 	@make -C Libft
-	@echo "$(ORA)  _______           ______   ______   ______  $(RESET)"
-	@echo "$(ORA) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
-	@echo "$(ORA) | (    \/| )   ( || (   ) )\/   \  \| (  \  )$(RESET)"
-	@echo "$(ORA) | |      | |   | || (__/ /    ___) /| |   ) |$(RESET)"
-	@echo "$(ORA) | |      | |   | ||  __ (    (___ ( | |   | |$(RESET)"
-	@echo "$(ORA) | |      | |   | || (  \ \       ) \| |   ) |$(RESET)"
-	@echo "$(ORA) | (____/\| (___) || )___) )/\___/  /| (__/  )$(RESET)"
-	@echo "$(ORA) (_______/(_______)|/ \___/ \______/ (______/ $(RESET)"
+	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
+	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
+	@echo "$(ORANGE) | (    \/| )   ( || (   ) )\/   \  \| (  \  )$(RESET)"
+	@echo "$(ORANGE) | |      | |   | || (__/ /    ___) /| |   ) |$(RESET)"
+	@echo "$(ORANGE) | |      | |   | ||  __ (    (___ ( | |   | |$(RESET)"
+	@echo "$(ORANGE) | |      | |   | || (  \ \       ) \| |   ) |$(RESET)"
+	@echo "$(ORANGE) | (____/\| (___) || )___) )/\___/  /| (__/  )$(RESET)"
+	@echo "$(ORANGE) (_______/(_______)|/ \___/ \______/ (______/ $(RESET)"
                                                    
 
 	@if find . -name "libmlx42.a" | grep -q .;then\
