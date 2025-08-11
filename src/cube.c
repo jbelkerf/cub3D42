@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/11 17:33:58 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/11 19:38:08 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,23 @@ void rnder_floor_and_ceil(t_data *data)
 	int	y;
 
 	y = 0;
-	while (y < (data->pixel_height / 8))
+	while (y < data->pixel_height / 2)
 	{
 		x = 0;
 		while (x < data->pixel_width)
 		{
-			mlx_put_pixel(data->imgs.C3D, x, y, get_color(data->ceil_rgb));
-			// printf("1\n");
+			mlx_put_pixel(data->imgs.background, x, y, get_color(data->ceil_rgb));
 			x += 1;
 		}
 		y += 1;
 	}
-	y = (data->pixel_height / 8) * 7;
+	y = data->pixel_height / 2;
 	while (y < data->pixel_height)
 	{
 		x = 0;
 		while (x < data->pixel_width)
 		{
-			mlx_put_pixel(data->imgs.C3D, x, y,  get_color(data->floor_rgb));
+			mlx_put_pixel(data->imgs.background, x, y,  get_color(data->floor_rgb));
 			x += 1;
 		}
 		y += 1;
@@ -77,8 +76,10 @@ void	get_images(t_data *data)
 {
 	mlx_image_t	*img;
 
+	data->imgs.background = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
 	data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
-	mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
+	mlx_image_to_window(data->mlx, data->imgs.C3D, data->pixel_width, data->pixel_height);
 	rnder_floor_and_ceil(data);
 	img = create_render(data->mlx, floor_texture, '0', data->map);
 	data->imgs.floor = img;
@@ -132,15 +133,19 @@ void rotate(mlx_key_data_t keydata, void *param)
 	t_data *data;
 	
 	data = param;
+	if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT)
+	{
+		mlx_delete_image(data->mlx, data->imgs.C3D);
+		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		mlx_image_to_window(data->mlx, data->imgs.C3D, data->pixel_width, data->pixel_height);
+	}
 	if (keydata.key == MLX_KEY_RIGHT)
 	{
-		// printf("right\n");
 		data->player->angle = fmod(data->player->angle + ROTATE_DEG, 360.0);
 		raycast(data);
 	}
 	if (keydata.key == MLX_KEY_LEFT)
 	{
-		// printf("lft\n");
 		data->player->angle = fmod(data->player->angle - ROTATE_DEG + 360.0, 360.0);
 		raycast(data);
 	}
@@ -150,8 +155,8 @@ void set_data(t_data *data)
 {
 	locate_player(data, data->map);
 	data->map_width -= 1;
-	data->pixel_width = data->map_width * SCALE2D * SCALE3D;
-	data->pixel_height =  data->map_length * SCALE2D * SCALE3D;
+	data->pixel_width = WINDOW_X;
+	data->pixel_height = WINDOW_Y;
 }
 
 int	main(int ac, char **av)
