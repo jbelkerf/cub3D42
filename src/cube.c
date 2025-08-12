@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/11 19:38:08 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/12 14:49:15 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	get_images(t_data *data)
 	data->imgs.background = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
 	data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
-	mlx_image_to_window(data->mlx, data->imgs.C3D, data->pixel_width, data->pixel_height);
+	mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
 	rnder_floor_and_ceil(data);
 	img = create_render(data->mlx, floor_texture, '0', data->map);
 	data->imgs.floor = img;
@@ -137,7 +137,7 @@ void rotate(mlx_key_data_t keydata, void *param)
 	{
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
-		mlx_image_to_window(data->mlx, data->imgs.C3D, data->pixel_width, data->pixel_height);
+		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
 	}
 	if (keydata.key == MLX_KEY_RIGHT)
 	{

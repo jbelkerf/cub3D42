@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/11 19:06:04 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/12 15:06:45 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define WINDOW_Y 1200
 # define MOVE_PIX 4
 # define VISIBILTY 255
-# define WALL_HEIGHT 100
+# define WALL_HEIGHT 700
 
 typedef struct s_imgs
 {

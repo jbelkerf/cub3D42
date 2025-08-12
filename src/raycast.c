@@ -15,10 +15,9 @@ void render3d(int raw, double x, double y, t_data *data)
 	distance = sqrt((p_x - x) * (p_x - x) + (p_y - y) * (p_y - y));
 	end = WINDOW_Y - distance;
 	start = WINDOW_Y - distance - WALL_HEIGHT;
-	printf("start = %d end %d raw %d\n", start, end, raw);
 	while (start < end)
 	{
-		mlx_put_pixel(data->imgs.C3D, start, raw, 0xffffffff);
+		mlx_put_pixel(data->imgs.C3D, raw, start, 0xffffffff);
 		start += 1;
 	}
 }
@@ -31,7 +30,8 @@ void raycast(t_data *data)
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
 	double ang = data->player->angle - (FOV / 2);
 	double var = FOV / 1000;
-	while (var <= data->player->angle + (FOV / 2))
+	int test = 0;
+	while ((ang <= data->player->angle + (FOV / 2)) && test < 1000)
 	{
 		double m = 0;
 		double x = data->imgs.player->instances[0].x + (SCALE2D / 2);
@@ -54,7 +54,9 @@ void raycast(t_data *data)
 			// ((udouble32_t *)data->imgs.ray->pixels)[yy * data->map_width *  SCALE2D + xx] = 0xff00ff00;
 			m+=1;	
 		}
+		test++;
 		rays++;
 		ang += var;
 	}
+	// printf("test = %d\n", test);
 }
