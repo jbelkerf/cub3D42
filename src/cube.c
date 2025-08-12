@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/12 14:49:15 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/12 16:54:28 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ void move_player(void *param)
 		mlx_close_window(data->mlx);
 	if(mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
+		mlx_delete_image(data->mlx, data->imgs.C3D);
+		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
 		double dx = cos(data->player->angle * M_PI / 180.0);
 		double dy = sin(data->player->angle * M_PI / 180.0);
 		data->imgs.player->instances[0].y += 2 * dy;
