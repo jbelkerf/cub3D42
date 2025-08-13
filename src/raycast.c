@@ -1,33 +1,33 @@
 #include "../include/cube.h"
 
 
-void render3d(int raw, double x, double y, t_data *data, unsigned col)
-{
-	double	distance;
-	double	p_x;
-	double	p_y;
-	int	start;
-	int	end;
-	if (raw > WINDOW_X)
-		return ;
-	p_x = data->imgs.player->instances[0].x;
-	p_y = data->imgs.player->instances[0].y;
-	distance = sqrt((p_x - x) * (p_x - x) + (p_y - y) * (p_y - y));
-	if (distance == 0)
-		return ;
-	int wall_height = (WINDOW_Y / distance) * 10;
-	start = (WINDOW_Y / 2) - (wall_height / 2);
-	end = (WINDOW_Y / 2) + (wall_height / 2);
-	if (start < 0)
-		start = 0;
-	if (end > WINDOW_Y)
-		end = WINDOW_Y;
-	while (start < end)
-	{
-		mlx_put_pixel(data->imgs.C3D, raw, start, col);
-		start += 1;
-	}
-}
+// void render3d(int raw, double x, double y, t_data *data, unsigned col)
+// {
+// 	double	distance;
+// 	double	p_x;
+// 	double	p_y;
+// 	int	start;
+// 	int	end;
+// 	if (raw > WINDOW_X)
+// 		return ;
+// 	p_x = data->imgs.player->instances[0].x;
+// 	p_y = data->imgs.player->instances[0].y;
+// 	distance = sqrt((p_x - x) * (p_x - x) + (p_y - y) * (p_y - y));
+// 	if (distance == 0)
+// 		return ;
+// 	int wall_height = (WINDOW_Y / distance) * 10;
+// 	start = (WINDOW_Y / 2) - (wall_height / 2);
+// 	end = (WINDOW_Y / 2) + (wall_height / 2);
+// 	if (start < 0)
+// 		start = 0;
+// 	if (end > WINDOW_Y)
+// 		end = WINDOW_Y;
+// 	while (start < end)
+// 	{
+// 		mlx_put_pixel(data->imgs.C3D, raw, start, col);
+// 		start += 1;
+// 	}
+// }
 
 void raycast(t_data *data)
 {
@@ -41,8 +41,8 @@ void raycast(t_data *data)
 	while ((ang <= data->player->angle + (FOV / 2)) && test < WINDOW_X)
 	{
 		double m = 0;
-		double x = data->imgs.player->instances[0].x + (SCALE2D / 2);
-		double y = data->imgs.player->instances[0].y + (SCALE2D / 2);
+		double x = data->player->p_x + (SCALE2D / 2);
+		double y = data->player->p_y + (SCALE2D / 2);
 		double dx = cos(ang * M_PI / 180.0);
 		double dy = sin(ang * M_PI / 180.0);
 		while (m < WINDOW_X)
@@ -71,7 +71,7 @@ void raycast(t_data *data)
 						else
 							col = WALL_UP_COLOR;
 					}
-					render3d(fabs((ang - data->player->angle - (FOV / 2)) / var), xx, yy, data, col);
+					// render3d(fabs((ang - data->player->angle - (FOV / 2)) / var), xx, yy, data, col);
 				}
 				break ;
 			}

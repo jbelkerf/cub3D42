@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/12 16:39:49 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/13 13:24:52 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define SCALE2D 20
 # define WINDOW_X 1500
 # define WINDOW_Y 1200
+# define MINI_MAP_XY 600
 # define MOVE_PIX 4
 # define VISIBILTY 255
 # define WALL_HEIGHT 700
@@ -40,9 +41,7 @@
 
 typedef struct s_imgs
 {
-	mlx_image_t	*player;
-	mlx_image_t	*floor;
-	mlx_image_t	*wall;
+	mlx_image_t	*minimap;
 	mlx_image_t *ray;
 	mlx_image_t	*background;
 	mlx_image_t	*C3D;
