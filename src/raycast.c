@@ -30,64 +30,26 @@ void render3d(int raw, double x, double y, t_data *data, unsigned col)
 }
 void ray(t_data *data)
 {
-	int rays=0;
-	mlx_delete_image(data->mlx, data->imgs.ray);
-	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE2D, data->map_length * SCALE2D);
-	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
+	memset(data->imgs.ray, 0, data->map_width * data->map_length * sizeof(uint32_t));
 	double ang = data->player->angle;
-	double var = FOV / WINDOW_X;
-	int test = 0;
-	while ((ang <= data->player->angle + (FOV / 2)) && test < WINDOW_X)
+	double m = 0;
+	double x = data->imgs.player->instances[0].x + (SCALE2D / 2);
+	double y = data->imgs.player->instances[0].y + (SCALE2D / 2);
+	double dx = cos(ang * M_PI / 180.0);
+	double dy = sin(ang * M_PI / 180.0);
+	while (m < WINDOW_X)
 	{
-		double m = 0;
-		double x = data->imgs.player->instances[0].x + (SCALE2D / 2);
-		double y = data->imgs.player->instances[0].y + (SCALE2D / 2);
-		double dx = cos(ang * M_PI / 180.0);
-		double dy = sin(ang * M_PI / 180.0);
-		while (m < WINDOW_X)
-		{
-			double xx;
-			double yy;
-			xx = x + (double)(dx  * m);
-			yy = y + (double)(dy * m);
-			if (data->map[(int)(yy / SCALE2D)][(int)(xx / SCALE2D)] == '1' || !(xx <( data->map_width * SCALE2D ) && yy < (data->map_length * SCALE2D)  && xx > 0 && yy > 0))
-			{
-				if (data->map[(int)(yy / SCALE2D)][(int)(xx / SCALE2D)] == '1')
-				{
-					unsigned	col;
-					if (fabs(xx - (int)(xx / SCALE2D) * SCALE2D) < fabs(yy - (int)(yy / SCALE2D) * SCALE2D))
-					{
-						// Vertical wall
-						if (dx > 0)
-							col = WALL_RIGHT_COLOR;
-						else
-							col = WALL_LEFT_COLOR;
-					} else
-					{
-						// Horizontal wall
-						if (dy > 0)
-							col = WALL_DOWN_COLOR;
-						else
-							col = WALL_UP_COLOR;
-					}
-					//render3d(fabs((ang - data->player->angle - (FOV / 2)) / var), xx, yy, data, col);
-				}
-				break ;
-			}
-			mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
-			// ((udouble32_t *)data->imgs.ray->pixels)[yy * data->map_width *  SCALE2D + xx] = 0xff00ff00;
-			m+=1;	
-		}
-		break;
-		test++;
-		rays++;
-		ang += var;
+		double xx;
+		double yy;
+		xx = x + (double)(dx  * m);
+		yy = y + (double)(dy * m);
+		mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
+		m+=1;	
 	}
-	// printf("test = %d\n", test);
 }
 void raycast(t_data *data)
 {
-	// ray(data);
+	ray(data);
 	double dist_x = 0;
 	double dist_y = 0;
 	double player_x = data->player->p_x / SCALE2D;
@@ -96,7 +58,6 @@ void raycast(t_data *data)
 	int grid_x = (int)player_x;
 	int grid_y = (int)player_y;
 
-	printf("GRID: [%d %d]\n", grid_x, grid_y);
 	double angle = data->player->angle;
 	double sin_z = sin(angle * M_PI / 180);
 	double cos_z = cos(angle * M_PI / 180);

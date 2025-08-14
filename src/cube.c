@@ -95,6 +95,8 @@ void	get_images(t_data *data)
 void move_player(void *param)
 {
 	t_data * data;
+	double dx;
+	double dy;
 
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
@@ -104,15 +106,8 @@ void move_player(void *param)
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
-		double dx = cos(data->player->angle * M_PI / 180.0);
-		double dy = sin(data->player->angle * M_PI / 180.0); 
-		if (data->map[(int)(data->player->p_y / SCALE2D + dy)][(int)(data->player->p_x / SCALE2D + dx)] != '1')
-		{
-			data->player->p_x += dx;
-			data->player->p_y += dy;
-			data->imgs.player->instances[0].y += dy;// * 5;
-			data->imgs.player->instances[0].x += dx;// * 5;
-		}
+		dx = cos(data->player->angle * M_PI / 180.0);
+		dy = sin(data->player->angle * M_PI / 180.0); 
 		raycast(data);
 	}
 	if(mlx_is_key_down(data->mlx, MLX_KEY_S))
@@ -120,12 +115,8 @@ void move_player(void *param)
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
-		double dx = cos((data->player->angle + 180) * M_PI / 180.0);
-		double dy = sin((data->player->angle + 180) * M_PI / 180.0);
-		data->player->p_x += dx;
-		data->player->p_y += dy;
-		data->imgs.player->instances[0].y += dy * 5;
-		data->imgs.player->instances[0].x += dx * 5;
+		dx = cos((data->player->angle + 180) * M_PI / 180.0);
+		dy = sin((data->player->angle + 180) * M_PI / 180.0);
 		raycast(data);
 	}
 	if(mlx_is_key_down(data->mlx, MLX_KEY_A))
@@ -133,12 +124,8 @@ void move_player(void *param)
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
-		double dx = cos((data->player->angle - 90) * M_PI / 180.0);
-		double dy = sin((data->player->angle - 90) * M_PI / 180.0);
-		data->player->p_x += dx;
-		data->player->p_y += dy;
-		data->imgs.player->instances[0].y += dy * 5;
-		data->imgs.player->instances[0].x += dx * 5;
+		dx = cos((data->player->angle - 90) * M_PI / 180.0);
+		dy = sin((data->player->angle - 90) * M_PI / 180.0);
 		raycast(data);
 	}
 	if(mlx_is_key_down(data->mlx, MLX_KEY_D))
@@ -146,13 +133,20 @@ void move_player(void *param)
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 		mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
-		double dx = cos((data->player->angle + 90) * M_PI / 180.0);
-		double dy = sin((data->player->angle + 90) * M_PI / 180.0);
+		dx = cos((data->player->angle + 90) * M_PI / 180.0);
+		dy = sin((data->player->angle + 90) * M_PI / 180.0);
+		raycast(data);
+	}
+	if ((mlx_is_key_down(data->mlx, MLX_KEY_W)
+		|| mlx_is_key_down(data->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(data->mlx, MLX_KEY_A)
+		|| mlx_is_key_down(data->mlx, MLX_KEY_D))
+		&& data->map[(int)(data->player->p_y / SCALE2D + dy)][(int)(data->player->p_x / SCALE2D + dx)] != '1')
+	{
 		data->player->p_x += dx;
 		data->player->p_y += dy;
-		data->imgs.player->instances[0].y += dy * 5;
-		data->imgs.player->instances[0].x += dx * 5;
-		raycast(data);
+		data->imgs.player->instances[0].y += dy;// * 5;
+		data->imgs.player->instances[0].x += dx;// * 5;
 	}
 }
 
