@@ -95,8 +95,8 @@ void	get_images(t_data *data)
 void move_player(void *param)
 {
 	t_data * data;
-	double dx;
-	double dy;
+	double dx = 0;
+	double dy = 0;
 
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
@@ -137,16 +137,13 @@ void move_player(void *param)
 		dy = sin((data->player->angle + 90) * M_PI / 180.0);
 		raycast(data);
 	}
-	if ((mlx_is_key_down(data->mlx, MLX_KEY_W)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_S)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_A)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_D))
-		&& data->map[(int)(data->player->p_y / SCALE2D + dy)][(int)(data->player->p_x / SCALE2D + dx)] != '1')
+	if ((dx != 0 || dy != 0) && data->map[(int)(data->player->p_y / SCALE2D + dy)][(int)(data->player->p_x / SCALE2D + dx)] != '1')
 	{
+		//printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, data->imgs.player->instances[0].x, data->imgs.player->instances[0].y);
 		data->player->p_x += dx;
 		data->player->p_y += dy;
-		data->imgs.player->instances[0].y += dy;// * 5;
-		data->imgs.player->instances[0].x += dx;// * 5;
+		data->imgs.player->instances[0].y = (int)data->player->p_y - 10;
+		data->imgs.player->instances[0].x = (int)data->player->p_x - 10;
 	}
 }
 

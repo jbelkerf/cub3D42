@@ -30,11 +30,13 @@ void render3d(int raw, double x, double y, t_data *data, unsigned col)
 }
 void ray(t_data *data)
 {
-	memset(data->imgs.ray, 0, data->map_width * data->map_length * sizeof(uint32_t));
+	mlx_delete_image(data->mlx, data->imgs.ray);
+	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE2D, data->map_length * SCALE2D);
+	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
 	double ang = data->player->angle;
 	double m = 0;
-	double x = data->imgs.player->instances[0].x + (SCALE2D / 2);
-	double y = data->imgs.player->instances[0].y + (SCALE2D / 2);
+	double x = data->player->p_x;
+	double y = data->player->p_y;
 	double dx = cos(ang * M_PI / 180.0);
 	double dy = sin(ang * M_PI / 180.0);
 	while (m < WINDOW_X)
@@ -43,7 +45,12 @@ void ray(t_data *data)
 		double yy;
 		xx = x + (double)(dx  * m);
 		yy = y + (double)(dy * m);
-		mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
+		if (xx >= 0 && xx < data->map_width * SCALE2D && yy >= 0 && yy < data->map_length * SCALE2D)
+		{
+			if (data->map[(int) yy / SCALE2D][(int)xx / SCALE2D] == '1')
+				break ;
+			mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
+		}
 		m+=1;	
 	}
 }
@@ -81,7 +88,7 @@ void raycast(t_data *data)
 
 	while (data->map[grid_y][grid_x] != '1')
 	{
-		printf("grid x: %d, dist x: %f.\n\n", grid_x, dist_x);
+		//printf("grid x: %d, dist x: %f.\n\n", grid_x, dist_x);
 		if (dist_x < dist_y)
 		{
 			if (cos_z > 0)

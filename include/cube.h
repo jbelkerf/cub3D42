@@ -25,7 +25,7 @@
 # define player_texture "textures/p.png" //!to be removed
 # define floor_texture "textures/0.png" //!to be removed
 # define wall_texture "textures/1.png" //!to  be removed
-# define ROTATE_DEG 5
+# define ROTATE_DEG 3
 # define FOV 70.0
 # define SCALE2D 20
 # define WINDOW_X 1500
