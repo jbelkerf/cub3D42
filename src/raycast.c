@@ -59,12 +59,13 @@ void raycast(t_data *data)
 	ray(data);
 	double dist_x = 0;
 	double dist_y = 0;
-	double player_x = data->player->p_x / SCALE2D;
-	double player_y = data->player->p_y / SCALE2D;
+	double player_x = (data->player->p_x - 0.5) / SCALE2D;
+	double player_y = (data->player->p_y - 0.5) / SCALE2D;
 
-	int grid_x = (int)player_x;
-	int grid_y = (int)player_y;
+	int cell_x = (int)player_x;
+	int cell_y = (int)player_y;
 
+	printf("player at: [%d %d] ", cell_x, cell_y);
 	double angle = data->player->angle;
 	double sin_z = sin(angle * M_PI / 180);
 	double cos_z = cos(angle * M_PI / 180);
@@ -72,42 +73,41 @@ void raycast(t_data *data)
 	double step_x = fabs(1 / cos_z);
 	double step_y = fabs(1 / sin_z);
 
-	if (cos_z < 0)
-		dist_x = (grid_x + 1 - (player_x)) * cos_z;
-	else if (cos_z > 0)
-		dist_x = (player_x - grid_x) * cos_z;
-	else
-		dist_x = INFINITY;
+	dist_x = INFINITY;
+	dist_y = INFINITY;
+	if (cos_z > 0)
+		dist_x = (cell_x + 1 - (player_x)) * cos_z;
+	else if (cos_z < 0)
+		dist_x = (player_x - cell_x) * cos_z;
 	
-	if (sin_z > 0)
-		dist_y = (player_y - grid_y) * sin_z;
-	else if (sin_z < 0)
-		dist_y = ((grid_y +  1) - player_y) * sin_z;
-	else
-		dist_y = INFINITY;
+	if (sin_z < 0)
+		dist_y = (player_y - cell_y) * sin_z;
+	else if (sin_z > 0)
+		dist_y = ((cell_y +  1) - player_y) * sin_z;
 
-	while (data->map[grid_y][grid_x] != '1')
+	while (data->map[cell_y][cell_x] != '1')
 	{
-		//printf("grid x: %d, dist x: %f.\n\n", grid_x, dist_x);
+		//printf("grid x: %d, dist x: %f.\n\n", cell_x, dist_x);
 		if (dist_x < dist_y)
 		{
 			if (cos_z > 0)
-				grid_x++;
+				cell_x++;
 			else if (cos_z < 0)
-				grid_x--;
-			
-			dist_x += step_x;
+				cell_x--;
+			if (cos_z != 0)
+				dist_x += step_x;
 		}
 		else
 		{
 			if (sin_z < 0)
-				grid_y--;
+				cell_y--;
 			else if (sin_z > 0)
-				grid_y++;
-			dist_y += step_y;
+				cell_y++;
+			if (sin_z != 0)
+				dist_y += step_y;
 		}
 	}
-	printf("dist [%f %f]\n", dist_x, dist_y);
+	printf("cos: %f sin: %f dist [%f %f] at cell [%d %d]\n", cos_z, sin_z, dist_x, dist_y, cell_x, cell_y);
 	//printf("player at [%f %f] at angle %f\n", player_x / SCALE2D, player_y / SCALE2D, angle);
 	
 }

@@ -25,6 +25,7 @@ void	locate_player(t_data *data, char **map)
 		{
 			if (map[i][j] == 'N')
 			{
+				printf("player at: [%d %d]\n", i, j);
 				data->player->p_x = (j + 0.5) * SCALE2D;
 				data->player->p_y = (i + 0.5) * SCALE2D;
 				break ;
