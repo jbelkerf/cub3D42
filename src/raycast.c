@@ -135,7 +135,7 @@ void raycast(t_data *data)
 			else
 				col = WALL_LEFT_COLOR;
 		}
-		dist *= cos(angle  * M_PI / 180  - ray_angle * M_PI / 180);
+		dist *= cos((angle - ray_angle) * M_PI / 180);
 		if (dist < 0)
 			dist = 0;
 		render3d(dist, raw, col, data);
