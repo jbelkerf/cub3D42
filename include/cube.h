@@ -26,10 +26,12 @@
 # define floor_texture "textures/0.png" //!to be removed
 # define wall_texture "textures/1.png" //!to  be removed
 # define ROTATE_DEG 3
-# define FOV 70.0
+# define FOV 90.0
 # define SCALE2D 20
-# define WINDOW_X 1500
-# define WINDOW_Y 1200
+//# define WINDOW_X 1500
+//# define WINDOW_Y 1200
+# define WINDOW_X 1000
+# define WINDOW_Y 800
 # define MOVE_PIX 4
 # define VISIBILTY 255
 # define WALL_HEIGHT 700

@@ -1,21 +1,13 @@
 #include "../include/cube.h"
 
-
-void render3d(int raw, double x, double y, t_data *data, unsigned col)
+void render3d(double distance, int raw, unsigned col, t_data *data)
 {
-	double	distance;
-	double	p_x;
-	double	p_y;
 	int	start;
 	int	end;
+
 	if (raw > WINDOW_X)
 		return ;
-	p_x = data->imgs.player->instances[0].x;
-	p_y = data->imgs.player->instances[0].y;
-	distance = sqrt((p_x - x) * (p_x - x) + (p_y - y) * (p_y - y));
-	if (distance == 0)
-		return ;
-	int wall_height = (WINDOW_Y / distance) * 10;
+	int wall_height = (WINDOW_Y / distance);
 	start = (WINDOW_Y / 2) - (wall_height / 2);
 	end = (WINDOW_Y / 2) + (wall_height / 2);
 	if (start < 0)
@@ -54,60 +46,101 @@ void ray(t_data *data)
 		m+=1;	
 	}
 }
+
 void raycast(t_data *data)
 {
-	ray(data);
-	double dist_x = 0;
-	double dist_y = 0;
-	double player_x = (data->player->p_x - 0.5) / SCALE2D;
-	double player_y = (data->player->p_y - 0.5) / SCALE2D;
-
-	int cell_x = (int)player_x;
-	int cell_y = (int)player_y;
-
-	printf("player at: [%d %d] ", cell_x, cell_y);
-	double angle = data->player->angle;
-	double sin_z = sin(angle * M_PI / 180);
-	double cos_z = cos(angle * M_PI / 180);
-
-	double step_x = fabs(1 / cos_z);
-	double step_y = fabs(1 / sin_z);
-
-	dist_x = INFINITY;
-	dist_y = INFINITY;
-	if (cos_z > 0)
-		dist_x = (cell_x + 1 - (player_x)) * cos_z;
-	else if (cos_z < 0)
-		dist_x = (player_x - cell_x) * cos_z;
+    ray(data);
+    
+	double dist;
 	
-	if (sin_z < 0)
-		dist_y = (player_y - cell_y) * sin_z;
-	else if (sin_z > 0)
-		dist_y = ((cell_y +  1) - player_y) * sin_z;
-
-	while (data->map[cell_y][cell_x] != '1')
+    double player_x = (data->player->p_x - 0.5) / SCALE2D;
+    double player_y = (data->player->p_y - 0.5) / SCALE2D;
+    
+	double angle = data->player->angle;
+	
+	int raw = 0;
+	double ray_angle = angle - (FOV / 2);
+	while (raw < WINDOW_X)
 	{
-		//printf("grid x: %d, dist x: %f.\n\n", cell_x, dist_x);
-		if (dist_x < dist_y)
+		if (ray_angle < 0)
+			ray_angle += 360;
+		if (ray_angle > 360)
+			ray_angle -= 360;
+		int cell_x = (int)player_x;
+    	int cell_y = (int)player_y;
+		double ray_dx = cos(ray_angle * M_PI / 180);
+		double ray_dy = sin(ray_angle * M_PI / 180);
+		int step_x = 1;
+		int step_y = 1;
+		if (ray_dx < 0)
+			step_x = -1;
+		if (ray_dy < 0)
+			step_y = -1;
+		
+		double delta_x = INFINITY;
+		double delta_y = INFINITY;
+		if (ray_dx != 0)
+			delta_x = fabs(1.0 / ray_dx);
+		if (ray_dy != 0)
+			delta_y = fabs(1.0 / ray_dy);
+
+		double side_x, side_y;
+		
+		if (ray_dx < 0)
+			side_x = (player_x - cell_x) * delta_x;
+		else
+			side_x = (cell_x + 1.0 - player_x) * delta_x;
+		if (ray_dy < 0)
+			side_y = (player_y - cell_y) * delta_y;
+		else
+			side_y = (cell_y + 1.0 - player_y) * delta_y;
+		
+		int hit = 0;
+		int side;
+		
+		while (hit == 0)
 		{
-			if (cos_z > 0)
-				cell_x++;
-			else if (cos_z < 0)
-				cell_x--;
-			if (cos_z != 0)
-				dist_x += step_x;
+			if (side_x < side_y)
+			{
+				side_x += delta_x;
+				cell_x += step_x;
+				side = 0;
+			} else 
+			{
+				side_y += delta_y;
+				cell_y += step_y;
+				side = 1;
+			}
+			if (data->map[cell_y][cell_x] == '1')
+				hit = 1;
+		}
+
+		if (side == 0)
+			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
+		else
+			dist = (cell_y - player_y + (1 - step_y) / 2) / ray_dy;
+		unsigned col;
+
+		if (side)
+		{
+			if (delta_y > 0)
+				col = WALL_DOWN_COLOR;
+			else
+				col = WALL_UP_COLOR;
 		}
 		else
 		{
-			if (sin_z < 0)
-				cell_y--;
-			else if (sin_z > 0)
-				cell_y++;
-			if (sin_z != 0)
-				dist_y += step_y;
+			if (delta_x > 0)
+				col = WALL_RIGHT_COLOR;
+			else
+				col = WALL_LEFT_COLOR;
 		}
+		dist *= cos(angle  * M_PI / 180  - ray_angle * M_PI / 180);
+		if (dist < 0)
+			dist = 0;
+		render3d(dist, raw, col, data);
+		printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
+		ray_angle += FOV / WINDOW_X;
+		raw++;
 	}
-	printf("cos: %f sin: %f dist [%f %f] at cell [%d %d]\n", cos_z, sin_z, dist_x, dist_y, cell_x, cell_y);
-	//printf("player at [%f %f] at angle %f\n", player_x / SCALE2D, player_y / SCALE2D, angle);
-	
 }

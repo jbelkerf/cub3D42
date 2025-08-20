@@ -24,7 +24,7 @@ SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/raycast.c
 
 all: $(NAME)
-$(NAME): $(SRC)
+$(NAME): $(SRC) include/cube.h
 	@make -C Libft
 	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
 	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
