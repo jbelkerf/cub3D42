@@ -43,7 +43,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	if (end > WINDOW_Y)
 		end = WINDOW_Y;
 	double	wallX;
-	if (side)
+	if (!side)
 		wallX = data->player->p_y + distance * sin(ray_angle);
 	else
 		wallX = data->player->p_x + distance * cos(ray_angle);
@@ -162,14 +162,14 @@ void raycast(t_data *data)
 
 		if (side)
 		{
-			if (delta_y > 0)
+			if (ray_dy > 0)
 				texture = data->texts.north;
 			else
 				texture = data->texts.south;
 		}
 		else
 		{
-			if (delta_x > 0)
+			if (ray_dx > 0)
 				texture = data->texts.east;
 			else
 				texture = data->texts.west;
