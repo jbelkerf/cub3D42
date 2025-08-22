@@ -1,11 +1,39 @@
 #include "../include/cube.h"
 
-void render3d(double distance, int raw, unsigned col, t_data *data)
+// void render3d(double distance, int raw, unsigned col, t_data *data)
+// {
+// 	int	start;
+// 	int	end;
+
+// 	if (raw > WINDOW_X)
+// 		return ;
+// 	int wall_height = (WINDOW_Y / distance);
+// 	start = (WINDOW_Y / 2) - (wall_height / 2);
+// 	end = (WINDOW_Y / 2) + (wall_height / 2);
+// 	if (start < 0)
+// 		start = 0;
+// 	if (end > WINDOW_Y)
+// 		end = WINDOW_Y;
+// 	while (start < end)
+// 	{
+// 		mlx_put_pixel(data->imgs.C3D, raw, start, col);
+// 		start += 1;
+// 	}
+// }
+
+
+
+uint32_t rgba_to_int(uint8_t *pixels)
+{
+	return ((uint32_t)(pixels[0] << 24) | (uint32_t)(pixels[1] << 16) | (uint32_t)(pixels[2] << 8) | (uint32_t)pixels[3]);
+}
+
+void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, int side, double ray_angle)
 {
 	int	start;
 	int	end;
 
-	if (raw > WINDOW_X)
+	if (raw > WINDOW_X )
 		return ;
 	int wall_height = (WINDOW_Y / distance);
 	start = (WINDOW_Y / 2) - (wall_height / 2);
@@ -14,10 +42,29 @@ void render3d(double distance, int raw, unsigned col, t_data *data)
 		start = 0;
 	if (end > WINDOW_Y)
 		end = WINDOW_Y;
-	while (start < end)
+	double	wallX;
+	if (!side)
+		wallX = data->player->p_y + distance * sin(ray_angle);
+	else
+		wallX = data->player->p_x + distance * cos(ray_angle);
+	wallX -= floor(wallX);
+
+	int textX = (int)(wallX * (double)texture->width);
+	if ((side == 0 && cos(ray_angle) > 0) || (side == 1 && sin(ray_angle ) < 0))
+		textX = texture->width - textX - 1;
+	int y = start;
+	while (y < end)
 	{
-		mlx_put_pixel(data->imgs.C3D, raw, start, col);
-		start += 1;
+		if (y < 300 && raw < 400) //? do not overwrite the minimap
+		{
+			y++;
+			continue;
+		}
+		int d = (y * WINDOW_Y - (WINDOW_Y * WINDOW_Y / 2) + (wall_height * WINDOW_Y / 2));
+		int textY = ((d * texture->height / wall_height) / WINDOW_Y);
+		uint8_t * pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
+		mlx_put_pixel(data->imgs.C3D, raw, y, rgba_to_int(pixel));
+		y++;
 	}
 }
 void ray(t_data *data)
@@ -115,26 +162,26 @@ void raycast(t_data *data)
 			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
 		else
 			dist = (cell_y - player_y + (1 - step_y) / 2) / ray_dy;
-		unsigned col;
+		mlx_texture_t *texture;
 
 		if (side)
 		{
-			if (delta_y > 0)
-				col = WALL_DOWN_COLOR;
+			if (ray_dy > 0)
+				texture = data->texts.north;
 			else
-				col = WALL_UP_COLOR;
+				texture = data->texts.south;
 		}
 		else
 		{
-			if (delta_x > 0)
-				col = WALL_RIGHT_COLOR;
+			if (ray_dx > 0)
+				texture = data->texts.east;
 			else
-				col = WALL_LEFT_COLOR;
+				texture = data->texts.west;
 		}
 		dist *= cos(angle - ray_angle);
 		if (dist < 0)
 			dist = 0;
-		render3d(dist, raw, col, data);
+		render3d(dist, raw, texture, data, side, ray_angle);
 		//printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;

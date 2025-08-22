@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/22 17:58:52 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/22 19:32:27 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <math.h>
 # include <stdio.h>
 #include "../MLX42/include/MLX42/MLX42.h"
+
+#define RED     "\033[0;31m"
+#define GREEN   "\033[0;32m"
+#define ORANGE  "\033[0;33m"
+#define RESET   "\033[0m"
 
 # define player_texture "textures/p.png" //!to be removed
 # define floor_texture "textures/0.png" //!to be removed

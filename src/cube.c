@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/22 18:02:10 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/22 19:46:50 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,16 +178,29 @@ void rotate(mlx_key_data_t keydata, void *param)
 	}
 }
 
+mlx_texture_t *safe_load_texture(char *path)
+{
+	if (path[ft_strlen(path) - 1] == '\n')
+		path[ft_strlen(path) - 1] = 0;
+	mlx_texture_t *tex = mlx_load_png(path);
+	if (!tex)
+	{
+		printf(RED "failed to load texeture |%s|\n", path);
+		exit(1);
+	}
+	return (tex);
+}
+
 void set_data(t_data *data)
 {
 	locate_player(data, data->map);
 	data->map_width -= 1;
 	data->pixel_width = WINDOW_X;
 	data->pixel_height = WINDOW_Y;
-	data->texts.north = mlx_load_png(data->north_texture);
-	data->texts.east = mlx_load_png(data->east_texture);
-	data->texts.south = mlx_load_png(data->south_texture);
-	data->texts.west = mlx_load_png(data->west_texture);
+	data->texts.north = safe_load_texture(data->north_texture);
+	data->texts.east = safe_load_texture(data->east_texture);
+	data->texts.south = safe_load_texture(data->south_texture);
+	data->texts.west = safe_load_texture(data->west_texture);
 }
 
 int	main(int ac, char **av)

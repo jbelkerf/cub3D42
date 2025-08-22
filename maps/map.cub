@@ -1,7 +1,7 @@
-NO ./textures/1.png
-WE ./textures/1.png
-SO ./textures/1.png
-EA ./textures/1.png
+WE /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
+NO /Users/jbelkerf/Desktop/cub3D42/textures/purplestone.png
+SO /Users/jbelkerf/Desktop/cub3D42/textures/sprite_3.png
+EA /Users/jbelkerf/Desktop/cub3D42/textures/sprite_2.png
 
 F 128,0,128
 C 75,0,130
@@ -12,9 +12,9 @@ C 75,0,130
 11111111110011111111
 111100001100101000001
 10010000000001001101
-11111111110000110001
-10000000110000111101
-11110111111101101111
+11110000010000110001
+10000000000000111101
+11110100000101101111
 1111011111110100001
 11000000010101100001
 10000000000000100001
