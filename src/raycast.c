@@ -43,7 +43,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	if (end > WINDOW_Y)
 		end = WINDOW_Y;
 	double	wallX;
-	if (!side)
+	if (side)
 		wallX = data->player->p_y + distance * sin(ray_angle);
 	else
 		wallX = data->player->p_x + distance * cos(ray_angle);
