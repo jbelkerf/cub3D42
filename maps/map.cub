@@ -1,7 +1,7 @@
-NO ./textures/1.png
-WE ./textures/1.png
-SO ./textures/1.png
-EA ./textures/1.png
+WE /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
+NO /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
+SO /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
+EA /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
 
 F 128,0,128
 C 75,0,130
