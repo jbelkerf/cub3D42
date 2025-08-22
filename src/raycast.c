@@ -33,7 +33,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	int	start;
 	int	end;
 
-	if (raw > WINDOW_X)
+	if (raw > WINDOW_X )
 		return ;
 	int wall_height = (WINDOW_Y / distance);
 	start = (WINDOW_Y / 2) - (wall_height / 2);
@@ -55,9 +55,13 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	int y = start;
 	while (y < end)
 	{
+		if (y < 300 && raw < 400) //? do not overwrite the minimap
+		{
+			y++;
+			continue;
+		}
 		int d = (y * WINDOW_Y - (WINDOW_Y * WINDOW_Y / 2) + (wall_height * WINDOW_Y / 2));
 		int textY = ((d * texture->height / wall_height) / WINDOW_Y);
-		// printf("pixel x = %d pixel y == %d\n", textX, textY);
 		uint8_t * pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
 		mlx_put_pixel(data->imgs.C3D, raw, y, rgba_to_int(pixel));
 		y++;
