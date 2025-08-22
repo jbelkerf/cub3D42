@@ -135,7 +135,7 @@ void raycast(t_data *data)
 		if (dist < 0)
 			dist = 0;
 		render3d(dist, raw, col, data);
-		printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
+		//printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}

@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/12 16:54:28 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/22 17:15:35 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,9 @@ void move_player(void *param)
 		dy = sin(data->player->angle + (M_PI / 2));
 		raycast(data);
 	}
-	if ((dx != 0 || dy != 0) && data->map[(int)(data->player->p_y / SCALE2D + dy)][(int)(data->player->p_x / SCALE2D + dx)] != '1')
+	if ((dx != 0 || dy != 0) && data->map[(int)((data->player->p_y - 0.5 + dy)/ SCALE2D )][(int)((data->player->p_x - 0.5 + dx)/ SCALE2D) ] != '1')
 	{
-		//printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, data->imgs.player->instances[0].x, data->imgs.player->instances[0].y);
+		printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, (data->imgs.player->instances[0].x - 10), (data->imgs.player->instances[0].y - 10));
 		data->player->p_x += dx;
 		data->player->p_y += dy;
 		data->imgs.player->instances[0].y = (int)data->player->p_y - 10;
