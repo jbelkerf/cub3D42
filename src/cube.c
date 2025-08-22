@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/22 17:15:35 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/22 18:02:10 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	locate_player(t_data *data, char **map)
 		{
 			if (map[i][j] == 'N')
 			{
-				printf("player at: [%d %d]\n", i, j);
 				data->player->p_x = (j + 0.5) * SCALE2D;
 				data->player->p_y = (i + 0.5) * SCALE2D;
 				break ;
@@ -140,11 +139,12 @@ void move_player(void *param)
 	}
 	if ((dx != 0 || dy != 0) && data->map[(int)((data->player->p_y - 0.5 + dy)/ SCALE2D )][(int)((data->player->p_x - 0.5 + dx)/ SCALE2D) ] != '1')
 	{
-		printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, (data->imgs.player->instances[0].x - 10), (data->imgs.player->instances[0].y - 10));
+		//printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, (data->imgs.player->instances[0].x - 10), (data->imgs.player->instances[0].y - 10));
 		data->player->p_x += dx;
 		data->player->p_y += dy;
-		data->imgs.player->instances[0].y = (int)data->player->p_y - 10;
-		data->imgs.player->instances[0].x = (int)data->player->p_x - 10;
+		data->imgs.player->instances[0].y = (int)data->player->p_y - (SCALE2D / 2);
+		data->imgs.player->instances[0].x = (int)data->player->p_x - (SCALE2D / 2);
+		printf("player at: [%f %f]\n", data->player->p_x / SCALE2D, data->player->p_y/ SCALE2D);
 	}
 }
 
@@ -184,6 +184,10 @@ void set_data(t_data *data)
 	data->map_width -= 1;
 	data->pixel_width = WINDOW_X;
 	data->pixel_height = WINDOW_Y;
+	data->texts.north = mlx_load_png(data->north_texture);
+	data->texts.east = mlx_load_png(data->east_texture);
+	data->texts.south = mlx_load_png(data->south_texture);
+	data->texts.west = mlx_load_png(data->west_texture);
 }
 
 int	main(int ac, char **av)

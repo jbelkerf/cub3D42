@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/22 17:11:00 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/22 17:58:52 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_player
 	double	p_y;
 	double	angle;
 }	t_player;
+typedef	struct s_textures
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*west;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+}	t_textures;
 typedef struct s_data
 {
 	mlx_t	*mlx;
@@ -72,6 +79,7 @@ typedef struct s_data
 	int		floor_start;
 	t_player *player;
 	t_imgs	imgs;
+	t_textures texts;
 }	t_data;
 
 //CHECK MAP
