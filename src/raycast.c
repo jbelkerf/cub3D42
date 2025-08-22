@@ -29,8 +29,8 @@ void ray(t_data *data)
 	double m = 0;
 	double x = data->player->p_x;
 	double y = data->player->p_y;
-	double dx = cos(ang * M_PI / 180.0);
-	double dy = sin(ang * M_PI / 180.0);
+	double dx = cos(ang);
+	double dy = sin(ang);
 	while (m < WINDOW_X)
 	{
 		double xx;
@@ -59,17 +59,13 @@ void raycast(t_data *data)
 	double angle = data->player->angle;
 	
 	int raw = 0;
-	double ray_angle = angle - (FOV / 2);
+	double ray_angle = angle - ((FOV * M_PI / 180) / 2);
 	while (raw < WINDOW_X)
 	{
-		if (ray_angle < 0)
-			ray_angle += 360;
-		if (ray_angle > 360)
-			ray_angle -= 360;
 		int cell_x = (int)player_x;
     	int cell_y = (int)player_y;
-		double ray_dx = cos(ray_angle * M_PI / 180);
-		double ray_dy = sin(ray_angle * M_PI / 180);
+		double ray_dx = cos(ray_angle);
+		double ray_dy = sin(ray_angle);
 		int step_x = 1;
 		int step_y = 1;
 		if (ray_dx < 0)
@@ -135,12 +131,12 @@ void raycast(t_data *data)
 			else
 				col = WALL_LEFT_COLOR;
 		}
-		dist *= cos((angle - ray_angle) * M_PI / 180);
+		dist *= cos(angle - ray_angle);
 		if (dist < 0)
 			dist = 0;
 		render3d(dist, raw, col, data);
 		printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
-		ray_angle += FOV / WINDOW_X;
+		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
 }
