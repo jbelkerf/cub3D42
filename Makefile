@@ -21,7 +21,7 @@ SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c src/free_resource.c \
 	src/map_to_table.c src/check_map_header.c  src/errors.c\
 	src/check_walls.c src/fill_the_data.c src/create_and_render.c\
-	src/raycast.c
+	src/raycast.c src/render_mini_map.c
 
 all: $(NAME)
 $(NAME): $(SRC) include/cube.h

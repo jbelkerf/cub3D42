@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/22 19:46:50 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/23 13:24:47 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,14 @@ void rnder_floor_and_ceil(t_data *data)
 
 void	get_images(t_data *data)
 {
-	mlx_image_t	*img;
-
 	data->imgs.background = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
 	data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
 	mlx_image_to_window(data->mlx, data->imgs.C3D, 0, 0);
 	rnder_floor_and_ceil(data);
-	img = create_render(data->mlx, floor_texture, '0', data->map);
-	data->imgs.floor = img;
-	img = create_render(data->mlx, wall_texture, '1', data->map);
-	data->imgs.wall = img;
-	img = create_render(data->mlx, player_texture, 'N', data->map);
-	data->imgs.player = img;
-	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE2D, data->map_length * SCALE2D);
+	data->imgs.ray = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
+	render_mini_map(data);
 	raycast(data);
 }
 
@@ -142,9 +135,9 @@ void move_player(void *param)
 		//printf("dx dy: [%f %f] player [%f %f] instance [%d %d]\n", dx, dy, data->player->p_x, data->player->p_y, (data->imgs.player->instances[0].x - 10), (data->imgs.player->instances[0].y - 10));
 		data->player->p_x += dx;
 		data->player->p_y += dy;
-		data->imgs.player->instances[0].y = (int)data->player->p_y - (SCALE2D / 2);
-		data->imgs.player->instances[0].x = (int)data->player->p_x - (SCALE2D / 2);
-		printf("player at: [%f %f]\n", data->player->p_x / SCALE2D, data->player->p_y/ SCALE2D);
+		// data->imgs.player->instances[0].y = (int)data->player->p_y - (SCALE2D / 2);
+		// data->imgs.player->instances[0].x = (int)data->player->p_x - (SCALE2D / 2);
+		// printf("player at: [%f %f]\n", data->player->p_x / SCALE2D, data->player->p_y/ SCALE2D);
 	}
 }
 
@@ -201,6 +194,7 @@ void set_data(t_data *data)
 	data->texts.east = safe_load_texture(data->east_texture);
 	data->texts.south = safe_load_texture(data->south_texture);
 	data->texts.west = safe_load_texture(data->west_texture);
+	data->imgs.mini_map = NULL;
 }
 
 int	main(int ac, char **av)
