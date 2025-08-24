@@ -1,7 +1,7 @@
-WE /Users/jbelkerf/Desktop/cub3D42/textures/eagle.png
-NO /Users/jbelkerf/Desktop/cub3D42/textures/purplestone.png
-SO /Users/jbelkerf/Desktop/cub3D42/textures/sprite_3.png
-EA /Users/jbelkerf/Desktop/cub3D42/textures/sprite_2.png
+WE ./textures/aya.png
+NO ./textures/purplestone.png
+SO ./textures/aya.png
+EA ./textures/sprite_2.png
 
 F 128,0,128
 C 75,0,130

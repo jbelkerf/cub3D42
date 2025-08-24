@@ -4,7 +4,7 @@ OS:=$(shell uname -s)
 ifeq ($(OS),Darwin)
 	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L ~/.brew/opt/glfw/lib -l glfw3
 else
-	LFLAGS := -glfw
+	LFLAGS := -lglfw -lm -ldl -lGL
 endif
 
 RED=\033[0;31m
