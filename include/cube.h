@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/23 12:34:59 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/25 12:24:15 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define FOV 60.0
 # define SCALE2D 20
 # define WINDOW_X 1500
-# define WINDOW_Y 1200
+# define WINDOW_Y 1500
 # define MOVE_PIX 4
 # define VISIBILTY 255
 # define WALL_HEIGHT 700

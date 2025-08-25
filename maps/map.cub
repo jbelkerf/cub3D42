@@ -1,6 +1,6 @@
-WE ./textures/aya.png
-NO ./textures/purplestone.png
-SO ./textures/aya.png
+WE ./textures/pillar.png
+NO ./textures/lava.png
+SO ./textures/pillar.png
 EA ./textures/sprite_2.png
 
 F 128,0,128
