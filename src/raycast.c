@@ -43,39 +43,37 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	if (end > WINDOW_Y)
 		end = WINDOW_Y;
 	double	wallX;
+	printf("ray: [%d] ray_angle: [%f]\n", raw, ray_angle * 180 / M_PI);
 	if (!side)
-		wallX = data->player->p_y + distance * sin(ray_angle);
+		wallX = ((data->player->p_y - 0.5) / SCALE2D) + distance * sin(ray_angle);
 	else
-		wallX = data->player->p_x + distance * cos(ray_angle);
+		wallX = ((data->player->p_x - 0.5) / SCALE2D) + distance * cos(ray_angle);
 	wallX -= floor(wallX);
 
 	int textX = (int)(wallX * (double)texture->width);
-	if ((side == 0 && cos(ray_angle) > 0) || (side == 1 && sin(ray_angle ) < 0))
+	if ((side == 0 && cos(ray_angle) < 0) || (side != 0 && sin(ray_angle ) > 0))
 		textX = texture->width - textX - 1;
+	textX = fmax(0, fmin(textX, texture->width - 1));
 	int y = start;
 	while (y < end)
 	{
-		if (y < 300 && raw < 400) //? do not overwrite the minimap
+		if (y < MINI_HEIGHT && raw < MINI_WIDTH) //? do not overwrite the minimap
 		{
 			y++;
 			continue;
 		}
-		int d = (y * WINDOW_Y - (WINDOW_Y * WINDOW_Y / 2) + (wall_height * WINDOW_Y / 2));
-		int textY = ((d * texture->height / wall_height) / WINDOW_Y);
+		int textY = (((y - start) * texture->height / wall_height) );
 		uint8_t * pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
 		mlx_put_pixel(data->imgs.C3D, raw, y, rgba_to_int(pixel));
 		y++;
 	}
 }
-void ray(t_data *data)
+void ray(t_data *data, double start_x, double start_y)
 {
-	mlx_delete_image(data->mlx, data->imgs.ray);
-	data->imgs.ray = mlx_new_image(data->mlx, data->map_width * SCALE2D, data->map_length * SCALE2D);
-	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
 	double ang = data->player->angle;
 	double m = 0;
-	double x = data->player->p_x;
-	double y = data->player->p_y;
+	double x = data->player->p_x - start_x;
+	double y = (data->player->p_y) - start_y;
 	double dx = cos(ang);
 	double dy = sin(ang);
 	while (m < WINDOW_X)
@@ -84,11 +82,11 @@ void ray(t_data *data)
 		double yy;
 		xx = x + (double)(dx  * m);
 		yy = y + (double)(dy * m);
-		if (xx >= 0 && xx < data->map_width * SCALE2D && yy >= 0 && yy < data->map_length * SCALE2D)
+		if (xx >= 0 && xx + SCALE2D < MINI_WIDTH && yy >= 0 && yy + SCALE2D < MINI_HEIGHT)
 		{
-			if (data->map[(int) yy / SCALE2D][(int)xx / SCALE2D] == '1')
+			if (data->map[(int)(yy + (SCALE2D / 2)) / SCALE2D][((int)(xx + (SCALE2D / 2)) / SCALE2D)] == '1')
 				break ;
-			mlx_put_pixel(data->imgs.ray, xx, yy, 0xff0000ff);
+			mlx_put_pixel(data->imgs.mini_map, xx + SCALE2D, yy + SCALE2D, 0xff0000ff);
 		}
 		m+=1;	
 	}
@@ -96,7 +94,7 @@ void ray(t_data *data)
 
 void raycast(t_data *data)
 {
-    ray(data);
+    // ray(data);
     
 	double dist;
 	
@@ -186,4 +184,5 @@ void raycast(t_data *data)
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
+	render_mini_map(data);
 }
