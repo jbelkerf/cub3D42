@@ -32,6 +32,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 {
 	int	start;
 	int	end;
+	int old_start;
 
 	if (raw > WINDOW_X )
 		return ;
@@ -39,15 +40,18 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	start = (WINDOW_Y / 2) - (wall_height / 2);
 	end = (WINDOW_Y / 2) + (wall_height / 2);
 	if (start < 0)
+	{
+		old_start = start;
 		start = 0;
+	}
 	if (end > WINDOW_Y)
 		end = WINDOW_Y;
 	double	wallX;
-	printf("ray: [%d] ray_angle: [%f]\n", raw, ray_angle * 180 / M_PI);
+	// printf("ray: [%d] ray_angle: [%f]\n", raw, ray_angle * 180 / M_PI);
 	if (!side)
-		wallX = ((data->player->p_y - 0.5) / SCALE2D) + distance * sin(ray_angle);
+		wallX = ((data->player->p_y - 0.5) / SCALE2D) + (distance * sin(ray_angle));
 	else
-		wallX = ((data->player->p_x - 0.5) / SCALE2D) + distance * cos(ray_angle);
+		wallX = ((data->player->p_x - 0.5) / SCALE2D) + (distance * cos(ray_angle));
 	wallX -= floor(wallX);
 
 	int textX = (int)(wallX * (double)texture->width);
@@ -62,7 +66,16 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 			y++;
 			continue;
 		}
-		int textY = (((y - start) * texture->height / wall_height) );
+		int textY;
+		if (start)
+			textY = (((y - start) * texture->height / wall_height) );
+		else
+			textY = (((y - old_start) * texture->height / wall_height) );
+		if (textY < 0 || (uint32_t)textY >= texture->height || y >= WINDOW_Y)
+		{
+			y++;
+			continue;
+		}
 		uint8_t * pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
 		mlx_put_pixel(data->imgs.C3D, raw, y, rgba_to_int(pixel));
 		y++;
