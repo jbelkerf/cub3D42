@@ -6,11 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:51:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../include/cube_bonus.h"
 
 uint32_t	rgba_to_int(uint8_t *pixels)
 {
@@ -55,6 +55,11 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	y = start;
 	while (y < end)
 	{
+		if (y < MINI_HEIGHT && raw < MINI_WIDTH) //? do not overwrite the minimap
+		{
+			y++;
+			continue ;
+		}
 		if (start)
 			textY = (((y - start) * texture->height / wall_height) );
 		else

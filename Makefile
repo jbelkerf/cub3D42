@@ -17,11 +17,18 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
 MLX=./MLX42/build/libmlx42.a
 
+BONUS_SRC = gnl/get_next_line.c gnl/get_next_line_utils.c \
+	bonus/cube.c bonus/map_validity.c \
+	bonus/map_to_table.c bonus/check_map_header.c  bonus/errors.c\
+	bonus/check_walls.c bonus/fill_the_data.c bonus/tools.c \
+	bonus/raycast.c bonus/render_mini_map.c bonus/render3d.c bonus/move_player.c\
+	bonus/free_resourses.c 
+
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c \
 	src/map_to_table.c src/check_map_header.c  src/errors.c\
 	src/check_walls.c src/fill_the_data.c src/tools.c \
-	src/raycast.c src/render_mini_map.c src/render3d.c src/move_player.c\
+	src/raycast.c  src/render3d.c src/move_player.c\
 	src/free_resourses.c 
 
 all: $(NAME)
@@ -48,6 +55,30 @@ $(NAME): $(SRC) include/cube.h
 		fi
 	
 	$(CC) $(CFLAGS) $(SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
+
+bonus: $(BONUS_SRC) include/cube_bonus.h
+	@make -C Libft
+	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
+	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
+	@echo "$(ORANGE) | (    \/| )   ( || (   ) )\/   \  \| (  \  )$(RESET)"
+	@echo "$(ORANGE) | |      | |   | || (__/ /    ___) /| |   ) |$(RESET)"
+	@echo "$(ORANGE) | |      | |   | ||  __ (    (___ ( | |   | |$(RESET)"
+	@echo "$(ORANGE) | |      | |   | || (  \ \       ) \| |   ) |$(RESET)"
+	@echo "$(ORANGE) | (____/\| (___) || )___) )/\___/  /| (__/  )$(RESET)"
+	@echo "$(ORANGE) (_______/(_______)|/ \___/ \______/ (______/ $(RESET)"
+                                                   
+
+	@if find . -name "libmlx42.a" | grep -q .;then\
+		echo "$(GRN)mlx exist$(RESET)";\
+	else\
+		echo "$(YEL)MLX42 not found, setuping it...$(RESET)";\
+		rm -rf MLX42;\
+		git clone https://github.com/codam-coding-college/MLX42.git ;\
+		cd MLX42 && cmake -B build && cmake --build build;\
+		cd -;\
+		fi
+	
+	$(CC) $(CFLAGS) $(BONUS_SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
 
 clean:
 	make clean -C Libft

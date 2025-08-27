@@ -6,11 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 18:52:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../include/cube_bonus.h"
 
 unsigned int	g_clr(int *cols)
 {
@@ -57,6 +57,10 @@ void	get_images(t_data *data)
 	data->imgs.CUB = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 	rnder_floor_and_ceil(data);
+	tmp = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
+	data->imgs.ray = tmp;
+	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
+	render_mini_map(data);
 	raycast(data);
 }
 

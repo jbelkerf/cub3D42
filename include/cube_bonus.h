@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 18:51:18 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:29:36 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ORANGE  "\033[0;33m"
 # define RESET   "\033[0m"
 
+# define MINI_WIDTH 300
+# define MINI_HEIGHT 300
 
 # define ROTATE_DEG 3
 # define FOV 60.0
@@ -45,6 +47,7 @@
 
 typedef struct s_imgs
 {
+	mlx_image_t	*mini_map;
 	mlx_image_t	*ray;
 	mlx_image_t	*background;
 	mlx_image_t	*CUB;

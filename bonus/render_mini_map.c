@@ -6,11 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:39:22 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 15:40:14 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../include/cube_bonus.h"
 
 mlx_image_t	*create_img(mlx_t *mlx, char *img_file)
 {

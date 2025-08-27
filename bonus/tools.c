@@ -6,11 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:52:04 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube.h"
+#include "../include/cube_bonus.h"
 
 mlx_texture_t	*safe_load_texture(char *path)
 {
@@ -37,4 +37,5 @@ void	set_data(t_data *data)
 	data->texts.east = safe_load_texture(data->east_texture);
 	data->texts.south = safe_load_texture(data->south_texture);
 	data->texts.west = safe_load_texture(data->west_texture);
+	data->imgs.mini_map = NULL;
 }

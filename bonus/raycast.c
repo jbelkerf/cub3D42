@@ -1,4 +1,29 @@
-#include "../include/cube.h"
+#include "../include/cube_bonus.h"
+
+void ray(t_data *data, double start_x, double start_y)
+{
+	double ang = data->player->angle;
+	double m = 0;
+	double x = data->player->p_x - start_x;
+	double y = (data->player->p_y) - start_y;
+	double dx = cos(ang);
+	double dy = sin(ang);
+
+	while (m < WINDOW_X)
+	{
+		double xx;
+		double yy;
+		xx = x + (double)(dx  * m);
+		yy = y + (double)(dy * m);
+		if (xx >= 0 && xx + SCALE2D < MINI_WIDTH && yy >= 0 && yy + SCALE2D < MINI_HEIGHT)
+		{
+			if (data->map[(int)(yy + (SCALE2D / 2)) / SCALE2D][((int)(xx + (SCALE2D / 2)) / SCALE2D)] == '1')
+				break ;
+			mlx_put_pixel(data->imgs.mini_map, xx + SCALE2D, yy + SCALE2D, 0xff0000ff);
+		}
+		m+=1;	
+	}
+}
 
 void	raycast(t_data *data)
 {
@@ -91,4 +116,5 @@ void	raycast(t_data *data)
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
+	render_mini_map(data);
 }
