@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   tools_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:33:11 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ mlx_texture_t	*safe_load_texture(char *path)
 	return (tex);
 }
 
+double	get_start_angle(char **map, double p_x, double p_y)
+{
+	if (map[(int)(p_y / SCALE2D)][(int)(p_x / SCALE2D)] == 'N')
+		return (3 * M_PI / 2);
+	if (map[(int)(p_y / SCALE2D)][(int)(p_x / SCALE2D)] == 'S')
+		return (M_PI / 2);
+	if (map[(int)(p_y / SCALE2D)][(int)(p_x / SCALE2D)] == 'E')
+		return (0);
+	return (M_PI);
+}
+
 void	set_data(t_data *data)
 {
 	locate_player(data, data->map);
@@ -38,4 +49,5 @@ void	set_data(t_data *data)
 	data->texts.south = safe_load_texture(data->south_texture);
 	data->texts.west = safe_load_texture(data->west_texture);
 	data->imgs.mini_map = NULL;
+	data->player->angle = get_start_angle(data->map, data->player->p_x, data->player->p_y);
 }

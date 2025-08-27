@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 15:53:12 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:28:03 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	locate_player(t_data *data, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N')
+			if (ft_strchr("NSEW", map[i][j]))
 			{
 				data->player->p_x = (j + 0.5) * SCALE2D;
 				data->player->p_y = (i + 0.5) * SCALE2D;
@@ -33,7 +33,6 @@ void	locate_player(t_data *data, char **map)
 		}
 		i++;
 	}
-	data->player->angle = 0;
 }
 
 void	move_player(void *param)

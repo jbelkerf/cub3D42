@@ -4,7 +4,7 @@ SO ./textures/soldate.png
 EA ./textures/sprite_2.png
 
 F 0,180,0
-C 0,0,180
+C 0,180,0
 
 
 11111111111
