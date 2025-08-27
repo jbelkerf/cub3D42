@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.c                                             :+:      :+:    :+:   */
+/*   cube_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:25:23 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ void	rnder_floor_and_ceil(t_data *data)
 	int	y;
 
 	y = 0;
-	while (y < data->pixel_height / 2)
+	while (y < data->pxl_height / 2)
 	{
 		x = 0;
-		while (x < data->pixel_width)
+		while (x < data->pxl_width)
 		{
 			mlx_put_pixel(data->imgs.background, x, y, g_clr(data->ceil_rgb));
 			x += 1;
 		}
 		y += 1;
 	}
-	y = data->pixel_height / 2;
-	while (y < data->pixel_height)
+	y = data->pxl_height / 2;
+	while (y < data->pxl_height)
 	{
 		x = 0;
-		while (x < data->pixel_width)
+		while (x < data->pxl_width)
 		{
 			mlx_put_pixel(data->imgs.background, x, y, g_clr(data->floor_rgb));
 			x += 1;
@@ -49,11 +49,11 @@ void	rnder_floor_and_ceil(t_data *data)
 void	get_images(t_data *data)
 {
 	mlx_image_t	*tmp;
-
-	tmp = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+	
+	tmp = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 	data->imgs.background = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
-	tmp = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+	tmp = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 	data->imgs.CUB = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 	rnder_floor_and_ceil(data);
@@ -62,6 +62,7 @@ void	get_images(t_data *data)
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
 	render_mini_map(data);
 	raycast(data);
+	printf("here1\n");
 }
 
 int	main(int ac, char **av)
@@ -75,7 +76,7 @@ int	main(int ac, char **av)
 	check_map_validity(av[1]);
 	fill_the_data(&data, av[1]);
 	set_data(&data);
-	data.mlx = mlx_init(data.pixel_width, data.pixel_height, "cub3D", false);
+	data.mlx = mlx_init(data.pxl_width, data.pxl_height, "cub3D", false);
 	if (!data.mlx)
 		put_error("mlx_init error", data.map);
 	get_images(&data);

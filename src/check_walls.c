@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:41:24 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 17:29:19 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:56:13 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_map_walls(char **map, int length)
 {
 	int	x;
 	int	y;
-	
+
 	y = -1;
 	while (map[++y])
 	{
@@ -27,7 +27,6 @@ void	check_map_walls(char **map, int length)
 			{
 				if (y == 0 || y == length || x == 0 || x == ft_strlen(map[y]))
 				{
-					printf("line == |%s| x = %d, y = %d\n", map[y], x ,y );
 					put_error("map not soronded", map);
 				}
 				else if (!(ft_strchr2("0NEWS1", map[y][x + 1])

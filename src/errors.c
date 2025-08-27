@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:25:06 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 17:29:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:56:24 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
-
 
 void	put_error(char *err, char **map)
 {

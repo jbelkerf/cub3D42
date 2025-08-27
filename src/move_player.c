@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 20:28:03 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 20:42:33 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,39 +42,41 @@ void	move_player(void *param)
 	double	dy;
 
 	data = param;
+	dx = 0;
+	dy = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 		dx = cos(data->player->angle);
 		dy = sin(data->player->angle); 
 		raycast(data);
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
 		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 		dx = cos(data->player->angle + M_PI);
 		dy = sin(data->player->angle + M_PI);
 		raycast(data);
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 		dx = cos(data->player->angle - (M_PI / 2));
 		dy = sin(data->player->angle - (M_PI / 2));
 		raycast(data);
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
 		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 		dx = cos(data->player->angle + (M_PI / 2));
 		dy = sin(data->player->angle + (M_PI / 2));
@@ -97,7 +99,7 @@ void	rotate(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT)
 	{
 		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
+		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
 	}
 	if (keydata.key == MLX_KEY_RIGHT)

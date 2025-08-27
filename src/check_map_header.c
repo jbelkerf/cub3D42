@@ -3,20 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_header.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 17:29:19 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:21:07 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
 
-int	m_t(char *line, char *identifier, int file_fd)
+int	poweroftwo(int exp)
+{
+	int	result;
+	int	i;
+
+	i = 0;
+	result = 1;
+	if (exp == 0)
+		return (1);
+	while (i < exp)
+	{
+		result *= 2;
+		i++;
+	}
+	return (result);
+}
+
+
+int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 {
 	int		i;
 	char	*err;
+	char	*shift;
 
+	shift = "NSWE";
 	err = NULL;
 	i = ft_strlen(identifier);
 	while (line[i] == ' ')
@@ -32,20 +52,8 @@ int	m_t(char *line, char *identifier, int file_fd)
 		close(i);
 		put_error(err, NULL);
 	}
+	*chk |= poweroftwo(ft_strchr(shift, identifier[0]) - shift);
 	return (1);
-}
-
-char	*skipi_abdsami3(int file_fd)
-{
-	char	*line;
-
-	line = get_next_line(file_fd);
-	if (!line)
-		return (NULL);
-	if (line[0] == '\n' && !line[1])
-		return (free(line), skipi_abdsami3(file_fd));
-	else
-		return (line);
 }
 
 int	is_valid_rgb(char *rgb)
@@ -112,14 +120,14 @@ void	check_map_header(char *file)
 	while (chk != 63)
 	{
 		ln = skipi_abdsami3(fd);
-		if (ln && !(chk & 1) && !ft_strncmp(ln, "NO ", 3) && m_t(ln, "NO ", fd))
-			chk = chk | 1;
-		else if (ln && !(chk & 2) && !ft_strncmp(ln, "SO ", 3) && m_t(ln, "SO ", fd))
-			chk = chk | 2;
-		else if (ln && !(chk & 4) && !ft_strncmp(ln, "WE ", 3) && m_t(ln, "WE ", fd))
-			chk = chk | 4;
-		else if (ln && !(chk & 8) && !ft_strncmp(ln, "EA ", 3) && m_t(ln, "EA ", fd))
-			chk = chk | 8;
+		if (ln && !(chk & 1) && !ft_strncmp(ln, "NO ", 3))
+			match_texture(ln, "NO ", fd, &chk);
+		else if (ln && !(chk & 2) && !ft_strncmp(ln, "SO ", 3))
+			match_texture(ln, "SO ", fd, &chk);
+		else if (ln && !(chk & 4) && !ft_strncmp(ln, "WE ", 3))
+			match_texture(ln, "WE ", fd, &chk);
+		else if (ln && !(chk & 8) && !ft_strncmp(ln, "EA ", 3))
+			match_texture(ln, "EA ", fd, &chk);
 		else if (ln && !(chk & 16) && !ft_strncmp(ln, "F ", 2) && match_rgb(ln))
 			chk = chk | 16;
 		else if (ln && !(chk & 32) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))

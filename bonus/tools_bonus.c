@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 20:33:11 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 21:31:23 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ mlx_texture_t	*safe_load_texture(char *path)
 	return (tex);
 }
 
+// char	*skipi_abdsami3(int file_fd)
+// {
+// 	char	*line;
+
+// 	line = get_next_line(file_fd);
+// 	if (!line)
+// 		return (NULL);
+// 	if (line[0] == '\n' && !line[1])
+// 		return (free(line), skipi_abdsami3(file_fd));
+// 	else
+// 		return (line);
+// }
+
 double	get_start_angle(char **map, double p_x, double p_y)
 {
 	if (map[(int)(p_y / SCALE2D)][(int)(p_x / SCALE2D)] == 'N')
@@ -40,14 +53,16 @@ double	get_start_angle(char **map, double p_x, double p_y)
 
 void	set_data(t_data *data)
 {
+	double	tmp;
+
 	locate_player(data, data->map);
 	data->map_width -= 1;
-	data->pixel_width = WINDOW_X;
-	data->pixel_height = WINDOW_Y;
+	data->pxl_width = WINDOW_X;
+	data->pxl_height = WINDOW_Y;
 	data->texts.north = safe_load_texture(data->north_texture);
 	data->texts.east = safe_load_texture(data->east_texture);
 	data->texts.south = safe_load_texture(data->south_texture);
 	data->texts.west = safe_load_texture(data->west_texture);
-	data->imgs.mini_map = NULL;
-	data->player->angle = get_start_angle(data->map, data->player->p_x, data->player->p_y);
+	tmp = get_start_angle(data->map, data->player->p_x, data->player->p_y);
+	data->player->angle = tmp;
 }

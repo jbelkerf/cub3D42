@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   cube_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 17:29:36 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:42:33 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ typedef struct	s_data
 	char		**map;
 	int			map_length;
 	int			map_width;
-	int			pixel_width;
-	int			pixel_height;
+	int			pxl_width;
+	int			pxl_height;
 	char		*north_texture;
 	char		*south_texture;
 	char		*west_texture;

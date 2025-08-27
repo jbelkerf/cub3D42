@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 18:34:14 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:59:30 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ char	**map_to_str(char *file, int *length, int *width)
 			break ;
 		free(line);
 	}
-	while (1)
+	while (line)
 	{
-		if (line == NULL)
-			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = 0;
 		re[i++] = resize_str(line, *width + 1);
