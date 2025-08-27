@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 23:14:54 by JbelkerfIse       #+#    #+#             */
+/*   Updated: 2025/08/27 23:14:55 by JbelkerfIse      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cube_bonus.h"
 
 void ray(t_data *data, double start_x, double start_y)
@@ -8,38 +20,38 @@ void ray(t_data *data, double start_x, double start_y)
 	double y = (data->player->p_y) - start_y;
 	double dx = cos(ang);
 	double dy = sin(ang);
+	double xx;
+	double yy;
 
 	while (m < WINDOW_X)
 	{
-		double xx;
-		double yy;
-		xx = x + (double)(dx  * m);
+		xx = x + (double)(dx * m);
 		yy = y + (double)(dy * m);
 		if (xx >= 0 && xx + SCALE2D < MINI_WIDTH && yy >= 0 && yy + SCALE2D < MINI_HEIGHT)
 		{
-			if (data->map[(int)(yy + (SCALE2D / 2)) / SCALE2D][((int)(xx + (SCALE2D / 2)) / SCALE2D)] == '1')
+			if (xx - x > 1 || yy  - y > 1)
 				break ;
 			mlx_put_pixel(data->imgs.mini_map, xx + SCALE2D, yy + SCALE2D, 0xff0000ff);
 		}
-		m+=1;	
+		m += 1;	
 	}
 }
 
 void	raycast(t_data *data)
 {
-	mlx_texture_t *texture;
-	double	dist;
-	double	player_x;
-	double	player_y;
-	double delta_x = INFINITY;
-	double delta_y = INFINITY;
-	double	angle;
-	int		raw;
-	double	ray_angle;
-	int		cell_x;
-	double side_x, side_y;
-	int		cell_y;
-	
+	mlx_texture_t	*texture;
+	double			dist;
+	double			player_x;
+	double			player_y;
+	double			delta_x = INFINITY;
+	double			delta_y = INFINITY;
+	double			angle;
+	int				raw;
+	double			ray_angle;
+	int				cell_x;
+	double			side_x, side_y;
+	int				cell_y;
+
 	player_x = (data->player->p_x - 0.5) / SCALE2D;
 	player_y = (data->player->p_y - 0.5) / SCALE2D;
 	angle = data->player->angle;

@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:39:22 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 22:05:32 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 22:41:34 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ void	render_mini_map(t_data *data)
 		}
 		y++;
 	}
-	print_on_map(data->imgs.mini_map, (data->player->p_x + (SCALE2D / 2)) / SCALE2D - x_start , (data->player->p_y + (SCALE2D / 2)) / SCALE2D - y_start , 0xff0000ff, 4);
+	print_on_map(data->imgs.mini_map, (data->player->p_x + (SCALE2D / 2)) / SCALE2D - x_start , (data->player->p_y + (SCALE2D / 2)) / SCALE2D - y_start , 0xff0000ff, 8);
 	ray(data, (x_start  + 0.5) * SCALE2D, (y_start + 0.5) * SCALE2D);	
 }
