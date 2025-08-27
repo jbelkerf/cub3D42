@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 20:42:33 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 22:29:14 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	locate_player(t_data *data, char **map)
 		}
 		i++;
 	}
+}
+
+int	is_it_wall(t_data *data, double x, double y)
+{
+	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1')
+		return (1);
+	return (0);
 }
 
 void	move_player(void *param)
@@ -82,7 +89,10 @@ void	move_player(void *param)
 		dy = sin(data->player->angle + (M_PI / 2));
 		raycast(data);
 	}
-	if ((dx != 0 || dy != 0) && data->map[(int)((data->player->p_y - 0.5 + dy)/ SCALE2D )][(int)((data->player->p_x - 0.5 + dx)/ SCALE2D) ] != '1')
+	if ((dx != 0 || dy != 0) && !is_it_wall(data, data->player->p_x + dx + 0.5, data->player->p_y + dy) &&
+		!is_it_wall(data, data->player->p_x + dx, data->player->p_y + dy + 0.5) &&
+	    !is_it_wall(data, data->player->p_x + dx - 0.5, data->player->p_y + dy) &&
+	    !is_it_wall(data, data->player->p_x + dx, data->player->p_y + dy - 0.5))
 	{
 		data->player->p_x += dx;
 		data->player->p_y += dy;

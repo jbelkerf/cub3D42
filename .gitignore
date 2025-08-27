@@ -3,5 +3,4 @@ MLX42/
 *.o
 *.a
 *.dSYM/
-cub3D_bonus
-cub3D
+cub3D*
