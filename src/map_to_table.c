@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/05 18:19:22 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 15:46:57 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ int	count_line(char *file, int *max_len)
 	char	*str;
 
 	fd = open(file, O_RDONLY);
-	line_count = 0;
-	while (1)
+	line_count = 1;
+	while (line_count)
 	{
 		str = get_next_line(fd);
 		if (str[0] == 'C' && str[1] == ' ')
-		{
-			free(str);
-			break ;
-		}
+			line_count = 0;
 		free(str);
 	}
 	str = skipi_abdsami3(fd);
@@ -76,29 +73,23 @@ char	**map_to_str(char *file, int *length, int *width)
 	*length = count_line(file, width);
 	re = malloc((*length + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
-	while (1)
+	i = 1;
+	while (i)
 	{
 		line = get_next_line(fd);
 		if (line[0] == 'C' && line[1] == ' ')
-		{
-			free(line);
-			break ;
-		}
+			i = 0;
 		free(line);
 	}
 	line = skipi_abdsami3(fd);
-	i = 0;
 	while (1)
 	{
 		if (line == NULL)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = 0;
-		re[i] = resize_str(line, *width);
-		i++;
+		re[i++] = resize_str(line, *width);
 		line = get_next_line(fd);
 	}
-	re[i] = NULL;
-	close(fd);
-	return (re);
+	return (re[i] = NULL, close(fd), re);
 }

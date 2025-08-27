@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 15:09:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:41:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	move_player(void *param)
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if(mlx_is_key_down(data->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
@@ -54,7 +54,7 @@ void	move_player(void *param)
 		dy = sin(data->player->angle); 
 		raycast(data);
 	}
-	if(mlx_is_key_down(data->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
@@ -63,7 +63,7 @@ void	move_player(void *param)
 		dy = sin(data->player->angle + M_PI);
 		raycast(data);
 	}
-	if(mlx_is_key_down(data->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);
@@ -72,7 +72,7 @@ void	move_player(void *param)
 		dy = sin(data->player->angle - (M_PI / 2));
 		raycast(data);
 	}
-	if(mlx_is_key_down(data->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
 		mlx_delete_image(data->mlx, data->imgs.C3D);
 		data->imgs.C3D = mlx_new_image(data->mlx, data->pixel_width, data->pixel_height);

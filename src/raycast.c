@@ -8,6 +8,7 @@ void ray(t_data *data, double start_x, double start_y)
 	double y = (data->player->p_y) - start_y;
 	double dx = cos(ang);
 	double dy = sin(ang);
+
 	while (m < WINDOW_X)
 	{
 		double xx;
@@ -81,7 +82,8 @@ void	raycast(t_data *data)
 				side_x += delta_x;
 				cell_x += step_x;
 				side = 0;
-			} else 
+			}
+			else 
 			{
 				side_y += delta_y;
 				cell_y += step_y;

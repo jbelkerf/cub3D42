@@ -6,18 +6,18 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 15:07:21 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:32:38 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
 
-unsigned	get_color(int *cols)
+unsigned int	get_color(int *cols)
 {
 	return (cols[0] << 24 | cols[1] << 16 | cols[2] << 8 | VISIBILTY);
 }
 
-void rnder_floor_and_ceil(t_data *data)
+void	rnder_floor_and_ceil(t_data *data)
 {
 	int	x;
 	int	y;
@@ -44,7 +44,6 @@ void rnder_floor_and_ceil(t_data *data)
 		}
 		y += 1;
 	}
-	
 }
 
 void	get_images(t_data *data)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_header.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/08 15:37:22 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 15:27:57 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
 
-void	match_texture(char *line, char *identifier, int file_fd)
+int	m_t(char *line, char *identifier, int file_fd)
 {
 	int		i;
 	char	*err;
@@ -32,6 +32,7 @@ void	match_texture(char *line, char *identifier, int file_fd)
 		close(i);
 		put_error(err);
 	}
+	return (1);
 }
 
 char	*skipi_abdsami3(int file_fd)
@@ -64,7 +65,7 @@ int	is_valid_rgb(char *rgb)
 	return (1);
 }
 
-void	match_rgb(char *line)
+int	match_rgb(char *line)
 {
 	int		i;
 	char	*err;
@@ -88,6 +89,7 @@ void	match_rgb(char *line)
 	free_arr(colors);
 	if (err)
 		put_error(err);
+	return (1);
 }
 
 /*
@@ -101,48 +103,28 @@ void	match_rgb(char *line)
 
 void	check_map_header(char *file)
 {
-	int		file_fd;
-	int		checker;
-	char	*line;
+	int		fd;
+	int		chk;
+	char	*ln;
 
-	file_fd = open(file, O_RDONLY);
-	checker = 0;
-	while (checker != 63)
+	fd = open(file, O_RDONLY);
+	chk = 0;
+	while (chk != 63)
 	{
-		line = skipi_abdsami3(file_fd);
-		if (line && !(checker & 1) && !ft_strncmp(line, "NO ", 3))
-		{
-			checker = checker | 1;
-			match_texture(line, "NO ", file_fd);
-		}
-		else if (line && !(checker & 2) && !ft_strncmp(line, "SO ", 3))
-		{
-			checker = checker | 2;
-			match_texture(line, "SO ", file_fd);
-		}
-		else if (line && !(checker & 4) && !ft_strncmp(line, "WE ", 3))
-		{
-			checker = checker | 4;
-			match_texture(line, "WE ", file_fd);
-		}
-		else if (line && !(checker & 8) && !ft_strncmp(line, "EA ", 3))
-		{
-			checker = checker | 8;
-			match_texture(line, "EA ", file_fd);
-		}
-		else if (line && !(checker & 16) && !ft_strncmp(line, "F ", 2))
-		{
-			checker = checker | 16;
-			match_rgb(line);
-		}
-		else if (line && !(checker & 32) && !ft_strncmp(line, "C ", 2))
-		{
-			checker = checker | 32;
-			match_rgb(line);
-		}
+		ln = skipi_abdsami3(fd);
+		if (ln && !(chk & 1) && !ft_strncmp(ln, "NO ", 3) && m_t(ln, "NO ", fd))
+			chk = chk | 1;
+		else if (ln && !(chk & 2) && !ft_strncmp(ln, "SO ", 3) && m_t(ln, "SO ", fd))
+			chk = chk | 2;
+		else if (ln && !(chk & 4) && !ft_strncmp(ln, "WE ", 3) && m_t(ln, "WE ", fd))
+			chk = chk | 4;
+		else if (ln && !(chk & 8) && !ft_strncmp(ln, "EA ", 3) && m_t(ln, "EA ", fd))
+			chk = chk | 8;
+		else if (ln && !(chk & 16) && !ft_strncmp(ln, "F ", 2) && match_rgb(ln))
+			chk = chk | 16;
+		else if (ln && !(chk & 32) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
+			chk = chk | 32;
 		else
-		{
 			put_error("unexpected line");
-		}
 	}
 }
