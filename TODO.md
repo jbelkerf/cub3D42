@@ -1,0 +1,3 @@
+- set the start angle depending on the player char N or WES 
+- free resourses when error or exit (esc or X window)
+- fix clicking on double key (same time)

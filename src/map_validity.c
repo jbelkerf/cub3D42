@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 21:SCALE:18 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/09 16:27:14 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
+/*   Updated: 2025/08/27 16:09:38 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	check_the_file_extention(char *file)
 
 	name_lenght = ft_strlen(file);
 	if (name_lenght <= 4)
-		put_error("file name not correct");
+		put_error("file name not correct", NULL);
 	if (file[name_lenght - 1] != 'b' || file[name_lenght - 2] != 'u')
-		put_error("file name not correct");
+		put_error("file name not correct", NULL);
 	if (file[name_lenght - 3] != 'c' || file[name_lenght - 4] != '.')
-		put_error("file name not correct");
+		put_error("file name not correct", NULL);
 	if (file[name_lenght - 5] == '/')
-		put_error("file name not correct");
+		put_error("file name not correct", NULL);
 }
 
 void	check_the_file_readablity(char *file)
@@ -38,7 +38,7 @@ void	check_the_file_readablity(char *file)
 	fd = open(file, O_RDONLY);
 	close(fd);
 	if (fd == -1)
-		put_error("file not exist or not readable");
+		put_error("file not exist or not readable", NULL);
 }
 
 void	check_map_symbols(char **map)
@@ -59,19 +59,13 @@ void	check_map_symbols(char **map)
 			if (ft_strchr("NWSE", syb))
 				p++;
 			if (!ft_strchr("NWSE10 \n", syb))
-			{
-				free_arr(map);
-				put_error("strange sybmol apeares");
-			}
+				put_error("strange sybmol apeares", map);
 			x++;
 		}
 		y++;
 	}
 	if (p != 1)
-	{
-		free_arr(map);
-		put_error("invalid player number");
-	}
+		put_error("invalid player number", map);
 }
 
 void	check_map_validity(char *file)

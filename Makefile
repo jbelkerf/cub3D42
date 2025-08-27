@@ -18,10 +18,11 @@ CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
 MLX=./MLX42/build/libmlx42.a
 
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
-	src/cube.c src/map_validity.c src/free_resource.c \
+	src/cube.c src/map_validity.c \
 	src/map_to_table.c src/check_map_header.c  src/errors.c\
-	src/check_walls.c src/fill_the_data.c src/create_and_render.c\
-	src/raycast.c src/render_mini_map.c
+	src/check_walls.c src/fill_the_data.c src/tools.c \
+	src/raycast.c src/render_mini_map.c src/render3d.c src/move_player.c\
+	src/free_resourses.c 
 
 all: $(NAME)
 $(NAME): $(SRC) include/cube.h
