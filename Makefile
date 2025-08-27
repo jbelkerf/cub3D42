@@ -18,11 +18,11 @@ CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
 MLX=./MLX42/build/libmlx42.a
 
 BONUS_SRC = gnl/get_next_line.c gnl/get_next_line_utils.c \
-	bonus/cube.c bonus/map_validity.c \
-	bonus/map_to_table.c bonus/check_map_header.c  bonus/errors.c\
-	bonus/check_walls.c bonus/fill_the_data.c bonus/tools.c \
-	bonus/raycast.c bonus/render_mini_map.c bonus/render3d.c bonus/move_player.c\
-	bonus/free_resourses.c 
+	bonus/cube_bonus.c bonus/map_validity_bonus.c \
+	bonus/map_to_table_bonus.c bonus/check_map_header_bonus.c  bonus/errors_bonus.c\
+	bonus/check_walls_bonus.c bonus/fill_the_data_bonus.c bonus/tools_bonus.c \
+	bonus/raycast_bonus.c bonus/render_mini_map_bonus.c bonus/render3d_bonus.c bonus/move_player_bonus.c\
+	bonus/free_resourses_bonus.c 
 
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c \
@@ -56,7 +56,7 @@ $(NAME): $(SRC) include/cube.h
 	
 	$(CC) $(CFLAGS) $(SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
 
-bonus: $(BONUS_SRC) include/cube_bonus.h
+bonus: cub3D $(BONUS_SRC) include/cube_bonus.h
 	@make -C Libft
 	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
 	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
