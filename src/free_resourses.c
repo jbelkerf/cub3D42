@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:38:16 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 15:38:17 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:28:03 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	**free_arr(char **arr)
 	free(arr);
 	return (NULL);
 }
+
 void	free_resourses(t_data *data)
 {
 	free_arr(data->map);

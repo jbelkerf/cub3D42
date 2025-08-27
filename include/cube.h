@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 15:36:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:17:52 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-#include "../MLX42/include/MLX42/MLX42.h"
-
+# include "../MLX42/include/MLX42/MLX42.h"
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 # define RED     "\033[0;31m"
 # define GREEN   "\033[0;32m"
 # define ORANGE  "\033[0;33m"
@@ -30,9 +32,6 @@
 # define MINI_WIDTH 300
 # define MINI_HEIGHT 300
 
-# define player_texture "textures/p.png" //!to be removed
-# define floor_texture "textures/0.png" //!to be removed
-# define wall_texture "textures/1.png" //!to  be removed
 # define ROTATE_DEG 3
 # define FOV 60.0
 # define SCALE2D 20
@@ -51,7 +50,7 @@ typedef struct s_imgs
 	mlx_image_t	*mini_map;
 	mlx_image_t	*ray;
 	mlx_image_t	*background;
-	mlx_image_t	*C3D;
+	mlx_image_t	*CUB;
 }	t_imgs;
 
 
@@ -104,7 +103,7 @@ char	**map_to_str(char *file, int *length, int *width);
 char	*skipi_abdsami3(int file_fd);
 
 //ERRORS
-void	put_error(char *err);
+void	put_error(char *err, char **map);
 
 // FREE RESOURCES
 char	**free_arr(char **arr);
@@ -128,5 +127,8 @@ void	move_player(void *param);
 
 //free resourses
 void	free_resourses(t_data *data);
+
+//tools
+void	set_data(t_data *data);
 
 #endif

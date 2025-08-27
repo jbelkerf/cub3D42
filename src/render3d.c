@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 15:16:18 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:53:12 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 		if (!(textY < 0 || (uint32_t)textY >= texture->height || y >= WINDOW_Y))
 		{
 			uint8_t * pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
-			mlx_put_pixel(data->imgs.C3D, raw, y, rgba_to_int(pixel));
+			mlx_put_pixel(data->imgs.CUB, raw, y, rgba_to_int(pixel));
 		}
 		y++;
 	}

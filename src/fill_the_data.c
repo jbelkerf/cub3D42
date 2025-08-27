@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_the_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:09:17 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/07/10 15:22:08 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 16:27:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_texture_path(char *file, char *identifier)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		put_error("opne error");
+		put_error("opne error", NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -45,22 +45,20 @@ void	set_rgb(char *file, char *identifier, int *rgb)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		put_error("opne error");
+		put_error("opne error", NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (close(fd), put_error("RGB not found"));
+			return (close(fd), put_error("RGB not found", NULL));
 		if (!ft_strncmp(line, identifier, 2))
 		{
 			str = ft_strtrim(line + 2, " ");
-			free(line);
 			colors = ft_split(str, ',');
-			free(str);
 			rgb[0] = ft_atoi(colors[0]);
 			rgb[1] = ft_atoi(colors[1]);
 			rgb[2] = ft_atoi(colors[2]);
-			return (free_arr(colors), close(fd), (void)31337);
+			return (free(str), free_arr(colors), close(fd), free(line));
 		}
 		free(line);
 	}

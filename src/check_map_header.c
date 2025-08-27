@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 15:27:57 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:09:27 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	m_t(char *line, char *identifier, int file_fd)
 			err = "invalid texture";
 		close(file_fd);
 		close(i);
-		put_error(err);
+		put_error(err, NULL);
 	}
 	return (1);
 }
@@ -88,7 +88,7 @@ int	match_rgb(char *line)
 		err = "invalid rgb";
 	free_arr(colors);
 	if (err)
-		put_error(err);
+		put_error(err, NULL);
 	return (1);
 }
 
@@ -125,6 +125,6 @@ void	check_map_header(char *file)
 		else if (ln && !(chk & 32) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
 			chk = chk | 32;
 		else
-			put_error("unexpected line");
+			put_error("unexpected line", NULL);
 	}
 }

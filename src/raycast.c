@@ -27,15 +27,19 @@ void ray(t_data *data, double start_x, double start_y)
 
 void	raycast(t_data *data)
 {
+	mlx_texture_t *texture;
 	double	dist;
 	double	player_x;
 	double	player_y;
+	double delta_x = INFINITY;
+	double delta_y = INFINITY;
 	double	angle;
 	int		raw;
 	double	ray_angle;
 	int		cell_x;
+	double side_x, side_y;
 	int		cell_y;
-
+	
 	player_x = (data->player->p_x - 0.5) / SCALE2D;
 	player_y = (data->player->p_y - 0.5) / SCALE2D;
 	angle = data->player->angle;
@@ -53,16 +57,10 @@ void	raycast(t_data *data)
 			step_x = -1;
 		if (ray_dy < 0)
 			step_y = -1;
-		
-		double delta_x = INFINITY;
-		double delta_y = INFINITY;
 		if (ray_dx != 0)
 			delta_x = fabs(1.0 / ray_dx);
 		if (ray_dy != 0)
 			delta_y = fabs(1.0 / ray_dy);
-
-		double side_x, side_y;
-		
 		if (ray_dx < 0)
 			side_x = (player_x - cell_x) * delta_x;
 		else
@@ -71,7 +69,6 @@ void	raycast(t_data *data)
 			side_y = (player_y - cell_y) * delta_y;
 		else
 			side_y = (cell_y + 1.0 - player_y) * delta_y;
-		
 		int hit = 0;
 		int side;
 		
@@ -83,7 +80,7 @@ void	raycast(t_data *data)
 				cell_x += step_x;
 				side = 0;
 			}
-			else 
+			else
 			{
 				side_y += delta_y;
 				cell_y += step_y;
@@ -97,7 +94,6 @@ void	raycast(t_data *data)
 			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
 		else
 			dist = (cell_y - player_y + (1 - step_y) / 2) / ray_dy;
-		mlx_texture_t *texture;
 
 		if (side)
 		{
