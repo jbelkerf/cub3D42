@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 21:31:23 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 22:07:13 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ mlx_texture_t	*safe_load_texture(char *path)
 	return (tex);
 }
 
-// char	*skipi_abdsami3(int file_fd)
-// {
-// 	char	*line;
+char	*skipi_abdsami3(int file_fd)
+{
+	char	*line;
 
-// 	line = get_next_line(file_fd);
-// 	if (!line)
-// 		return (NULL);
-// 	if (line[0] == '\n' && !line[1])
-// 		return (free(line), skipi_abdsami3(file_fd));
-// 	else
-// 		return (line);
-// }
+	line = get_next_line(file_fd);
+	if (!line)
+		return (NULL);
+	if (line[0] == '\n' && !line[1])
+		return (free(line), skipi_abdsami3(file_fd));
+	else
+		return (line);
+}
 
 double	get_start_angle(char **map, double p_x, double p_y)
 {
@@ -65,4 +65,5 @@ void	set_data(t_data *data)
 	data->texts.west = safe_load_texture(data->west_texture);
 	tmp = get_start_angle(data->map, data->player->p_x, data->player->p_y);
 	data->player->angle = tmp;
+	data->imgs.mini_map = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 21:25:23 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 22:06:29 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ void	get_images(t_data *data)
 	rnder_floor_and_ceil(data);
 	tmp = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
 	data->imgs.ray = tmp;
-	mlx_image_to_window(data->mlx, data->imgs.ray, 0 , 0);
-	render_mini_map(data);
+	mlx_image_to_window(data->mlx, data->imgs.ray, 0, 0);
 	raycast(data);
-	printf("here1\n");
 }
 
 int	main(int ac, char **av)

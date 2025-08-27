@@ -1,4 +1,5 @@
 NAME=cub3D
+NAME_BONUS=cub3D_bonus
 
 OS:=$(shell uname -s)
 ifeq ($(OS),Darwin)
@@ -56,7 +57,8 @@ $(NAME): $(SRC) include/cube.h
 	
 	$(CC) $(CFLAGS) $(SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
 
-bonus: cub3D $(BONUS_SRC) include/cube_bonus.h
+bonus:$(NAME_BONUS)
+$(NAME_BONUS): $(BONUS_SRC)  include/cube_bonus.h $(NAME_BONUS)
 	@make -C Libft
 	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
 	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"
@@ -78,7 +80,7 @@ bonus: cub3D $(BONUS_SRC) include/cube_bonus.h
 		cd -;\
 		fi
 	
-	$(CC) $(CFLAGS) $(BONUS_SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(BONUS_SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME_BONUS)
 
 clean:
 	make clean -C Libft

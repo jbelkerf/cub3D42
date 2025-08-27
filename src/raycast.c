@@ -14,7 +14,6 @@ void	raycast(t_data *data)
 	int		cell_x;
 	double side_x, side_y;
 	int		cell_y;
-	printf("here\n");
 	
 	player_x = (data->player->p_x - 0.5) / SCALE2D;
 	player_y = (data->player->p_y - 0.5) / SCALE2D;

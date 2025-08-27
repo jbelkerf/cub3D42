@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_mini_map.c                                  :+:      :+:    :+:   */
+/*   render_mini_map_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:39:22 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 22:05:32 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	print_on_map(mlx_image_t *img, double center_x, double center_y, uint32_t c
 
 	x = (center_x * SCALE2D - (SCALE2D / scale));
 	y = (center_y * SCALE2D - (SCALE2D / scale));
-
 	while (y < (center_y * SCALE2D + (SCALE2D / scale)) && y < MINI_HEIGHT)
 	{
 		x = (center_x * SCALE2D - (SCALE2D / scale));
