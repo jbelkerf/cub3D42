@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:09:17 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 16:27:39 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:29:19 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	fill_the_data(t_data *data, char *file)
 	data->south_texture = get_texture_path(file, "SO ");
 	set_rgb(file, "C ", data->ceil_rgb);
 	set_rgb(file, "F ", data->floor_rgb);
+	
 	data->map = map_to_str(file, &(data->map_length), &(data->map_width));
 }

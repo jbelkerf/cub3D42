@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 15:46:57 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:27:40 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ char	*resize_str(char *str, int new_size)
 	return (re);
 }
 
+int	start_the_map(char *line)
+{
+	if (!line)
+		return (2);
+	while (*line == ' ')
+		line++;
+	if (*line == '1' || *line == '0')
+		return (1);
+	return (0);
+}
+
 int	count_line(char *file, int *max_len)
 {
 	int		fd;
@@ -29,37 +40,26 @@ int	count_line(char *file, int *max_len)
 	char	*str;
 
 	fd = open(file, O_RDONLY);
-	line_count = 1;
-	while (line_count)
-	{
-		str = get_next_line(fd);
-		if (str[0] == 'C' && str[1] == ' ')
-			line_count = 0;
-		free(str);
-	}
-	str = skipi_abdsami3(fd);
-	if (str)
-	{
-		*max_len = ft_strlen(str);
-		line_count++;
-		free(str);
-	}
+	line_count = 0;
+	*max_len = 0;
 	while (1)
 	{
 		str = get_next_line(fd);
-		if (str == NULL)
+		if (start_the_map(str))
 			break ;
-		if (*max_len < ft_strlen(str))
+		free(str);
+	}
+	while (str)
+	{
+		if (str && *max_len < ft_strlen(str))
 			*max_len = ft_strlen(str);
 		line_count++;
 		free(str);
+		str = get_next_line(fd);
 	}
 	close(fd);
 	if (line_count == 0)
-	{
-		ft_putendl_fd("emptys shit", 2);
-		exit(1);
-	}
+		put_error("Empty map", NULL);
 	return (line_count);
 }
 
@@ -73,15 +73,14 @@ char	**map_to_str(char *file, int *length, int *width)
 	*length = count_line(file, width);
 	re = malloc((*length + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
-	i = 1;
-	while (i)
+	i = 0;
+	while (1)
 	{
 		line = get_next_line(fd);
-		if (line[0] == 'C' && line[1] == ' ')
-			i = 0;
+		if (start_the_map(line))
+			break ;
 		free(line);
 	}
-	line = skipi_abdsami3(fd);
 	while (1)
 	{
 		if (line == NULL)

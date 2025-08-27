@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
-/*   Updated: 2025/08/27 16:09:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:31:31 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	check_map_validity(char *file)
 	char	**map;
 	int		length;
 	int		width;
-
+	
 	printf(GREEN "checking map's readablity...\n" RESET);
 	check_the_file_readablity(file);
 	printf(GREEN "done!\nchecking map's extention...\n" RESET);
