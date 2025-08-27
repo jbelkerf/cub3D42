@@ -36,8 +36,8 @@
 # define ROTATE_DEG 3
 # define FOV 60.0
 # define SCALE2D 20
-# define WINDOW_X 1500
-# define WINDOW_Y 1500
+# define WINDOW_X 1000
+# define WINDOW_Y 1000
 # define MOVE_PIX 4
 # define VISIBILTY 255
 # define WALL_HEIGHT 700
@@ -117,5 +117,14 @@ void rotate(mlx_key_data_t keydata, void *param);
 void	render_mini_map(t_data *data);
 void	locate_player(t_data *data, char **map);
 void ray(t_data *data, double start_x, double start_y);
+
+// Render3d
+void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, int side, double ray_angle);
+
+//Move player
+void move_player(void *param);
+
+//free resourses
+void	free_resourses(t_data *data);
 
 #endif
