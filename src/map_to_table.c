@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 17:27:40 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:34:14 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**map_to_str(char *file, int *length, int *width)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = 0;
-		re[i++] = resize_str(line, *width);
+		re[i++] = resize_str(line, *width + 1);
 		line = get_next_line(fd);
 	}
 	return (re[i] = NULL, close(fd), re);

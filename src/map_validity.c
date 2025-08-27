@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
-/*   Updated: 2025/08/27 17:31:31 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:26:56 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	check_map_symbols(char **map)
 
 	p = 0;
 	y = 0;
+	
 	while (map[y])
 	{
 		x = 0;
@@ -61,6 +62,7 @@ void	check_map_symbols(char **map)
 			if (!ft_strchr("NWSE10 \n", syb))
 				put_error("strange sybmol apeares", map);
 			x++;
+			// printf("x == %d y = %d line = %s\n", x, y, map[y]);
 		}
 		y++;
 	}
