@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/25 13:11:11 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/27 15:07:21 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
-
-void	locate_player(t_data *data, char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N')
-			{
-				data->player->p_x = (j + 0.5) * SCALE2D;
-				data->player->p_y = (i + 0.5) * SCALE2D;
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-	data->player->angle = 0;
-}
-
 
 unsigned	get_color(int *cols)
 {
@@ -114,8 +89,8 @@ void set_data(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
-	t_player player;
+	t_data		data;
+	t_player	player;
 
 	if (ac != 2)
 		put_error("Usage: ./cube <map_file>");

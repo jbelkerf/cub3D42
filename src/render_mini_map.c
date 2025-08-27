@@ -8,8 +8,6 @@ mlx_image_t	*create_img(mlx_t *mlx, char *img_file)
 	mlx_image_t		*img;
 
 	img_tex = mlx_load_png(img_file);
-	// if (!img_tex)
-	// 	free_map_and_error("texture can't be loaded", &map);
 	img = mlx_texture_to_image(mlx, img_tex);
 	mlx_delete_texture(img_tex);
 	mlx_resize_image(img, SCALE2D, SCALE2D);
@@ -18,8 +16,11 @@ mlx_image_t	*create_img(mlx_t *mlx, char *img_file)
 
 void	print_on_map(mlx_image_t *img, double center_x, double center_y, uint32_t color, int scale)
 {
-	int x = (center_x * SCALE2D - (SCALE2D / scale));
-	int y = (center_y * SCALE2D - (SCALE2D / scale));
+	int	x;
+	int	y;
+
+	x = (center_x * SCALE2D - (SCALE2D / scale));
+	y = (center_y * SCALE2D - (SCALE2D / scale));
 
 	while (y < (center_y * SCALE2D + (SCALE2D / scale)) && y < MINI_HEIGHT)
 	{

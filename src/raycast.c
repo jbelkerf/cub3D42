@@ -24,23 +24,26 @@ void ray(t_data *data, double start_x, double start_y)
 	}
 }
 
-void raycast(t_data *data)
+void	raycast(t_data *data)
 {
-    // ray(data);
-    
-	double dist;
-	
-    double player_x = (data->player->p_x - 0.5) / SCALE2D;
-    double player_y = (data->player->p_y - 0.5) / SCALE2D;
-    
-	double angle = data->player->angle;
-	
-	int raw = 0;
-	double ray_angle = angle - ((FOV * M_PI / 180) / 2);
+	double	dist;
+	double	player_x;
+	double	player_y;
+	double	angle;
+	int		raw;
+	double	ray_angle;
+	int		cell_x;
+	int		cell_y;
+
+	player_x = (data->player->p_x - 0.5) / SCALE2D;
+	player_y = (data->player->p_y - 0.5) / SCALE2D;
+	angle = data->player->angle;
+	raw = 0;
+	ray_angle = angle - ((FOV * M_PI / 180) / 2);
 	while (raw < WINDOW_X)
 	{
-		int cell_x = (int)player_x;
-    	int cell_y = (int)player_y;
+		cell_x = (int)player_x;
+		cell_y = (int)player_y;
 		double ray_dx = cos(ray_angle);
 		double ray_dy = sin(ray_angle);
 		int step_x = 1;
@@ -112,7 +115,6 @@ void raycast(t_data *data)
 		if (dist < 0)
 			dist = 0;
 		render3d(dist, raw, texture, data, side, ray_angle);
-		//printf("angle: [%f] ray_angle: [%f] dist: [%f] ray: [%d]\n", angle, ray_angle, dist, raw);
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
