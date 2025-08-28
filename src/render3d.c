@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 14:52:36 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 14:59:42 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ typedef struct s_render
 	int		wall_height;
 	int		y;
 	double	wallx;
-	double	p_x;
-	double	p_y;
 	uint8_t	*pixel;
 	uint8_t	*pxls;
 }	t_render;
 
-void	pre_render(t_render *r, double dst, mlx_texture_t *texture, t_data *data, int side, double r_angl)
+void	pre_render(t_render *r , double dst, mlx_texture_t *texture, t_data *data, int side, double r_angl)
 {
 	r->wall_height = (WINDOW_Y / dst);
 	r->start = (WINDOW_Y / 2) - (r->wall_height / 2);
@@ -64,10 +62,9 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 {
 	t_render	r;
 
+
 	if (raw > WINDOW_X)
 		return ;
-	r.p_x = data->player->p_x;
-	r.p_y = data->player->p_y;
 	r.pxls = texture->pixels;
 	pre_render(&r, distance, texture, data, side, ray_angle);
 	while (r.y < r.end)
