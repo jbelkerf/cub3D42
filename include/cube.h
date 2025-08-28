@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 15:30:23 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 15:40:30 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,25 +91,25 @@ typedef struct s_data
 }	t_data;
 typedef struct s_raycast_md
 {
-	int		raw;
-	int		side;
-	int		cell_x;
-	int		cell_y;
-	int		step_x;
-	int		step_y;
-	double	side_x;
-	double	side_y;
-	double	ray_dx;
-	double	ray_dy;
-	double	player_x;
-	double	player_y;
-	double	delta_x;
-	double	delta_y;
-	double	dist;
-	double	ray_angle;
-	t_data	*data;
-	mlx_texture_t *texture;
-} t_raycast_md;
+	int				raw;
+	int				side;
+	int				cell_x;
+	int				cell_y;
+	int				step_x;
+	int				step_y;
+	double			side_x;
+	double			side_y;
+	double			ray_dx;
+	double			ray_dy;
+	double			player_x;
+	double			player_y;
+	double			delta_x;
+	double			delta_y;
+	double			dist;
+	double			ray_angle;
+	t_data			*data;
+	mlx_texture_t	*texture;
+}	t_raycast_md;
 
 //CHECK MAP
 void	check_map_validity(char *file);

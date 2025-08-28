@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 21:21:07 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 15:38:40 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	poweroftwo(int exp)
 	}
 	return (result);
 }
-
 
 int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 {
