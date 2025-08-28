@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 23:15:31 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 15:01:28 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 15:02:43 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	raycast(t_data *data)
 		md.dist *= cos(angle - md.ray_angle);
 		if (md.dist < 0)
 			md.dist = 0;
-		render3d(md.dist, md.raw, md.texture, md.data, md.side, md.ray_angle);
+		render3d(&md);
 		md.ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		md.raw++;
 	}

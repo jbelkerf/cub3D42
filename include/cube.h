@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 15:01:35 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 15:30:23 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define RESET   "\033[0m"
 
 
-# define ROTATE_DEG 3
+# define ROTATE_SPEED 0.07
 # define FOV 60.0
 # define SCALE2D 20
-# define WINDOW_X 1000
+# define WINDOW_X 1500
 # define WINDOW_Y 1000
 # define MOVE_PIX 4
 # define VISIBILTY 255
@@ -43,27 +43,6 @@
 # define WALL_LEFT_COLOR 0x000000ff
 # define WALL_RIGHT_COLOR 0xDA70D6ff
 
-typedef struct s_raycast_md
-{
-	int		raw;
-	int		side;
-	int		cell_x;
-	int		cell_y;
-	int		step_x;
-	int		step_y;
-	double	side_x;
-	double	side_y;
-	double	ray_dx;
-	double	ray_dy;
-	double	player_x;
-	double	player_y;
-	double	delta_x;
-	double	delta_y;
-	double	dist;
-	double	ray_angle;
-	t_data	*data;
-	mlx_texture_t *texture;
-} t_raycast_md;
 
 typedef struct s_imgs
 {
@@ -88,7 +67,7 @@ typedef struct s_textures
 	mlx_texture_t	*east;
 }	t_textures;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	mlx_t		*mlx;
 	char		**map;
@@ -104,10 +83,33 @@ typedef struct	s_data
 	int			ceil_rgb[3];
 	int			ceil_start;
 	int			floor_start;
+	double		dx;
+	double		dy;
 	t_player	*player;
 	t_imgs		imgs;
 	t_textures	texts;
 }	t_data;
+typedef struct s_raycast_md
+{
+	int		raw;
+	int		side;
+	int		cell_x;
+	int		cell_y;
+	int		step_x;
+	int		step_y;
+	double	side_x;
+	double	side_y;
+	double	ray_dx;
+	double	ray_dy;
+	double	player_x;
+	double	player_y;
+	double	delta_x;
+	double	delta_y;
+	double	dist;
+	double	ray_angle;
+	t_data	*data;
+	mlx_texture_t *texture;
+} t_raycast_md;
 
 //CHECK MAP
 void	check_map_validity(char *file);
@@ -139,7 +141,7 @@ void	locate_player(t_data *data, char **map);
 void	ray(t_data *data, double start_x, double start_y);
 
 // Render3d
-void	render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, int side, double ray_angle);
+void	render3d(t_raycast_md *md);
 
 //Move player
 void	move_player(void *param);
