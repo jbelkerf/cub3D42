@@ -43,28 +43,6 @@
 # define WALL_LEFT_COLOR 0x000000ff
 # define WALL_RIGHT_COLOR 0xDA70D6ff
 
-typedef struct s_raycast_md
-{
-	int		raw;
-	int		side;
-	int		cell_x;
-	int		cell_y;
-	int		step_x;
-	int		step_y;
-	double	side_x;
-	double	side_y;
-	double	ray_dx;
-	double	ray_dy;
-	double	player_x;
-	double	player_y;
-	double	delta_x;
-	double	delta_y;
-	double	dist;
-	double	ray_angle;
-	t_data	*data;
-	mlx_texture_t *texture;
-} t_raycast_md;
-
 typedef struct s_imgs
 {
 	mlx_image_t	*ray;
