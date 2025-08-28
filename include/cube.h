@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 15:41:17 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 16:45:55 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_data
 	t_imgs		imgs;
 	t_textures	texts;
 }	t_data;
+
 typedef struct s_raycast_md
 {
 	int				raw;
@@ -150,5 +151,6 @@ void	free_resourses(t_data *data);
 
 //tools
 void	set_data(t_data *data);
+int		check_the_file_extention(char *file, char *extention);
 
 #endif

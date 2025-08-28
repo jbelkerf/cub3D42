@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 15:11:39 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 17:05:05 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	pre_render(t_render *r, t_raycast_md *md)
 void	render3d(t_raycast_md *m)
 {
 	t_render	r;
-
 
 	if (m->raw > WINDOW_X)
 		return ;

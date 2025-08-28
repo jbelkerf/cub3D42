@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 20:59:30 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 17:07:15 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ int	count_line(char *file, int *max_len)
 		free(str);
 		str = get_next_line(fd);
 	}
-	close(fd);
 	if (line_count == 0)
-		put_error("Empty map", NULL);
-	return (line_count);
+		return (close(fd), put_error("Empty map", NULL), 0);
+	return (close(fd), line_count);
 }
 
 char	**map_to_str(char *file, int *length, int *width)

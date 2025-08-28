@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 21:21:18 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 17:02:48 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 mlx_texture_t	*safe_load_texture(char *path)
 {
-	mlx_texture_t	*tex;
+	mlx_texture_t	*png_tex;
 
+	png_tex = NULL;
 	if (path[ft_strlen(path) - 1] == '\n')
 		path[ft_strlen(path) - 1] = 0;
-	tex = mlx_load_png(path);
-	if (!tex)
+	if (check_the_file_extention(path, ".png"))
+		png_tex = mlx_load_png(path);
+	else
+	{
+		printf(RED "invalid texture extention |%s|\n", path);
+		exit(1);
+	}
+	if (!png_tex)
 	{
 		printf(RED "failed to load texeture |%s|\n", path);
 		exit(1);
 	}
-	return (tex);
+	return (png_tex);
 }
 
 char	*skipi_abdsami3(int file_fd)
@@ -65,4 +72,23 @@ void	set_data(t_data *data)
 	data->texts.west = safe_load_texture(data->west_texture);
 	tmp = get_start_angle(data->map, data->player->p_x, data->player->p_y);
 	data->player->angle = tmp;
+}
+
+int	check_the_file_extention(char *file, char *extention)
+{
+	int	x_len;
+	int	f_len;
+
+	x_len = ft_strlen(extention);
+	f_len = ft_strlen(file);
+	if (x_len >= f_len)
+		return (0);
+	while (--x_len >= 0)
+	{
+		if (file[--f_len] != extention[x_len])
+			return (0);
+	}
+	if (file[f_len - 1] == '/')
+		return (0);
+	return (1);
 }
