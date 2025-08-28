@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render3d.c                                         :+:      :+:    :+:   */
+/*   render3d_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:30:12 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	double	wallX;
 	uint8_t * pixel;
 
-	if (raw > WINDOW_X )
+	if (raw > WINDOW_X)
 		return ;
 	wall_height = (WINDOW_Y / distance);
 	start = (WINDOW_Y / 2) - (wall_height / 2);
 	end = (WINDOW_Y / 2) + (wall_height / 2);
+	old_start = 0;
 	if (start < 0)
 	{
 		old_start = start;

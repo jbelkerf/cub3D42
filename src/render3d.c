@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:51:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:26:49 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 	wall_height = (WINDOW_Y / distance);
 	start = (WINDOW_Y / 2) - (wall_height / 2);
 	end = (WINDOW_Y / 2) + (wall_height / 2);
+	old_start = 0;
 	if (start < 0)
 	{
 		old_start = start;
@@ -58,8 +59,8 @@ void render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 		if (start)
 			textY = (((y - start) * texture->height / wall_height) );
 		else
-			textY = (((y - old_start) * texture->height / wall_height) );
-		if (!(textY < 0 || (uint32_t)textY >= texture->height || y >= WINDOW_Y))
+			textY = (((y - old_start) * texture->height / wall_height));
+		if ((textY >= 0 && (uint32_t)textY < texture->height && y < WINDOW_Y))
 		{
 			pixel = &(texture->pixels[4 * (textY *texture->width + textX)]);
 			mlx_put_pixel(data->imgs.CUB, raw, y, rgba_to_int(pixel));

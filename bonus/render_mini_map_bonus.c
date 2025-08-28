@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:39:22 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 22:41:34 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/28 13:01:07 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,26 @@ void	render_mini_map(t_data *data)
 		data->imgs.mini_map = mlx_new_image(data->mlx, MINI_WIDTH, MINI_HEIGHT);
 		mlx_image_to_window(data->mlx, data->imgs.mini_map, 0, 0);
 	}
+	else
+		ft_memset(data->imgs.mini_map->pixels, 0, MINI_WIDTH * MINI_HEIGHT * 4);
 	y_start = (data->player->p_y / SCALE2D) - (MINI_HEIGHT / SCALE2D / 2);
 	if (y_start < 0)
 		y_start = 0;
 	y_end = (MINI_HEIGHT / SCALE2D) + y_start;
 	if (y_end > data->map_length)
+	{
 		y_end = data->map_length;
+		y_start = y_end - (MINI_HEIGHT / SCALE2D);
+	}
 	x_start = (data->player->p_x / SCALE2D)- (MINI_WIDTH / SCALE2D / 2);
 	if (x_start < 0)
 		x_start = 0;
 	x_end = (MINI_HEIGHT / SCALE2D) + x_start;
 	if (x_end > data->map_width)
+	{
 		x_end = data->map_width;
+		x_start = x_end - (MINI_WIDTH / SCALE2D);
+	}
 	y = y_start;
 
 	while (y < y_end)
