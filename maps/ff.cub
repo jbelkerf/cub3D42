@@ -1,0 +1,13 @@
+WE ./textures/van.png
+NO ./textures/akatski.png
+SO ./textures/soldate.png
+EA ./textures/bleach.png
+
+C 0,0,255
+F 0,0,0
+
+            
+1111111111111111
+1001011111111011
+10100N0000000001
+1111111111111111
