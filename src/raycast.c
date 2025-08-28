@@ -12,95 +12,114 @@
 
 #include "../include/cube.h"
 
-void	raycast(t_data *data)
+typedef struct s_raycast_md
 {
-	mlx_texture_t *texture;
-	double	dist;
+	int		raw;
+	int		side;
+	int		cell_x;
+	int		cell_y;
+	int		step_x;
+	int		step_y;
+	double	side_x;
+	double	side_y;
+	double	ray_dx;
+	double	ray_dy;
 	double	player_x;
 	double	player_y;
-	double delta_x = INFINITY;
-	double delta_y = INFINITY;
-	double	angle;
-	int		raw;
+	double	delta_x;
+	double	delta_y;
+	double	dist;
 	double	ray_angle;
-	int		cell_x;
-	double side_x, side_y;
-	int		cell_y;
+	t_data	*data;
+	mlx_texture_t *texture;
+} t_raycast_md;
+
+void	init_md(t_raycast_md *md, t_data *data)
+{
+	md->delta_x = INFINITY;
+	md->delta_y = INFINITY;
+	md->player_x = (data->player->p_x - 0.5) / SCALE2D;
+	md->player_y = (data->player->p_y - 0.5) / SCALE2D;
+	md->data = data;
+}
+
+void	raycast(t_data *data)
+{
+	t_raycast_md md;
+	double	angle;
 	
-	player_x = (data->player->p_x - 0.5) / SCALE2D;
-	player_y = (data->player->p_y - 0.5) / SCALE2D;
+	ft_memset(&md, 0, sizeof(t_raycast_md));
+	init_md(&md, data);
 	angle = data->player->angle;
-	raw = 0;
-	ray_angle = angle - ((FOV * M_PI / 180) / 2);
-	while (raw < WINDOW_X)
+	md.ray_angle = angle - ((FOV * M_PI / 180) / 2);
+	while (md.raw < WINDOW_X)
 	{
-		cell_x = (int)player_x;
-		cell_y = (int)player_y;
-		double ray_dx = cos(ray_angle);
-		double ray_dy = sin(ray_angle);
-		int step_x = 1;
-		int step_y = 1;
-		if (ray_dx < 0)
-			step_x = -1;
-		if (ray_dy < 0)
-			step_y = -1;
-		if (ray_dx != 0)
-			delta_x = fabs(1.0 / ray_dx);
-		if (ray_dy != 0)
-			delta_y = fabs(1.0 / ray_dy);
-		if (ray_dx < 0)
-			side_x = (player_x - cell_x) * delta_x;
+		md.cell_x = (int)(md.player_x);
+		md.cell_y = (int)(md.player_y);
+		md.ray_dx = cos(md.ray_angle);
+		md.ray_dy = sin(md.ray_angle);
+		md.step_x = 1;
+		md.step_y = 1;
+		if (md.ray_dx < 0)
+			md.step_x = -1;
+		if (md.ray_dy < 0)
+			md.step_y = -1;
+		if (md.ray_dx != 0)
+			md.delta_x = fabs(1.0 / md.ray_dx);
+		if (md.ray_dy != 0)
+			md.delta_y = fabs(1.0 / md.ray_dy);
+		if (md.ray_dx < 0)
+			md.side_x = (md.player_x - md.cell_x) * md.delta_x;
 		else
-			side_x = (cell_x + 1.0 - player_x) * delta_x;
-		if (ray_dy < 0)
-			side_y = (player_y - cell_y) * delta_y;
+			md.side_x = (md.cell_x + 1.0 - md.player_x) * md.delta_x;
+		if (md.ray_dy < 0)
+			md.side_y = (md.player_y - md.cell_y) * md.delta_y;
 		else
-			side_y = (cell_y + 1.0 - player_y) * delta_y;
+			md.side_y = (md.cell_y + 1.0 - md.player_y) * md.delta_y;
 		int hit = 0;
-		int side;
 		
 		while (hit == 0)
 		{
-			if (side_x < side_y)
+			if (md.side_x < md.side_y)
 			{
-				side_x += delta_x;
-				cell_x += step_x;
-				side = 0;
+				md.side_x += md.delta_x;
+				md.cell_x += md.step_x;
+				md.side = 0;
 			}
 			else
 			{
-				side_y += delta_y;
-				cell_y += step_y;
-				side = 1;
+				md.side_y += md.delta_y;
+				md.cell_y += md.step_y;
+				md.side = 1;
 			}
-			if (data->map[cell_y][cell_x] == '1')
+			if (data->map[md.cell_y][md.cell_x] == '1')
 				hit = 1;
 		}
 
-		if (side == 0)
-			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
+		if (md.side == 0)
+			md.dist = (md.cell_x - md.player_x + (1 - md.step_x) / 2) / md.ray_dx;
 		else
-			dist = (cell_y - player_y + (1 - step_y) / 2) / ray_dy;
+			md.dist = (md.cell_y - md.player_y + (1 - md.step_y) / 2) / md.ray_dy;
 
-		if (side)
+		if (md.side)
 		{
-			if (ray_dy > 0)
-				texture = data->texts.north;
+			if (md.ray_dy > 0)
+				md.texture = data->texts.north;
 			else
-				texture = data->texts.south;
+				md.texture = data->texts.south;
 		}
 		else
 		{
-			if (ray_dx > 0)
-				texture = data->texts.east;
+			if (md.ray_dx > 0)
+				md.texture = data->texts.east;
 			else
-				texture = data->texts.west;
+				md.texture = data->texts.west;
 		}
-		dist *= cos(angle - ray_angle);
-		if (dist < 0)
-			dist = 0;
-		render3d(dist, raw, texture, data, side, ray_angle);
-		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
-		raw++;
+		md.dist *= cos(angle - md.ray_angle);
+		if (md.dist < 0)
+			md.dist = 0;
+		render3d(md.dist, md.raw, md.texture, md.data, md.side, md.ray_angle);
+		md.ray_angle += (FOV * M_PI / 180) / WINDOW_X;
+		md.raw++;
 	}
 }
