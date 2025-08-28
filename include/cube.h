@@ -109,7 +109,7 @@ char	**free_arr(char **arr);
 void	raycast(t_data *data);
 
 // Rotate
-void	rotate(mlx_key_data_t keydata, void *param);
+void	rotate(void *param);
 
 // render MiniMap
 void	render_mini_map(t_data *data);

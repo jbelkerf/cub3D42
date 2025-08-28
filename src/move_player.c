@@ -99,31 +99,32 @@ void	move_player(void *param)
 	}
 }
 
-void	rotate(mlx_key_data_t keydata, void *param)
+void	rotate(void *param)
 {
+	int update;
 	t_data	*data;
 	double	rot_speed;
 
-	data = param;
+	update = 0;
+	data = (t_data *) param;
 	rot_speed = 0.07;
-	if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-	}
-	if (keydata.key == MLX_KEY_RIGHT)
-	{
+		update = 1;
 		data->player->angle += rot_speed;
 		if (data->player->angle > 2 * M_PI)
 			data->player->angle -= 2 * M_PI;
-		raycast(data);
 	}
-	if (keydata.key == MLX_KEY_LEFT)
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
+		update = 1;
 		data->player->angle -= rot_speed;
 		if (data->player->angle < 0)
 			data->player->angle += 2 * M_PI;
+	}
+	if (update)
+	{
+		ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width * data->imgs.CUB->height * 4);
 		raycast(data);
 	}
 }
