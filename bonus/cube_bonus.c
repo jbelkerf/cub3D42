@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 22:06:29 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:25:57 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 		put_error("mlx_init error", data.map);
 	get_images(&data);
 	mlx_loop_hook(data.mlx, move_player, (void *)&data);
-	mlx_key_hook(data.mlx, rotate, &data);
+	mlx_loop_hook(data.mlx, rotate, &data);
 	mlx_loop(data.mlx);
 	free_resourses(&data);
 	mlx_terminate(data.mlx);

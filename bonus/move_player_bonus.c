@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 22:29:14 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:23:16 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	locate_player(t_data *data, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchr("NSWE", map[i][j]))
+			if (ft_strchr("NSEW", map[i][j]))
 			{
 				data->player->p_x = (j + 0.5) * SCALE2D;
 				data->player->p_y = (i + 0.5) * SCALE2D;
@@ -35,95 +35,87 @@ void	locate_player(t_data *data, char **map)
 	}
 }
 
-int	is_it_wall(t_data *data, double x, double y)
+int	is_wall(t_data *data, double dx, double dy)
 {
+	double	x;
+	double	y;
+
+	x = data->player->p_x + dx;
+	y = data->player->p_y + dy;
 	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1')
 		return (1);
 	return (0);
 }
 
-void	move_player(void *param)
+void	help_move(t_data *data, double *dx, double *dy, double angle)
 {
-	t_data	*data;
+	ft_memset(data->imgs.CUB->pixels, 0,
+		data->imgs.CUB->width * data->imgs.CUB->height * 4);
+	*dx = cos(angle);
+	*dy = sin(angle); 
+	raycast(data);
+}
+
+struct s_move
+{
 	double	dx;
 	double	dy;
+};
+
+void	move_player(void *param)
+{
+	t_data			*data;
+	struct s_move	m;
 
 	data = param;
-	dx = 0;
-	dy = 0;
+	m.dx = 0;
+	m.dy = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-		dx = cos(data->player->angle);
-		dy = sin(data->player->angle); 
-		raycast(data);
-	}
+		help_move(data, &m.dx, &m.dy, data->player->angle);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-		dx = cos(data->player->angle + M_PI);
-		dy = sin(data->player->angle + M_PI);
-		raycast(data);
-	}
+		help_move(data, &m.dx, &m.dy, data->player->angle + M_PI);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-		dx = cos(data->player->angle - (M_PI / 2));
-		dy = sin(data->player->angle - (M_PI / 2));
-		raycast(data);
-	}
+		help_move(data, &m.dx, &m.dy, data->player->angle - (M_PI / 2));
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		help_move(data, &m.dx, &m.dy, data->player->angle + (M_PI / 2));
+	if ((m.dx != 0 || m.dy != 0)
+		&& !is_wall(data, m.dx + 0.5, m.dy)
+		&& !is_wall(data, m.dx, m.dy + 0.5)
+		&& !is_wall(data, m.dx - 0.5, m.dy)
+		&& !is_wall(data, m.dx, m.dy - 0.5))
 	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-		dx = cos(data->player->angle + (M_PI / 2));
-		dy = sin(data->player->angle + (M_PI / 2));
-		raycast(data);
-	}
-	if ((dx != 0 || dy != 0) && !is_it_wall(data, data->player->p_x + dx + 0.5, data->player->p_y + dy) &&
-		!is_it_wall(data, data->player->p_x + dx, data->player->p_y + dy + 0.5) &&
-	    !is_it_wall(data, data->player->p_x + dx - 0.5, data->player->p_y + dy) &&
-	    !is_it_wall(data, data->player->p_x + dx, data->player->p_y + dy - 0.5))
-	{
-		data->player->p_x += dx;
-		data->player->p_y += dy;
+		data->player->p_x += m.dx;
+		data->player->p_y += m.dy;
 	}
 }
 
-void	rotate(mlx_key_data_t keydata, void *param)
+void	rotate(void *param)
 {
+	int		update;
 	t_data	*data;
-	double	rot_speed;
 
-	data = param;
-	rot_speed = 0.07;
-	if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT)
+	update = 0;
+	data = (t_data *) param;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		mlx_delete_image(data->mlx, data->imgs.CUB);
-		data->imgs.CUB = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-		mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
-	}
-	if (keydata.key == MLX_KEY_RIGHT)
-	{
-		data->player->angle += rot_speed;
+		update = 1;
+		data->player->angle += ROTATE_SPEED;
 		if (data->player->angle > 2 * M_PI)
 			data->player->angle -= 2 * M_PI;
-		raycast(data);
 	}
-	if (keydata.key == MLX_KEY_LEFT)
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
-		data->player->angle -= rot_speed;
+		update = 1;
+		data->player->angle -= ROTATE_SPEED;
 		if (data->player->angle < 0)
 			data->player->angle += 2 * M_PI;
+	}
+	if (update)
+	{
+		ft_memset(data->imgs.CUB->pixels, 0,
+			data->imgs.CUB->width * data->imgs.CUB->height * 4);
 		raycast(data);
 	}
 }

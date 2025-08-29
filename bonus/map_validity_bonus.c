@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validity.c                                     :+:      :+:    :+:   */
+/*   map_validity_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:24:30 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,6 @@
 #define GREEN   "\033[0;32m"
 #define ORANGE  "\033[0;33m"
 #define RESET   "\033[0m"
-
-void	check_the_file_extention(char *file)
-{
-	int	name_lenght;
-
-	name_lenght = ft_strlen(file);
-	if (name_lenght <= 4)
-		put_error("file name not correct", NULL);
-	if (file[name_lenght - 1] != 'b' || file[name_lenght - 2] != 'u')
-		put_error("file name not correct", NULL);
-	if (file[name_lenght - 3] != 'c' || file[name_lenght - 4] != '.')
-		put_error("file name not correct", NULL);
-	if (file[name_lenght - 5] == '/')
-		put_error("file name not correct", NULL);
-}
 
 void	check_the_file_readablity(char *file)
 {
@@ -50,7 +35,6 @@ void	check_map_symbols(char **map)
 
 	p = 0;
 	y = 0;
-	
 	while (map[y])
 	{
 		x = 0;
@@ -62,7 +46,6 @@ void	check_map_symbols(char **map)
 			if (!ft_strchr("NWSE10 \n", syb))
 				put_error("strange sybmol apeares", map);
 			x++;
-			// printf("x == %d y = %d line = %s\n", x, y, map[y]);
 		}
 		y++;
 	}
@@ -75,11 +58,12 @@ void	check_map_validity(char *file)
 	char	**map;
 	int		length;
 	int		width;
-	
+
 	printf(GREEN "checking map's readablity...\n" RESET);
 	check_the_file_readablity(file);
 	printf(GREEN "done!\nchecking map's extention...\n" RESET);
-	check_the_file_extention(file);
+	if (!check_the_file_extention(file, ".cub"))
+		put_error("file name not correct", NULL);
 	printf(GREEN "done!\nchecking map's header...\n" RESET);
 	check_map_header(file);
 	printf(GREEN "done!\nchecking map's symbols...\n" RESET);

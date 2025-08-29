@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 22:06:55 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:22:56 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	poweroftwo(int exp)
 	return (result);
 }
 
-
 int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 {
 	int		i;
@@ -43,15 +42,18 @@ int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 		i++;
 	line[ft_strlen(line) - 1] = 0;
 	i = open(line + i, O_RDONLY);
-	free(line);
-	if (i == -1)
+	if (i == -1
+		|| !check_the_file_extention(line + ft_strlen(identifier) + 1, ".png"))
 	{
 		if (i == -1)
 			err = "invalid texture";
+		else
+			err = "invalid texture extention";
 		close(file_fd);
 		close(i);
-		put_error(err, NULL);
+		return (free(line), put_error(err, NULL), 0);
 	}
+	free(line);
 	*chk |= poweroftwo(ft_strchr(shift, identifier[0]) - shift);
 	return (1);
 }
@@ -136,4 +138,3 @@ void	check_map_header(char *file)
 			put_error("unexpected line", NULL);
 	}
 }
-

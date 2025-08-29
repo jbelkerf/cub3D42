@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 20:42:33 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:25:26 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define MINI_WIDTH 300
 # define MINI_HEIGHT 300
 
-# define ROTATE_DEG 3
+# define ROTATE_SPEED 0.07
 # define FOV 60.0
 # define SCALE2D 20
 # define WINDOW_X 1000
@@ -112,7 +112,7 @@ char	**free_arr(char **arr);
 void	raycast(t_data *data);
 
 // Rotate
-void	rotate(mlx_key_data_t keydata, void *param);
+void	rotate(void *param);
 
 // render MiniMap
 void	render_mini_map(t_data *data);
@@ -130,5 +130,6 @@ void	free_resourses(t_data *data);
 
 //tools
 void	set_data(t_data *data);
+int	check_the_file_extention(char *file, char *extention);
 
 #endif
