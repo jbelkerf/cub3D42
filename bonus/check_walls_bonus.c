@@ -23,16 +23,14 @@ void	check_map_walls(char **map, int length)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (ft_strchr2("0NEWS", map[y][x]))
+			if (ft_strchr2("0NEWSD", map[y][x]))
 			{
 				if (y == 0 || y == length || x == 0 || x == ft_strlen(map[y]))
-				{
 					put_error("map not soronded", map);
-				}
-				else if (!(ft_strchr2("0NEWS1", map[y][x + 1])
-					&& ft_strchr2("0NEWS1", map[y][x - 1])
-						&& ft_strchr2("0NEWS1", map[y + 1][x])
-						&& ft_strchr2("0NEWS1", map[y - 1][x])))
+				else if (!(ft_strchr2("0NEWS1D", map[y][x + 1])
+					&& ft_strchr2("0NEWS1D", map[y][x - 1])
+						&& ft_strchr2("0NEWS1D", map[y + 1][x])
+						&& ft_strchr2("0NEWS1D", map[y - 1][x])))
 					put_error("map not soronded", map);
 			}
 		}

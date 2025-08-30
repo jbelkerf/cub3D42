@@ -67,6 +67,7 @@ typedef struct s_textures
 	mlx_texture_t	*west;
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
+	mlx_texture_t	*door;
 }	t_textures;
 
 typedef struct	s_data
@@ -81,6 +82,7 @@ typedef struct	s_data
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
+	char		*door_texture;
 	int			floor_rgb[3];
 	int			ceil_rgb[3];
 	int			ceil_start;
@@ -94,6 +96,7 @@ typedef struct	s_data
 void	check_map_validity(char *file);
 void	check_map_header(char *file);
 void	check_map_walls(char **map, int length);
+void	check_map_doors(char **map);
 
 // FILL the DATA
 void	fill_the_data(t_data *data, char *file);

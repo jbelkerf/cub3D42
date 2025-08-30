@@ -71,6 +71,7 @@ void	fill_the_data(t_data *data, char *file)
 	data->west_texture = get_texture_path(file, "WE ");
 	data->north_texture = get_texture_path(file, "NO ");
 	data->south_texture = get_texture_path(file, "SO ");
+	data->door_texture = get_texture_path(file, "DO ");
 	set_rgb(file, "C ", data->ceil_rgb);
 	set_rgb(file, "F ", data->floor_rgb);
 	data->map = map_to_str(file, &(data->map_length), &(data->map_width));

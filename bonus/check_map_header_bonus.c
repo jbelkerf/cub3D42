@@ -134,7 +134,7 @@ void	check_map_header(char *file)
 			chk = chk | 16;
 		else if (ln && !(chk & 32) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
 			chk = chk | 32;
-		else
-			put_error("unexpected line", NULL);
+		// else
+		// 	put_error("unexpected line", NULL);
 	}
 }

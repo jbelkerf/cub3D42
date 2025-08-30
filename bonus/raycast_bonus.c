@@ -98,7 +98,7 @@ void	raycast(t_data *data)
 				cell_y += step_y;
 				side = 1;
 			}
-			if (data->map[cell_y][cell_x] == '1')
+			if (data->map[cell_y][cell_x] == '1' || data->map[cell_y][cell_x] == 'D')
 				hit = 1;
 		}
 
@@ -121,6 +121,8 @@ void	raycast(t_data *data)
 			else
 				texture = data->texts.west;
 		}
+		if (data->map[cell_y][cell_x] == 'D')
+			texture = data->texts.door;
 		dist *= cos(angle - ray_angle);
 		if (dist < 0)
 			dist = 0;
@@ -128,5 +130,5 @@ void	raycast(t_data *data)
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
-	render_mini_map(data);
+	//render_mini_map(data);
 }

@@ -70,6 +70,7 @@ void	set_data(t_data *data)
 	data->texts.east = safe_load_texture(data->east_texture);
 	data->texts.south = safe_load_texture(data->south_texture);
 	data->texts.west = safe_load_texture(data->west_texture);
+	data->texts.door = safe_load_texture(data->door_texture);
 	tmp = get_start_angle(data->map, data->player->p_x, data->player->p_y);
 	data->player->angle = tmp;
 }

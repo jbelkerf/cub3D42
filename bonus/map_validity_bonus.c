@@ -43,7 +43,7 @@ void	check_map_symbols(char **map)
 			syb = map[y][x];
 			if (ft_strchr("NWSE", syb))
 				p++;
-			if (!ft_strchr("NWSE10 \n", syb))
+			if (!ft_strchr("NWSE10D \n", syb))
 				put_error("strange sybmol apeares", map);
 			x++;
 		}
@@ -52,6 +52,7 @@ void	check_map_symbols(char **map)
 	if (p != 1)
 		put_error("invalid player number", map);
 }
+
 
 void	check_map_validity(char *file)
 {
@@ -71,6 +72,8 @@ void	check_map_validity(char *file)
 	check_map_symbols(map);
 	printf(GREEN "done!\nchecking map's walls...\n" RESET);
 	check_map_walls(map, length);
+	printf(GREEN "done!\nchecking map's doors...\n" RESET);
+	check_map_doors(map);
 	printf(GREEN "done!\n" RESET);
 	free_arr(map);
 }
