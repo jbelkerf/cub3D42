@@ -126,6 +126,12 @@ void	raycast(t_data *data)
 		dist *= cos(angle - ray_angle);
 		if (dist < 0)
 			dist = 0;
+		if (raw == WINDOW_X / 2)
+		{
+			data->raw.y = cell_y;
+			data->raw.x = cell_x;
+			data->raw.dist = dist;
+		}
 		render3d(dist, raw, texture, data, side, ray_angle);
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;

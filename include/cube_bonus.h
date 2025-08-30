@@ -70,6 +70,13 @@ typedef struct s_textures
 	mlx_texture_t	*door;
 }	t_textures;
 
+typedef struct s_raw
+{
+	int	x;
+	int	y;
+	double dist;
+} t_raw;
+
 typedef struct	s_data
 {
 	mlx_t		*mlx;
@@ -90,6 +97,7 @@ typedef struct	s_data
 	t_player	*player;
 	t_imgs		imgs;
 	t_textures	texts;
+	t_raw		raw;
 }	t_data;
 
 //CHECK MAP
@@ -116,6 +124,9 @@ void	raycast(t_data *data);
 
 // Rotate
 void	rotate(void *param);
+
+// Door
+void door_func(void *param);
 
 // render MiniMap
 void	render_mini_map(t_data *data);

@@ -42,7 +42,7 @@ int	is_wall(t_data *data, double dx, double dy)
 
 	x = data->player->p_x + dx;
 	y = data->player->p_y + dy;
-	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1')
+	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1' || data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == 'D')
 		return (1);
 	return (0);
 }
