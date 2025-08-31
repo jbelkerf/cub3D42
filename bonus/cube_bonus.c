@@ -80,6 +80,7 @@ int	main(int ac, char **av)
 	get_images(&data);
 	mlx_loop_hook(data.mlx, move_player, (void *)&data);
 	mlx_loop_hook(data.mlx, rotate, &data);
+	mlx_loop_hook(data.mlx, door_func, &data);
 	mlx_loop(data.mlx);
 	free_resourses(&data);
 	mlx_terminate(data.mlx);

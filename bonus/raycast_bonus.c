@@ -98,10 +98,9 @@ void	raycast(t_data *data)
 				cell_y += step_y;
 				side = 1;
 			}
-			if (data->map[cell_y][cell_x] == '1')
+			if (data->map[cell_y][cell_x] == '1' || data->map[cell_y][cell_x] == 'D')
 				hit = 1;
 		}
-
 		if (side == 0)
 			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
 		else
@@ -124,9 +123,29 @@ void	raycast(t_data *data)
 		dist *= cos(angle - ray_angle);
 		if (dist < 0)
 			dist = 0;
+		if (data->map[cell_y][cell_x] == 'D')
+			texture = data->texts.door;
+		if (raw == WINDOW_X / 2)
+		{
+			data->front_door = -1;
+			if (data->map[cell_y][cell_x] == 'D')
+			{
+				int idx = get_door(data, cell_x, cell_y);
+				data->front_door = idx;
+				if (idx == -1)
+				{
+					int idx1 = ++(data->door_idx);
+					data->front_door = idx1;
+					data->doors_info[idx1].y = cell_y;
+					data->doors_info[idx1].x = cell_x;
+				}
+				if (idx != -1)
+					data->doors_info[idx].dist = dist;
+			}
+		}
 		render3d(dist, raw, texture, data, side, ray_angle);
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
-	render_mini_map(data);
+	//render_mini_map(data);
 }

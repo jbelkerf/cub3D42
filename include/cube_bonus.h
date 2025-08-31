@@ -45,6 +45,7 @@
 # define WALL_LEFT_COLOR 0x000000ff
 # define WALL_RIGHT_COLOR 0xDA70D6ff
 
+# define MAX_DOORS 32
 typedef struct s_imgs
 {
 	mlx_image_t	*mini_map;
@@ -67,7 +68,17 @@ typedef struct s_textures
 	mlx_texture_t	*west;
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
+	mlx_texture_t	*door;
 }	t_textures;
+
+typedef struct s_door_info
+{
+	int	x;
+	int	y;
+	int	idx;
+	int opened;
+	double dist;
+} t_door_info;
 
 typedef struct	s_data
 {
@@ -81,19 +92,24 @@ typedef struct	s_data
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
+	char		*door_texture;
 	int			floor_rgb[3];
 	int			ceil_rgb[3];
 	int			ceil_start;
 	int			floor_start;
+	int			door_idx;
+	int			front_door;
 	t_player	*player;
 	t_imgs		imgs;
 	t_textures	texts;
+	t_door_info		doors_info[MAX_DOORS];
 }	t_data;
 
 //CHECK MAP
 void	check_map_validity(char *file);
 void	check_map_header(char *file);
 void	check_map_walls(char **map, int length);
+void	check_map_doors(char **map);
 
 // FILL the DATA
 void	fill_the_data(t_data *data, char *file);
@@ -113,6 +129,10 @@ void	raycast(t_data *data);
 
 // Rotate
 void	rotate(void *param);
+
+// Door
+void	door_func(void *param);
+int		get_door(t_data *data, int x, int y);
 
 // render MiniMap
 void	render_mini_map(t_data *data);
