@@ -139,7 +139,8 @@ void	raycast(t_data *data)
 					data->doors_info[idx1].y = cell_y;
 					data->doors_info[idx1].x = cell_x;
 				}
-				data->doors_info[0].dist = dist;
+				if (idx != -1)
+					data->doors_info[idx].dist = dist;
 			}
 		}
 		render3d(dist, raw, texture, data, side, ray_angle);

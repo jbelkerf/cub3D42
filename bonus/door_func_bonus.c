@@ -17,7 +17,7 @@ int get_door(t_data *data, int x, int y)
     int idx;
 
     idx = -1;
-    while (++idx < data->door_idx)
+    while (++idx <= data->door_idx)
     {
         int xx = data->doors_info[idx].x;
         int yy = data->doors_info[idx].y;
@@ -32,18 +32,24 @@ void open_close_door(int idx, t_data *data)
 {
     int x;
     int y;
-    int i = -1;
+    int i;
 
-    while (++i < data->door_idx)
+    i = -1;
+    while (++i <= data->door_idx)
     {
         x = data->doors_info[i].x;
         y = data->doors_info[i].y;
-        if (x != (int) data->player->p_x && y != (int) data->player->p_y)
+        if (x != (int) (data->player->p_x / SCALE2D)  || y != (int) (data->player->p_y / SCALE2D))
+        {
             data->map[y][x] = 'D';
+        }
     }
+    if (idx == -1)
+        return ;
     x = data->doors_info[idx].x;
     y = data->doors_info[idx].y;
-    data->map[y][x] = 'd';
+    if (x != (int) (data->player->p_x / SCALE2D)  || y != (int) (data->player->p_y / SCALE2D))
+        data->map[y][x] = 'd';
 }
 
 void door_func(void *param)
@@ -54,7 +60,7 @@ void door_func(void *param)
     if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE))
     {
         int idx = data->front_door;
-        if (idx != -1 && data->doors_info[idx].dist <= 1.0)
+        if (idx != -1 && data->doors_info[idx].dist <= 1.0 && data->doors_info[idx].dist > 0.0)
         {
             open_close_door(idx, data);
             ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width * data->imgs.CUB->height * 4);

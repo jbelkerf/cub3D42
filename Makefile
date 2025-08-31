@@ -87,5 +87,5 @@ clean:
 
 fclean:
 	make fclean -C Libft
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 re: fclean all
