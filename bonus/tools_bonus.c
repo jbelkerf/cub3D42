@@ -73,7 +73,9 @@ void	set_data(t_data *data)
 	data->texts.door = safe_load_texture(data->door_texture);
 	tmp = get_start_angle(data->map, data->player->p_x, data->player->p_y);
 	data->player->angle = tmp;
-	ft_memset((void *)&data->raw, 0, sizeof(t_raw *));
+	data->door_idx = -1;
+	data->front_door = -1;
+	ft_memset((void *)&data->doors_info, 0, sizeof(t_door_info *));
 }
 
 int	check_the_file_extention(char *file, char *extention)
