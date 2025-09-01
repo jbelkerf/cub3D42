@@ -76,6 +76,8 @@ void	set_data(t_data *data)
 	data->door_idx = -1;
 	data->front_door = -1;
 	data->last_open_door = -1;
+	data->mouse_last_x = -1;
+	data->mouse_ignore_next = 0;
 	ft_memset((void *)&data->doors_info, 0, sizeof(t_door_info *));
 }
 
