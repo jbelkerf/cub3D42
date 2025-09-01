@@ -23,7 +23,7 @@ BONUS_SRC = gnl/get_next_line.c gnl/get_next_line_utils.c \
 	bonus/map_to_table_bonus.c bonus/check_map_header_bonus.c  bonus/errors_bonus.c\
 	bonus/check_walls_bonus.c bonus/fill_the_data_bonus.c bonus/tools_bonus.c \
 	bonus/raycast_bonus.c bonus/render_mini_map_bonus.c bonus/render3d_bonus.c bonus/move_player_bonus.c\
-	bonus/free_resourses_bonus.c  bonus/check_doors_bonus.c  bonus/door_func_bonus.c 
+	bonus/free_resourses_bonus.c  bonus/check_doors_bonus.c  bonus/door_func_bonus.c bonus/cursor_func_bonus.c 
 
 SRC= gnl/get_next_line.c gnl/get_next_line_utils.c \
 	src/cube.c src/map_validity.c \

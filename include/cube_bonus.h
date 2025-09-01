@@ -99,6 +99,8 @@ typedef struct	s_data
 	int			door_idx;
 	int			front_door;
 	int			last_open_door;
+	double		mouse_last_x;
+	int			mouse_ignore_next;
 	t_player	*player;
 	t_imgs		imgs;
 	t_textures	texts;
@@ -133,6 +135,9 @@ void	rotate(void *param);
 // Door
 void	door_func(void *param);
 int		get_door(t_data *data, int x, int y);
+
+// Cursor
+void	cursor_func(double xpos, double ypos, void *param);
 
 // render MiniMap
 void	render_mini_map(t_data *data);
