@@ -75,6 +75,7 @@ void	set_data(t_data *data)
 	data->player->angle = tmp;
 	data->door_idx = -1;
 	data->front_door = -1;
+	data->last_open_door = -1;
 	ft_memset((void *)&data->doors_info, 0, sizeof(t_door_info *));
 }
 
