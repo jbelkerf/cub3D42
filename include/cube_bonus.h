@@ -76,7 +76,6 @@ typedef struct s_door_info
 	int	x;
 	int	y;
 	int	idx;
-	int opened;
 	double dist;
 } t_door_info;
 
@@ -99,6 +98,7 @@ typedef struct	s_data
 	int			floor_start;
 	int			door_idx;
 	int			front_door;
+	int			last_open_door;
 	t_player	*player;
 	t_imgs		imgs;
 	t_textures	texts;
