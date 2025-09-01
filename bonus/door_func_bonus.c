@@ -71,7 +71,10 @@ void    close_last_opened_door(t_data *data)
     if (px == dx && py == dy)
         return ;
     if (abs(px - dx) > 2 || abs(py - dy) > 2)
+    {
+        data->last_open_door = -1;
         data->map[dy][dx] = 'D';
+    }
 }
 
 void door_func(void *param)
