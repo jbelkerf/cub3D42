@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/29 12:25:57 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 15:57:03 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void	get_images(t_data *data)
 	tmp = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
 	data->imgs.ray = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0, 0);
+	data->imgs.gun = mlx_new_image(data->mlx, SORD_WIDTH, SORD_HEIGHT);
+	mlx_image_to_window(data->mlx, data->imgs.gun, WINDOW_X - (SORD_WIDTH * 2), WINDOW_Y - SORD_HEIGHT);
+	set_frames(data);
 	raycast(data);
 }
 
@@ -81,6 +84,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, move_player, (void *)&data);
 	mlx_loop_hook(data.mlx, rotate, &data);
 	mlx_loop_hook(data.mlx, door_func, &data);
+	mlx_loop_hook(data.mlx, gun_func, &data);
 	mlx_cursor_hook(data.mlx, cursor_func, &data);
 	mlx_loop(data.mlx);
 	free_resourses(&data);

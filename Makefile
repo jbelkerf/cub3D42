@@ -19,7 +19,7 @@ CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
 MLX=./MLX42/build/libmlx42.a
 
 BONUS_SRC = gnl/get_next_line.c gnl/get_next_line_utils.c \
-	bonus/cube_bonus.c bonus/map_validity_bonus.c \
+	bonus/cube_bonus.c bonus/map_validity_bonus.c bonus/gun_bonus.c \
 	bonus/map_to_table_bonus.c bonus/check_map_header_bonus.c  bonus/errors_bonus.c\
 	bonus/check_walls_bonus.c bonus/fill_the_data_bonus.c bonus/tools_bonus.c \
 	bonus/raycast_bonus.c bonus/render_mini_map_bonus.c bonus/render3d_bonus.c bonus/move_player_bonus.c\

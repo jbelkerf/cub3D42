@@ -2,7 +2,7 @@ WE ./textures/van.png
 SO ./textures/soldate.png
 NO ./textures/akatski.png
 EA ./textures/bleach.png
-DO ./textures/van.png
+DO ./textures/nw/zellige.png
 
 C 0,0,255
 F 0,0,0

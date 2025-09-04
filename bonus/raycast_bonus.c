@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 23:14:54 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 10:51:15 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 17:00:29 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,6 @@ void	raycast(t_data *data)
 		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
 		raw++;
 	}
+	render_gun(data, data->frames.fire[6]);
 	render_mini_map(data);
 }

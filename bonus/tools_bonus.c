@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/09/04 12:28:41 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 17:02:44 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	set_data(t_data *data)
 	data->mouse_last_x = -1;
 	data->mouse_ignore_next = 0;
 	ft_memset((void *)&data->doors_info, 0, sizeof(t_door_info *));
+	data->imgs.mini_map = NULL;
 }
 
 int	check_the_file_extention(char *file, char *extention)
@@ -98,4 +99,32 @@ int	check_the_file_extention(char *file, char *extention)
 	if (file[f_len - 1] == '/')
 		return (0);
 	return (1);
+}
+
+void set_frames(t_data *data)
+{
+	data->frames.aim_count = 0;
+	data->frames.max_aim = 10;
+	data->frames.max_fire = 7;
+	data->frames.fire_count = 0;
+	data->frames.last_time = mlx_get_time();
+	data->frames.aim = malloc(12 * sizeof(mlx_texture_t *));
+	data->frames.fire = malloc(8 * sizeof(char *));
+	data->frames.aim[0] = safe_load_texture("./textures/AIM/hk53_aim.1.png");
+	data->frames.aim[1] = safe_load_texture("./textures/AIM/hk53_aim.2.png");
+	data->frames.aim[2] = safe_load_texture("./textures/AIM/hk53_aim.3.png");
+	data->frames.aim[3] = safe_load_texture("./textures/AIM/hk53_aim.4.png");
+	data->frames.aim[4] = safe_load_texture("./textures/AIM/hk53_aimfire.1.png");
+	data->frames.aim[5] = safe_load_texture("./textures/AIM/hk53_aimfire.2.png");
+	data->frames.aim[6] = safe_load_texture("./textures/AIM/hk53_aimfire.3.png");
+	data->frames.aim[7] = safe_load_texture("./textures/AIM/hk53_aimfire.4.png");
+	data->frames.aim[8] = safe_load_texture("./textures/AIM/hk53_aimfire.5.png");
+	data->frames.aim[9] = safe_load_texture("./textures/AIM/hk53_aimfire.6.png");
+	data->frames.fire[0] = safe_load_texture("./textures/FIRE/hk53_fire.1.png");
+	data->frames.fire[1] = safe_load_texture("./textures/FIRE/hk53_fire.2.png");
+	data->frames.fire[2] = safe_load_texture("./textures/FIRE/hk53_fire.3.png");
+	data->frames.fire[3] = safe_load_texture("./textures/FIRE/hk53_fire.4.png");
+	data->frames.fire[4] = safe_load_texture("./textures/FIRE/hk53_fire.5.png");
+	data->frames.fire[5] = safe_load_texture("./textures/FIRE/hk53_fire.6.png");
+	data->frames.fire[6] = safe_load_texture("./textures/nw/hk53_idle.1.png");
 }

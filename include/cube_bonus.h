@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/29 12:25:26 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 16:53:55 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+# include <time.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -31,6 +32,12 @@
 
 # define MINI_WIDTH 300
 # define MINI_HEIGHT 300
+
+# define AIM 0
+# define FIRE 1
+# define FRAME_DELAY 0.1
+# define SORD_WIDTH 500
+# define SORD_HEIGHT 482 
 
 # define ROTATE_SPEED 0.07
 # define FOV 60.0
@@ -52,6 +59,7 @@ typedef struct s_imgs
 	mlx_image_t	*ray;
 	mlx_image_t	*background;
 	mlx_image_t	*CUB;
+	mlx_image_t	*gun;
 }	t_imgs;
 
 
@@ -79,32 +87,45 @@ typedef struct s_door_info
 	double dist;
 } t_door_info;
 
+typedef struct s_frames
+{
+	int				aim_count;
+	int				fire_count;
+	double			frame_delay;
+	double			last_time;
+	int				max_aim;
+	int				max_fire;
+	mlx_texture_t	**aim;
+	mlx_texture_t	**fire;
+} t_frames;
+
 typedef struct	s_data
 {
-	mlx_t		*mlx;
-	char		**map;
-	int			map_length;
-	int			map_width;
-	int			pxl_width;
-	int			pxl_height;
-	char		*north_texture;
-	char		*south_texture;
-	char		*west_texture;
-	char		*east_texture;
-	char		*door_texture;
-	int			floor_rgb[3];
-	int			ceil_rgb[3];
-	int			ceil_start;
-	int			floor_start;
-	int			door_idx;
-	int			front_door;
-	int			last_open_door;
-	double		mouse_last_x;
-	int			mouse_ignore_next;
-	t_player	*player;
-	t_imgs		imgs;
-	t_textures	texts;
-	t_door_info		doors_info[MAX_DOORS];
+	mlx_t			*mlx;
+	char			**map;
+	int				map_length;
+	int				map_width;
+	int				pxl_width;
+	int				pxl_height;
+	char			*north_texture;
+	char			*south_texture;
+	char			*west_texture;
+	char			*east_texture;
+	char			*door_texture;
+	int				floor_rgb[3];
+	int				ceil_rgb[3];
+	int				ceil_start;
+	int				floor_start;
+	int				door_idx;
+	int				front_door;
+	int				last_open_door;
+	double			mouse_last_x;
+	int				mouse_ignore_next;
+	t_frames		frames;
+	t_player		*player;
+	t_imgs			imgs;
+	t_textures		texts;
+	t_door_info			doors_info[MAX_DOORS];
 }	t_data;
 
 //CHECK MAP
@@ -150,11 +171,17 @@ void	render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, in
 //Move player
 void	move_player(void *param);
 
+// Gun
+void render_gun(t_data *data, mlx_texture_t *txt);
+void	gun_func(void *param);
+
 //free resourses
 void	free_resourses(t_data *data);
 
 //tools
-void	set_data(t_data *data);
-int	check_the_file_extention(char *file, char *extention);
+void		set_data(t_data *data);
+uint32_t	rgba_to_int(uint8_t *pixels);
+void		set_frames(t_data *data);
+int			check_the_file_extention(char *file, char *extention);
 
 #endif
