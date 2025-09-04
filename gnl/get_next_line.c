@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:40:04 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/06 22:27:04 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 12:04:13 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	}
 	line = read_line(fd, buffer, line, &left);
 	if (line == NULL)
-		return (free_p(&left), free_p(&buffer), NULL);
+		return (free_p(&left), left = NULL, free_p(&buffer), NULL);
 	if (left != NULL && *left == 0)
 		free_p(&left);
 	return (line);

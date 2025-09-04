@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/29 12:22:56 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 11:52:58 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 	char	*err;
 	char	*shift;
 
-	shift = "NSWE";
+	shift = "NSWED";
 	err = NULL;
 	i = ft_strlen(identifier);
 	while (line[i] == ' ')
@@ -109,6 +109,7 @@ int	match_rgb(char *line)
 	8 -> 0000 1000
 	16-> 0001 0000
 	32-> 0010 0000
+	64-> 0100 0000
 */
 
 void	check_map_header(char *file)
@@ -119,7 +120,7 @@ void	check_map_header(char *file)
 
 	fd = open(file, O_RDONLY);
 	chk = 0;
-	while (chk != 63)
+	while (chk != 127)
 	{
 		ln = skipi_abdsami3(fd);
 		if (ln && !(chk & 1) && !ft_strncmp(ln, "NO ", 3))
@@ -130,11 +131,16 @@ void	check_map_header(char *file)
 			match_texture(ln, "WE ", fd, &chk);
 		else if (ln && !(chk & 8) && !ft_strncmp(ln, "EA ", 3))
 			match_texture(ln, "EA ", fd, &chk);
-		else if (ln && !(chk & 16) && !ft_strncmp(ln, "F ", 2) && match_rgb(ln))
-			chk = chk | 16;
-		else if (ln && !(chk & 32) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
+		else if (ln && !(chk & 16) && !ft_strncmp(ln, "DO ", 3))
+			match_texture(ln, "DO ", fd, &chk);
+		else if (ln && !(chk & 32) && !ft_strncmp(ln, "F ", 2) && match_rgb(ln))
 			chk = chk | 32;
-		// else
-		// 	put_error("unexpected line", NULL);
+		else if (ln && !(chk & 64) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
+			chk = chk | 64;
+		else
+		{
+			printf("line = %s", ln);
+			put_error("unexpected line", NULL);
+		}
 	}
 }

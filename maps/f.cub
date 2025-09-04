@@ -1,7 +1,8 @@
 WE ./textures/van.png
-NO ./textures/akatski.png
 SO ./textures/soldate.png
+NO ./textures/akatski.png
 EA ./textures/bleach.png
+DO ./textures/van.png
 
 C 0,0,255
 F 0,0,0

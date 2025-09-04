@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:39:22 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 13:01:07 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 12:17:02 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	render_mini_map(t_data *data)
 	{
 		y_end = data->map_length;
 		y_start = y_end - (MINI_HEIGHT / SCALE2D);
+		if (y_start < 0)
+			y_start = 0;
 	}
 	x_start = (data->player->p_x / SCALE2D)- (MINI_WIDTH / SCALE2D / 2);
 	if (x_start < 0)
@@ -76,6 +78,8 @@ void	render_mini_map(t_data *data)
 	{
 		x_end = data->map_width;
 		x_start = x_end - (MINI_WIDTH / SCALE2D);
+		if (x_start < 0)
+			x_start = 0;
 	}
 	y = y_start;
 
@@ -88,6 +92,8 @@ void	render_mini_map(t_data *data)
 				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0x00ff00ff, 2);
 			else if (ft_strchr("NWES0", data->map[y][x]))
 				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0x0000ffff, 2);
+			else if (data->map[y][x] == 'D')
+				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0xffff00ff, 2);
 			x++;
 		}
 		y++;

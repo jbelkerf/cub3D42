@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:41:44 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:24:37 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 12:07:44 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 1
 # endif
 
 void	*free_p(char **p);
