@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 16:53:55 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 17:25:03 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # define AIM 0
 # define FIRE 1
+# define IDLE 2
 # define FRAME_DELAY 0.1
 # define SORD_WIDTH 500
 # define SORD_HEIGHT 482 
@@ -90,6 +91,7 @@ typedef struct s_door_info
 typedef struct s_frames
 {
 	int				aim_count;
+	bool			idle;
 	int				fire_count;
 	double			frame_delay;
 	double			last_time;

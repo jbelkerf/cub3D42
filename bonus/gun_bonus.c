@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:50:05 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 16:57:09 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 17:28:00 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void render_frames(t_data *data, t_frames *f, int type)
 	int *count;
 	mlx_texture_t **frames;
 	int max;
-
+	
+	data->frames.idle = false;
 	if (type == AIM)
 	{
 		count = &f->aim_count;
@@ -84,4 +85,13 @@ void	gun_func(void *param)
 		render_frames(data, &data->frames, AIM);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_F))
 		render_frames(data, &data->frames, FIRE);
+	else
+	{
+		if (!data->frames.idle && data->frames.last_time + 0.1 < mlx_get_time())
+		{
+			data->frames.idle = true;
+			data->frames.aim_count = 0;
+			render_gun(data, data->frames.fire[6]);
+		}
+	}
 }

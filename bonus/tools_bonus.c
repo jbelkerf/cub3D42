@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/09/04 17:02:44 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/04 17:25:29 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void set_frames(t_data *data)
 	data->frames.max_aim = 10;
 	data->frames.max_fire = 7;
 	data->frames.fire_count = 0;
+	data->frames.idle = true;
 	data->frames.last_time = mlx_get_time();
 	data->frames.aim = malloc(12 * sizeof(mlx_texture_t *));
 	data->frames.fire = malloc(8 * sizeof(char *));
