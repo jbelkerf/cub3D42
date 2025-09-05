@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:07 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 15:36:13 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:12:39 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	is_wall(t_data *data, double dx, double dy)
 
 void	help_move(t_data *data, double *dx, double *dy, double angle)
 {
-	ft_memset(data->imgs.CUB->pixels, 0,
-		data->imgs.CUB->width * data->imgs.CUB->height * 4);
+	ft_memset(data->imgs.cub->pixels, 0,
+		data->imgs.cub->width * data->imgs.cub->height * 4);
 	*dx = cos(angle);
 	*dy = sin(angle); 
 	raycast(data);
@@ -114,8 +114,8 @@ void	rotate(void *param)
 	}
 	if (update)
 	{
-		ft_memset(data->imgs.CUB->pixels, 0,
-			data->imgs.CUB->width * data->imgs.CUB->height * 4);
+		ft_memset(data->imgs.cub->pixels, 0,
+			data->imgs.cub->width * data->imgs.cub->height * 4);
 		raycast(data);
 	}
 }

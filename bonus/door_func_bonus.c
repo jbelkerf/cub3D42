@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_func_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aidnassa <aidnassa@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 16:29:56 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/09/05 11:29:33 by aidnassa         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:12:52 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	door_func(void *param)
 			&& data->doors_info[idx].dist > 0.0)
 		{
 			open_door(idx, data);
-			ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width
-				* data->imgs.CUB->height * 4);
+			ft_memset(data->imgs.cub->pixels, 0, data->imgs.cub->width
+				* data->imgs.cub->height * 4);
 			raycast(data);
 		}
 	}

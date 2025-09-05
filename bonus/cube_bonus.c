@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:49:30 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 15:41:08 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:11:31 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	get_images(t_data *data)
 	data->imgs.background = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
 	tmp = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
-	data->imgs.CUB = tmp;
-	mlx_image_to_window(data->mlx, data->imgs.CUB, 0, 0);
+	data->imgs.cub = tmp;
+	mlx_image_to_window(data->mlx, data->imgs.cub, 0, 0);
 	rnder_floor_and_ceil(data);
 	tmp = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
 	data->imgs.ray = tmp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_func_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aidnassa <aidnassa@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:20:17 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/09/01 12:20:18 by aidnassa         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:11:40 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	do_cursor_rotate(t_data *data, double delta_x)
 		data->player->angle += 2 * M_PI;
 	if (data->player->angle >= 2 * M_PI)
 		data->player->angle -= 2 * M_PI;
-	ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width
-		* data->imgs.CUB->height * 4);
+	ft_memset(data->imgs.cub->pixels, 0, data->imgs.cub->width
+		* data->imgs.cub->height * 4);
 	data->mouse_ignore_next = 1;
 	mlx_set_mouse_pos(data->mlx, WINDOW_X / 2, WINDOW_Y / 2);
 	raycast(data);

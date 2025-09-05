@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 17:05:05 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:12:26 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	render3d(t_raycast_md *m)
 				&& r.y < WINDOW_Y))
 		{
 			r.pixel = &(r.pxls[4 * (r.texty * m->texture->width + r.textx)]);
-			mlx_put_pixel(m->data->imgs.CUB, m->raw, r.y, rgba_to_int(r.pixel));
+			mlx_put_pixel(m->data->imgs.cub, m->raw, r.y, rgba_to_int(r.pixel));
 		}
 		r.y++;
 	}

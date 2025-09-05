@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 16:45:55 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:13:11 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define ORANGE  "\033[0;33m"
 # define RESET   "\033[0m"
 
-
 # define ROTATE_SPEED 0.07
 # define FOV 60.0
 # define SCALE2D 20
@@ -47,9 +46,8 @@ typedef struct s_imgs
 {
 	mlx_image_t	*ray;
 	mlx_image_t	*background;
-	mlx_image_t	*CUB;
+	mlx_image_t	*cub;
 }	t_imgs;
-
 
 typedef struct s_player
 {

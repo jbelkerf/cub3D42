@@ -6,12 +6,12 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 16:05:30 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:16:01 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#ifndef CUBE_BONUS_H
+# define CUBE_BONUS_H
 
 # include "../Libft/libft.h"
 # include "../gnl/get_next_line.h"
@@ -54,15 +54,15 @@
 # define WALL_RIGHT_COLOR 0xDA70D6ff
 
 # define MAX_DOORS 32
+
 typedef struct s_imgs
 {
 	mlx_image_t	*mini_map;
 	mlx_image_t	*ray;
 	mlx_image_t	*background;
-	mlx_image_t	*CUB;
+	mlx_image_t	*cub;
 	mlx_image_t	*gun;
 }	t_imgs;
-
 
 typedef struct s_player
 {
@@ -82,11 +82,11 @@ typedef struct s_textures
 
 typedef struct s_door_info
 {
-	int	x;
-	int	y;
-	int	idx;
-	double dist;
-} t_door_info;
+	int		x;
+	int		y;
+	int		idx;
+	double	dist;
+}	t_door_info;
 
 typedef struct s_frames
 {
@@ -98,9 +98,9 @@ typedef struct s_frames
 	int				max_fire;
 	mlx_texture_t	**aim;
 	mlx_texture_t	**fire;
-} t_frames;
+}	t_frames;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	mlx_t			*mlx;
 	char			**map;
@@ -139,8 +139,8 @@ typedef struct s_render
 	int		wall_height;
 	int		y;
 	int		x;
-	double		dy;
-	double		dx;
+	double	dy;
+	double	dx;
 	double	wallx;
 	uint8_t	*pixels;
 	uint8_t	*pxls;
@@ -169,54 +169,54 @@ typedef struct s_raycast_md
 }	t_raycast_md;
 
 //CHECK MAP
-void	check_map_validity(char *file);
-void	check_map_header(char *file, int chk);
-void	check_map_walls(char **map, int length);
-void	check_map_doors(char **map);
+void		check_map_validity(char *file);
+void		check_map_header(char *file, int chk);
+void		check_map_walls(char **map, int length);
+void		check_map_doors(char **map);
 
 // FILL the DATA
-void	fill_the_data(t_data *data, char *file);
+void		fill_the_data(t_data *data, char *file);
 
 //TOOLS
-char	**map_to_str(char *file, int *length, int *width);
-char	*skipi_abdsami3(int file_fd);
+char		**map_to_str(char *file, int *length, int *width);
+char		*skipi_abdsami3(int file_fd);
 
 //ERRORS
-void	put_error(char *err, char **map);
+void		put_error(char *err, char **map);
 
 // FREE RESOURCES
-char	**free_arr(char **arr);
+char		**free_arr(char **arr);
 
 // Raycast
-void	raycast(t_data *data);
+void		raycast(t_data *data);
 
 // Rotate
-void	rotate(void *param);
+void		rotate(void *param);
 
 // Door
-void	door_func(void *param);
-int		get_door(t_data *data, int x, int y);
-void	set_front_door(t_raycast_md *md);
+void		door_func(void *param);
+int			get_door(t_data *data, int x, int y);
+void		set_front_door(t_raycast_md *md);
 
 // Cursor
-void	cursor_func(double xpos, double ypos, void *param);
+void		cursor_func(double xpos, double ypos, void *param);
 
 // render MiniMap
-void	render_mini_map(t_data *data);
-void	locate_player(t_data *data, char **map);
+void		render_mini_map(t_data *data);
+void		locate_player(t_data *data, char **map);
 
 // Render3d
-void	render3d(t_raycast_md *md);
+void		render3d(t_raycast_md *md);
 
 //Move player
-void	move_player(void *param);
+void		move_player(void *param);
 
 // Gun
-void render_gun(t_data *data, mlx_texture_t *txt);
-void	gun_func(void *param);
+void		render_gun(t_data *data, mlx_texture_t *txt);
+void		gun_func(void *param);
 
 //free resourses
-void	free_resourses(t_data *data);
+void		free_resourses(t_data *data);
 
 //tools
 void		set_data(t_data *data);

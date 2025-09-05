@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:58:48 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:24:18 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:10:20 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ char	*ft_strdup1(const char *s)
 
 char	*ft_substr1(char *s, int start, int len)
 {
-	int	len_s;
-	int	i;
-	char			*sub;
+	int		len_s;
+	int		i;
+	char	*sub;
 
 	i = 0;
 	if (s == NULL)
