@@ -49,7 +49,7 @@ void	rnder_floor_and_ceil(t_data *data)
 void	get_images(t_data *data)
 {
 	mlx_image_t	*tmp;
-	
+
 	tmp = mlx_new_image(data->mlx, data->pxl_width, data->pxl_height);
 	data->imgs.background = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.background, 0, 0);
@@ -61,7 +61,8 @@ void	get_images(t_data *data)
 	data->imgs.ray = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0, 0);
 	data->imgs.gun = mlx_new_image(data->mlx, SORD_WIDTH, SORD_HEIGHT);
-	mlx_image_to_window(data->mlx, data->imgs.gun, WINDOW_X - (SORD_WIDTH * 2), WINDOW_Y - SORD_HEIGHT);
+	mlx_image_to_window(data->mlx, data->imgs.gun, WINDOW_X - (SORD_WIDTH * 2),
+		WINDOW_Y - SORD_HEIGHT);
 	set_frames(data);
 	raycast(data);
 }

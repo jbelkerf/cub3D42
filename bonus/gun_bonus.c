@@ -12,20 +12,21 @@
 
 #include "../include/cube_bonus.h"
 
-void render_gun(t_data *data, mlx_texture_t *txt)
+void	render_gun(t_data *data, mlx_texture_t *txt)
 {
+	uint8_t	*pixels;
+	int		x;
+	int		y;
+
 	double start_x, end_x;
 	double start_y, end_y;
-	uint8_t *pixels;
 	int tx, ty;
-
 	ft_memset(data->imgs.gun->pixels, 0, SORD_WIDTH * SORD_HEIGHT * 4);
 	start_x = 0;
 	start_y = 0;
 	end_x = SORD_WIDTH;
 	end_y = SORD_HEIGHT;
-	int x = start_x;
-	int y;
+	x = start_x;
 	while (x < end_x)
 	{
 		y = start_y;
@@ -35,7 +36,7 @@ void render_gun(t_data *data, mlx_texture_t *txt)
 			{
 				tx = ((x - start_x) * txt->width) / SORD_WIDTH;
 				ty = ((y - start_y) * txt->height) / SORD_HEIGHT;
-				pixels = &txt->pixels[ 4 * (ty * txt->width + tx)];
+				pixels = &txt->pixels[4 * (ty * txt->width + tx)];
 				if (rgba_to_int(pixels) != 0x00000000)
 					mlx_put_pixel(data->imgs.gun, x, y, rgba_to_int(pixels));
 			}
@@ -43,15 +44,14 @@ void render_gun(t_data *data, mlx_texture_t *txt)
 		}
 		x++;
 	}
-	
 }
 
-void render_frames(t_data *data, t_frames *f, int type)
+void	render_frames(t_data *data, t_frames *f, int type)
 {
-	int *count;
-	mlx_texture_t **frames;
-	int max;
-	
+	int				*count;
+	mlx_texture_t	**frames;
+	int				max;
+
 	data->frames.idle = false;
 	if (type == AIM)
 	{
@@ -75,10 +75,9 @@ void render_frames(t_data *data, t_frames *f, int type)
 	}
 }
 
-
 void	gun_func(void *param)
 {
-	t_data	*data;
+	t_data *data;
 
 	data = (t_data *)param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_V))

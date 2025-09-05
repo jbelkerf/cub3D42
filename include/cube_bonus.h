@@ -127,8 +127,30 @@ typedef struct	s_data
 	t_player		*player;
 	t_imgs			imgs;
 	t_textures		texts;
-	t_door_info			doors_info[MAX_DOORS];
+	t_door_info		doors_info[MAX_DOORS];
 }	t_data;
+
+typedef struct s_raycast_md
+{
+	int				raw;
+	int				side;
+	int				cell_x;
+	int				cell_y;
+	int				step_x;
+	int				step_y;
+	double			side_x;
+	double			side_y;
+	double			ray_dx;
+	double			ray_dy;
+	double			player_x;
+	double			player_y;
+	double			delta_x;
+	double			delta_y;
+	double			dist;
+	double			ray_angle;
+	t_data			*data;
+	mlx_texture_t	*texture;
+}	t_raycast_md;
 
 //CHECK MAP
 void	check_map_validity(char *file);
@@ -158,6 +180,7 @@ void	rotate(void *param);
 // Door
 void	door_func(void *param);
 int		get_door(t_data *data, int x, int y);
+void	set_front_door(t_raycast_md *md);
 
 // Cursor
 void	cursor_func(double xpos, double ypos, void *param);
@@ -165,7 +188,6 @@ void	cursor_func(double xpos, double ypos, void *param);
 // render MiniMap
 void	render_mini_map(t_data *data);
 void	locate_player(t_data *data, char **map);
-void	ray(t_data *data, double start_x, double start_y);
 
 // Render3d
 void	render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, int side, double ray_angle);

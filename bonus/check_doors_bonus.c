@@ -16,7 +16,7 @@ void	check_map_doors(char **map)
 {
 	int	x;
 	int	y;
-    int ok;
+	int	ok;
 
 	y = -1;
 	while (map[++y])
@@ -24,17 +24,17 @@ void	check_map_doors(char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-            ok = 0;
-            if (map[y][x] == 'D')
-            {
-                if (map[y][x - 1] == '1' && map[y][x + 1] == '1')
-                    ok++;
-                if (map[y - 1][x] == '1' && map[y + 1][x] == '1')
-                    ok++;
-                if (ok != 1)
-                    put_error("door should surrounded by walls in one side", map);
-            }
-
+			ok = 0;
+			if (map[y][x] == 'D')
+			{
+				if (map[y][x - 1] == '1' && map[y][x + 1] == '1')
+					ok++;
+				if (map[y - 1][x] == '1' && map[y + 1][x] == '1')
+					ok++;
+				if (ok != 1)
+					put_error("door should surrounded by walls in one side",
+						map);
+			}
 		}
 	}
 }

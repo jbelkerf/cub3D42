@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "../include/cube_bonus.h"
-#define RED     "\033[0;31m"
-#define GREEN   "\033[0;32m"
-#define ORANGE  "\033[0;33m"
-#define RESET   "\033[0m"
+#define RED "\033[0;31m"
+#define GREEN "\033[0;32m"
+#define ORANGE "\033[0;33m"
+#define RESET "\033[0m"
 
 void	check_the_file_readablity(char *file)
 {
@@ -52,7 +52,6 @@ void	check_map_symbols(char **map)
 	if (p != 1)
 		put_error("invalid player number", map);
 }
-
 
 void	check_map_validity(char *file)
 {

@@ -101,7 +101,7 @@ int	check_the_file_extention(char *file, char *extention)
 	return (1);
 }
 
-void set_frames(t_data *data)
+void	set_frames(t_data *data)
 {
 	data->frames.aim_count = 0;
 	data->frames.max_aim = 10;

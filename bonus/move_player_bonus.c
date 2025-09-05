@@ -42,21 +42,22 @@ int	is_wall(t_data *data, double dx, double dy)
 
 	x = data->player->p_x + dx;
 	y = data->player->p_y + dy;
-	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1' || data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == 'D')
+	if (data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == '1'
+		|| data->map[(int)(y / SCALE2D)][(int)(x / SCALE2D)] == 'D')
 		return (1);
 	return (0);
 }
 
 void	help_move(t_data *data, double *dx, double *dy, double angle)
 {
-	ft_memset(data->imgs.CUB->pixels, 0,
-		data->imgs.CUB->width * data->imgs.CUB->height * 4);
+	ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width
+		* data->imgs.CUB->height * 4);
 	*dx = cos(angle);
-	*dy = sin(angle); 
+	*dy = sin(angle);
 	raycast(data);
 }
 
-struct s_move
+struct		s_move
 {
 	double	dx;
 	double	dy;
@@ -80,10 +81,8 @@ void	move_player(void *param)
 		help_move(data, &m.dx, &m.dy, data->player->angle - (M_PI / 2));
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		help_move(data, &m.dx, &m.dy, data->player->angle + (M_PI / 2));
-	if ((m.dx != 0 || m.dy != 0)
-		&& !is_wall(data, m.dx + 0.5, m.dy)
-		&& !is_wall(data, m.dx, m.dy + 0.5)
-		&& !is_wall(data, m.dx - 0.5, m.dy)
+	if ((m.dx != 0 || m.dy != 0) && !is_wall(data, m.dx + 0.5, m.dy)
+		&& !is_wall(data, m.dx, m.dy + 0.5) && !is_wall(data, m.dx - 0.5, m.dy)
 		&& !is_wall(data, m.dx, m.dy - 0.5))
 	{
 		data->player->p_x += m.dx;
@@ -97,7 +96,7 @@ void	rotate(void *param)
 	t_data	*data;
 
 	update = 0;
-	data = (t_data *) param;
+	data = (t_data *)param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
 		update = 1;
@@ -114,8 +113,8 @@ void	rotate(void *param)
 	}
 	if (update)
 	{
-		ft_memset(data->imgs.CUB->pixels, 0,
-			data->imgs.CUB->width * data->imgs.CUB->height * 4);
+		ft_memset(data->imgs.CUB->pixels, 0, data->imgs.CUB->width
+			* data->imgs.CUB->height * 4);
 		raycast(data);
 	}
 }

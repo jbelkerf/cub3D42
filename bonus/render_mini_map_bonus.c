@@ -24,7 +24,8 @@ mlx_image_t	*create_img(mlx_t *mlx, char *img_file)
 	return (img);
 }
 
-void	print_on_map(mlx_image_t *img, double center_x, double center_y, uint32_t color, int scale)
+void	print_on_map(mlx_image_t *img, double center_x, double center_y,
+		uint32_t color, int scale)
 {
 	int	x;
 	int	y;
@@ -70,7 +71,7 @@ void	render_mini_map(t_data *data)
 		if (y_start < 0)
 			y_start = 0;
 	}
-	x_start = (data->player->p_x / SCALE2D)- (MINI_WIDTH / SCALE2D / 2);
+	x_start = (data->player->p_x / SCALE2D) - (MINI_WIDTH / SCALE2D / 2);
 	if (x_start < 0)
 		x_start = 0;
 	x_end = (MINI_HEIGHT / SCALE2D) + x_start;
@@ -82,22 +83,25 @@ void	render_mini_map(t_data *data)
 			x_start = 0;
 	}
 	y = y_start;
-
 	while (y < y_end)
 	{
 		x = x_start;
 		while (x < x_end)
 		{
 			if (data->map[y][x] == '1')
-				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0x00ff00ff, 2);
+				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start
+					+ 1, 0x00ff00ff, 2);
 			else if (ft_strchr("NWES0", data->map[y][x]))
-				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0x0000ffff, 2);
+				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start
+					+ 1, 0x0000ffff, 2);
 			else if (data->map[y][x] == 'D')
-				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start + 1, 0xffff00ff, 2);
+				print_on_map(data->imgs.mini_map, x - x_start + 1, y - y_start
+					+ 1, 0xffff00ff, 2);
 			x++;
 		}
 		y++;
 	}
-	print_on_map(data->imgs.mini_map, (data->player->p_x + (SCALE2D / 2)) / SCALE2D - x_start , (data->player->p_y + (SCALE2D / 2)) / SCALE2D - y_start , 0xff0000ff, 8);
-	ray(data, (x_start  + 0.5) * SCALE2D, (y_start + 0.5) * SCALE2D);	
+	print_on_map(data->imgs.mini_map, (data->player->p_x + (SCALE2D / 2))
+		/ SCALE2D - x_start, (data->player->p_y + (SCALE2D / 2)) / SCALE2D
+		- y_start, 0xff0000ff, 8);
 }

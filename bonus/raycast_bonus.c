@@ -1,151 +1,122 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_bonus.c                                    :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 23:14:54 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 17:00:29 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/08/27 23:15:31 by JbelkerfIse       #+#    #+#             */
+/*   Updated: 2025/08/28 17:04:58 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube_bonus.h"
 
-void ray(t_data *data, double start_x, double start_y)
+static void	init_md(t_raycast_md *md, t_data *data)
 {
-	double ang = data->player->angle;
-	double m = 0;
-	double x = data->player->p_x - start_x;
-	double y = (data->player->p_y) - start_y;
-	double dx = cos(ang);
-	double dy = sin(ang);
-	double xx;
-	double yy;
+	md->delta_x = INFINITY;
+	md->delta_y = INFINITY;
+	md->player_x = (data->player->p_x - 0.5) / SCALE2D;
+	md->player_y = (data->player->p_y - 0.5) / SCALE2D;
+	md->data = data;
+}
 
-	while (m < WINDOW_X)
+static double	calc_dist(t_raycast_md *md, double px, double py)
+{
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
 	{
-		xx = x + (double)(dx * m);
-		yy = y + (double)(dy * m);
-		if (xx >= 0 && xx + SCALE2D < MINI_WIDTH && yy >= 0 && yy + SCALE2D < MINI_HEIGHT)
+		if (md->side_x < md->side_y)
 		{
-			if (xx - x > 1 || yy  - y > 1)
-				break ;
-			mlx_put_pixel(data->imgs.mini_map, xx + SCALE2D, yy + SCALE2D, 0xff0000ff);
+			md->side_x += md->delta_x;
+			md->cell_x += md->step_x;
+			md->side = 0;
 		}
-		m += 1;	
+		else
+		{
+			md->side_y += md->delta_y;
+			md->cell_y += md->step_y;
+			md->side = 1;
+		}
+		if (ft_strchr("1D", md->data->map[md->cell_y][md->cell_x]))
+			hit = 1;
 	}
+	if (md->side == 0)
+		return ((md->cell_x - px + (1 - md->step_x) / 2) / md->ray_dx);
+	else
+		return ((md->cell_y - py + (1 - md->step_y) / 2) / md->ray_dy);
+}
+
+static void	prerender(t_raycast_md *md)
+{
+	md->cell_x = (int)(md->player_x);
+	md->cell_y = (int)(md->player_y);
+	md->ray_dx = cos(md->ray_angle);
+	md->ray_dy = sin(md->ray_angle);
+	md->step_x = 1;
+	md->step_y = 1;
+	if (md->ray_dx < 0)
+		md->step_x = -1;
+	if (md->ray_dy < 0)
+		md->step_y = -1;
+	if (md->ray_dx != 0)
+		md->delta_x = fabs(1.0 / md->ray_dx);
+	if (md->ray_dy != 0)
+		md->delta_y = fabs(1.0 / md->ray_dy);
+	if (md->ray_dx < 0)
+		md->side_x = (md->player_x - md->cell_x) * md->delta_x;
+	else
+		md->side_x = (md->cell_x + 1.0 - md->player_x) * md->delta_x;
+	if (md->ray_dy < 0)
+		md->side_y = (md->player_y - md->cell_y) * md->delta_y;
+	else
+		md->side_y = (md->cell_y + 1.0 - md->player_y) * md->delta_y;
+}
+
+static void	render(t_raycast_md *md, double angle)
+{
+	prerender(md);
+	md->dist = calc_dist(md, md->player_x, md->player_y);
+	if (md->side)
+	{
+		if (md->ray_dy > 0)
+			md->texture = md->data->texts.north;
+		else
+			md->texture = md->data->texts.south;
+	}
+	else
+	{
+		if (md->ray_dx > 0)
+			md->texture = md->data->texts.east;
+		else
+			md->texture = md->data->texts.west;
+	}
+	md->dist *= cos(angle - md->ray_angle);
+	if (md->dist < 0)
+		md->dist = 0;
+	if (md->data->map[md->cell_y][md->cell_x] == 'D')
+		md->texture = md->data->texts.door;
+	// render3d(md);
+	render3d(md->dist, md->raw, md->texture, md->data, md->side, md->ray_angle);
 }
 
 void	raycast(t_data *data)
 {
-	mlx_texture_t	*texture;
-	double			dist;
-	double			player_x;
-	double			player_y;
-	double			delta_x = INFINITY;
-	double			delta_y = INFINITY;
+	t_raycast_md	md;
 	double			angle;
-	int				raw;
-	double			ray_angle;
-	int				cell_x;
-	double			side_x, side_y;
-	int				cell_y;
 
-	player_x = (data->player->p_x - 0.5) / SCALE2D;
-	player_y = (data->player->p_y - 0.5) / SCALE2D;
+	ft_memset(&md, 0, sizeof(t_raycast_md));
+	init_md(&md, data);
 	angle = data->player->angle;
-	raw = 0;
-	ray_angle = angle - ((FOV * M_PI / 180) / 2);
-	while (raw < WINDOW_X)
+	md.ray_angle = angle - ((FOV * M_PI / 180) / 2);
+	while (md.raw < WINDOW_X)
 	{
-		cell_x = (int)player_x;
-		cell_y = (int)player_y;
-		double ray_dx = cos(ray_angle);
-		double ray_dy = sin(ray_angle);
-		int step_x = 1;
-		int step_y = 1;
-		if (ray_dx < 0)
-			step_x = -1;
-		if (ray_dy < 0)
-			step_y = -1;
-		if (ray_dx != 0)
-			delta_x = fabs(1.0 / ray_dx);
-		if (ray_dy != 0)
-			delta_y = fabs(1.0 / ray_dy);
-		if (ray_dx < 0)
-			side_x = (player_x - cell_x) * delta_x;
-		else
-			side_x = (cell_x + 1.0 - player_x) * delta_x;
-		if (ray_dy < 0)
-			side_y = (player_y - cell_y) * delta_y;
-		else
-			side_y = (cell_y + 1.0 - player_y) * delta_y;
-		int hit = 0;
-		int side;
-		
-		while (hit == 0)
-		{
-			if (side_x < side_y)
-			{
-				side_x += delta_x;
-				cell_x += step_x;
-				side = 0;
-			}
-			else
-			{
-				side_y += delta_y;
-				cell_y += step_y;
-				side = 1;
-			}
-			if (data->map[cell_y][cell_x] == '1' || data->map[cell_y][cell_x] == 'D')
-				hit = 1;
-		}
-		if (side == 0)
-			dist = (cell_x - player_x + (1 - step_x) / 2) / ray_dx;
-		else
-			dist = (cell_y - player_y + (1 - step_y) / 2) / ray_dy;
-
-		if (side)
-		{
-			if (ray_dy > 0)
-				texture = data->texts.north;
-			else
-				texture = data->texts.south;
-		}
-		else
-		{
-			if (ray_dx > 0)
-				texture = data->texts.east;
-			else
-				texture = data->texts.west;
-		}
-		dist *= cos(angle - ray_angle);
-		if (dist < 0)
-			dist = 0;
-		if (data->map[cell_y][cell_x] == 'D')
-			texture = data->texts.door;
-		if (raw == WINDOW_X / 2)
-		{
-			data->front_door = -1;
-			if (data->map[cell_y][cell_x] == 'D')
-			{
-				int idx = get_door(data, cell_x, cell_y);
-				data->front_door = idx;
-				if (idx == -1)
-				{
-					int idx1 = ++(data->door_idx);
-					data->front_door = idx1;
-					data->doors_info[idx1].y = cell_y;
-					data->doors_info[idx1].x = cell_x;
-				}
-				if (idx != -1)
-					data->doors_info[idx].dist = dist;
-			}
-		}
-		render3d(dist, raw, texture, data, side, ray_angle);
-		ray_angle += (FOV * M_PI / 180) / WINDOW_X;
-		raw++;
+		set_front_door(&md);
+		render(&md, angle);
+		md.ray_angle += (FOV * M_PI / 180) / WINDOW_X;
+		md.raw++;
 	}
 	render_gun(data, data->frames.fire[6]);
 	render_mini_map(data);

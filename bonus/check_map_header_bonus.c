@@ -42,8 +42,8 @@ int	match_texture(char *line, char *identifier, int file_fd, int *chk)
 		i++;
 	line[ft_strlen(line) - 1] = 0;
 	i = open(line + i, O_RDONLY);
-	if (i == -1
-		|| !check_the_file_extention(line + ft_strlen(identifier) + 1, ".png"))
+	if (i == -1 || !check_the_file_extention(line + ft_strlen(identifier) + 1,
+			".png"))
 	{
 		if (i == -1)
 			err = "invalid texture";

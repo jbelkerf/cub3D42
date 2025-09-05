@@ -12,7 +12,6 @@
 
 #include "../include/cube_bonus.h"
 
-
 void	put_error(char *err, char **map)
 {
 	printf(RED "Error\n\t");
