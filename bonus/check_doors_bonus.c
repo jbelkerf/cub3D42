@@ -12,13 +12,23 @@
 
 #include "../include/cube_bonus.h"
 
+static void	check_doors_error(char **map, int ok, int door)
+{
+	if (door > MAX_DOORS)
+		put_error("max doors exceeded", map);
+	if (ok != 1)
+		put_error("door should surrounded by walls in one side",
+			map);
+}
 void	check_map_doors(char **map)
 {
 	int	x;
 	int	y;
 	int	ok;
+	int door;
 
 	y = -1;
+	door = 0;
 	while (map[++y])
 	{
 		x = -1;
@@ -27,13 +37,12 @@ void	check_map_doors(char **map)
 			ok = 0;
 			if (map[y][x] == 'D')
 			{
+				door++;
 				if (map[y][x - 1] == '1' && map[y][x + 1] == '1')
 					ok++;
 				if (map[y - 1][x] == '1' && map[y + 1][x] == '1')
 					ok++;
-				if (ok != 1)
-					put_error("door should surrounded by walls in one side",
-						map);
+				check_doors_error(map, ok, door);
 			}
 		}
 	}

@@ -120,7 +120,6 @@ typedef struct	s_data
 	int				floor_start;
 	int				door_idx;
 	int				front_door;
-	int				last_open_door;
 	double			mouse_last_x;
 	int				mouse_ignore_next;
 	t_frames		frames;
