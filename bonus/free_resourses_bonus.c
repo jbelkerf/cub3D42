@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_resourses.c                                   :+:      :+:    :+:   */
+/*   free_resourses_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:38:16 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/27 18:54:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:40:30 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	free_resourses(t_data *data)
 	free(data->south_texture);
 	free(data->east_texture);
 	free(data->west_texture);
+	free(data->door_texture);
 	free(data->texts.east);
 	free(data->texts.west);
 	free(data->texts.north);
 	free(data->texts.south);
 	free(data->texts.door);
+	free(data->frames.aim);
+	free(data->frames.fire);
 }

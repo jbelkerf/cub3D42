@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:50:05 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 17:28:00 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 12:51:55 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,15 @@ void	render_frames(t_data *data, t_frames *f, int type)
 
 void	gun_func(void *param)
 {
-	t_data *data;
+	t_data	*data;
+	int		type;
 
 	data = (t_data *)param;
+	type = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_V))
-		render_frames(data, &data->frames, AIM);
+		type = AIM;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-		render_frames(data, &data->frames, FIRE);
+		type = FIRE;
 	else
 	{
 		if (!data->frames.idle && data->frames.last_time + 0.1 < mlx_get_time())
