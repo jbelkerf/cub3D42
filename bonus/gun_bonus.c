@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:50:05 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 12:51:55 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/09/05 13:37:15 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	render_frames(t_data *data, t_frames *f, int type)
 	mlx_texture_t	**frames;
 	int				max;
 
-	data->frames.idle = false;
 	if (type == AIM)
 	{
 		count = &f->aim_count;
@@ -65,7 +64,7 @@ void	render_frames(t_data *data, t_frames *f, int type)
 		frames = f->fire;
 		max = f->max_fire;
 	}
-	if (mlx_get_time() - f->last_time >= 0.1)
+	if (mlx_get_time() - f->last_time >= FRAME_DELAY)
 	{
 		render_gun(data, frames[*count]);
 		*count += 1;
@@ -78,21 +77,24 @@ void	render_frames(t_data *data, t_frames *f, int type)
 void	gun_func(void *param)
 {
 	t_data	*data;
-	int		type;
 
 	data = (t_data *)param;
-	type = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_V))
-		type = AIM;
+		data->frames.type = AIM;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-		type = FIRE;
-	else
+		data->frames.type = FIRE;
+	
+	if (data->frames.last_time + FRAME_DELAY < mlx_get_time() && data->frames.type == AIM)
 	{
-		if (!data->frames.idle && data->frames.last_time + 0.1 < mlx_get_time())
-		{
-			data->frames.idle = true;
-			data->frames.aim_count = 0;
-			render_gun(data, data->frames.fire[6]);
-		}
+		render_frames(data, &data->frames, AIM);
+		if (data->frames.aim_count == data->frames.max_aim - 1)
+			data->frames.type = 2;
 	}
+	else if (data->frames.last_time + FRAME_DELAY < mlx_get_time() && data->frames.type == FIRE)
+	{
+		render_frames(data, &data->frames, FIRE);
+		if (data->frames.fire_count == data->frames.max_fire - 1)
+			data->frames.type = 2;
+	}
+
 }
