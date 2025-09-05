@@ -30,8 +30,8 @@
 # define ORANGE  "\033[0;33m"
 # define RESET   "\033[0m"
 
-# define MINI_WIDTH 300
-# define MINI_HEIGHT 300
+# define MW 300
+# define MH 300
 
 # define AIM 0
 # define FIRE 1

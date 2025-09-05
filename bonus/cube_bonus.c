@@ -57,13 +57,13 @@ void	get_images(t_data *data)
 	data->imgs.cub = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.cub, 0, 0);
 	rnder_floor_and_ceil(data);
-	tmp = mlx_new_image(data->mlx, MINI_WIDTH * SCALE2D, MINI_HEIGHT * SCALE2D);
+	tmp = mlx_new_image(data->mlx, MW * SCALE2D, MH * SCALE2D);
 	data->imgs.ray = tmp;
 	mlx_image_to_window(data->mlx, data->imgs.ray, 0, 0);
 	data->imgs.gun = mlx_new_image(data->mlx, SORD_WIDTH, SORD_HEIGHT);
 	mlx_image_to_window(data->mlx, data->imgs.gun, WINDOW_X - (SORD_WIDTH * 2),
 		WINDOW_Y - SORD_HEIGHT);
-	data->imgs.mini_map = mlx_new_image(data->mlx, MINI_WIDTH, MINI_HEIGHT);
+	data->imgs.mini_map = mlx_new_image(data->mlx, MW, MH);
 	mlx_image_to_window(data->mlx, data->imgs.mini_map, 0, 0);
 	set_frames(data);
 	raycast(data);

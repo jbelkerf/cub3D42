@@ -31,10 +31,10 @@ void	p2map(mlx_image_t *img, t_render *r, uint32_t color, int scale)
 	}
 	x = (center_x * SCALE2D - (SCALE2D / scale));
 	y = (center_y * SCALE2D - (SCALE2D / scale));
-	while (y < (center_y * SCALE2D + (SCALE2D / scale)) && y < MINI_HEIGHT)
+	while (y < (center_y * SCALE2D + (SCALE2D / scale)) && y < MH && y > 0)
 	{
 		x = (center_x * SCALE2D - (SCALE2D / scale));
-		while (x < (center_x * SCALE2D + (SCALE2D / scale)) && x < MINI_WIDTH)
+		while (x < (center_x * SCALE2D + (SCALE2D / scale)) && x < MW && x > 0)
 			mlx_put_pixel(img, x++, y, color);
 		y++;
 	}
@@ -42,26 +42,26 @@ void	p2map(mlx_image_t *img, t_render *r, uint32_t color, int scale)
 
 void	pre_render_mini(t_render *r, t_data *data)
 {
-	ft_memset(data->imgs.mini_map->pixels, 0, MINI_WIDTH * MINI_HEIGHT * 4);
-	r->start_y = (data->player->p_y / SCALE2D) - (MINI_HEIGHT / SCALE2D / 2);
+	ft_memset(data->imgs.mini_map->pixels, 0, MW * MH * 4);
+	r->start_y = (data->player->p_y / SCALE2D) - (MH / SCALE2D / 2);
 	if (r->start_y < 0)
 		r->start_y = 0;
-	r->end_y = (MINI_HEIGHT / SCALE2D) + r->start_y;
+	r->end_y = (MH / SCALE2D) + r->start_y;
 	if (r->end_y > data->map_length)
 	{
 		r->end_y = data->map_length;
-		r->start_y = r->end_y - (MINI_HEIGHT / SCALE2D);
+		r->start_y = r->end_y - (MH / SCALE2D);
 		if (r->start_y < 0)
 			r->start_y = 0;
 	}
-	r->start_x = (data->player->p_x / SCALE2D) - (MINI_WIDTH / SCALE2D / 2);
+	r->start_x = (data->player->p_x / SCALE2D) - (MW / SCALE2D / 2);
 	if (r->start_x < 0)
 		r->start_x = 0;
-	r->end_x = (MINI_HEIGHT / SCALE2D) + r->start_x;
+	r->end_x = (MH / SCALE2D) + r->start_x;
 	if (r->end_x > data->map_width)
 	{
 		r->end_x = data->map_width;
-		r->start_x = r->end_x - (MINI_WIDTH / SCALE2D);
+		r->start_x = r->end_x - (MW / SCALE2D);
 		if (r->start_x < 0)
 			r->start_x = 0;
 	}

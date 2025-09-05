@@ -70,7 +70,7 @@ void	render3d(t_raycast_md *m)
 	pre_render(&r, m);
 	while (r.y < r.end)
 	{
-		if (r.y < MINI_HEIGHT && m->raw < MINI_WIDTH)
+		if (r.y < MH && m->raw < MW)
 		{
 			r.y++;
 			continue ;
