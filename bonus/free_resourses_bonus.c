@@ -37,4 +37,5 @@ void	free_resourses(t_data *data)
 	free(data->texts.west);
 	free(data->texts.north);
 	free(data->texts.south);
+	free(data->texts.door);
 }
