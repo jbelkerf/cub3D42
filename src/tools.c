@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:12:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/09/04 17:07:59 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:35:10 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ mlx_texture_t	*safe_load_texture(char *path)
 	}
 	if (!png_tex)
 	{
-		printf(RED "failed to load texeture |%s|\n", path); //! freeeeeeeee 
+		printf(RED "failed to load texeture |%s|\n", path);
 		exit(1);
 	}
 	return (png_tex);

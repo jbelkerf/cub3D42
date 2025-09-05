@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 23:15:31 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 17:04:58 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 15:21:09 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ static void	render(t_raycast_md *md, double angle)
 		md->dist = 0;
 	if (md->data->map[md->cell_y][md->cell_x] == 'D')
 		md->texture = md->data->texts.door;
-	// render3d(md);
-	render3d(md->dist, md->raw, md->texture, md->data, md->side, md->ray_angle);
+	render3d(md);
 }
 
 void	raycast(t_data *data)

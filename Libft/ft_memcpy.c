@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:09:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:36:14 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memcpy(void *dest, const void *src, int n)
 {
 	char	*b;
 	char	*s;
-	int	i;
+	int		i;
 
 	b = (char *)dest;
 	s = (char *)src;

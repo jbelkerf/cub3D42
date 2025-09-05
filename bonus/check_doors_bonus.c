@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_doors_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aidnassa <aidnassa@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:16:13 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/08/30 13:16:14 by aidnassa         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:09:00 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static void	check_doors_error(char **map, int ok, int door)
 		put_error("door should surrounded by walls in one side",
 			map);
 }
+
 void	check_map_doors(char **map)
 {
 	int	x;
 	int	y;
 	int	ok;
-	int door;
+	int	door;
 
 	y = -1;
 	door = 0;

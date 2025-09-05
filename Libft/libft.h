@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:01:24 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/09 16:23:26 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:36:56 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_putchar_fd(char c, int fd);
 char	*ft_strdup(const char *s);
 void	*ft_calloc(int nmemb, int size);
 char	*ft_strnstr(const char *big, const char *lil, int len);
-int		ft_strlcat(char *dst, const char *src, int	 size);
+int		ft_strlcat(char *dst, const char *src, int size);
 int		ft_strlcpy(char *dest, const char *src, int size);
 void	*ft_memchr(const void *s, int c, int n);
 int		ft_memcmp(const void *s1, const void *s2, int n);

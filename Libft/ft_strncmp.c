@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:05:49 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:38:53 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  */
 int	ft_strncmp(const char *s1, const char *s2, int n)
 {
-	int			i;
+	int				i;
 	unsigned char	c1;
 	unsigned char	c2;
 

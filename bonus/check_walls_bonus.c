@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:41:24 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/29 12:23:03 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 15:12:12 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ void	check_map_walls(char **map, int length)
 			}
 		}
 	}
+}
+
+char	*skipi_abdsami3(int file_fd)
+{
+	char	*line;
+
+	line = get_next_line(file_fd);
+	if (!line)
+		return (NULL);
+	if (line[0] == '\n' && !line[1])
+		return (free(line), skipi_abdsami3(file_fd));
+	else
+		return (line);
 }

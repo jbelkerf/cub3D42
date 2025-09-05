@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:15:19 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/08/28 13:30:12 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 15:20:58 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,77 @@
 
 uint32_t	rgba_to_int(uint8_t *pixels)
 {
-	return ((uint32_t)(pixels[0] << 24) | (uint32_t)(pixels[1] << 16) | (uint32_t)(pixels[2] << 8) | (uint32_t)pixels[3]);
+	return ((uint32_t)(pixels[0] << 24) | (uint32_t)(pixels[1] << 16)
+	| (uint32_t)(pixels[2] << 8) | (uint32_t)pixels[3]);
 }
 
-void	render3d(double distance, int raw, mlx_texture_t *texture, t_data *data,
-		int side, double ray_angle)
+typedef struct s_render_two
 {
 	int		start;
 	int		end;
-	int		old_start;
-	int		textX;
-	int		textY;
+	int		old_strt;
+	int		textx;
+	int		texty;
 	int		wall_height;
 	int		y;
-	double	wallX;
+	double	wallx;
 	uint8_t	*pixel;
+	uint8_t	*pxls;
+}	t_render_two;
 
-	if (raw > WINDOW_X)
-		return ;
-	wall_height = (WINDOW_Y / distance);
-	start = (WINDOW_Y / 2) - (wall_height / 2);
-	end = (WINDOW_Y / 2) + (wall_height / 2);
-	old_start = 0;
-	if (start < 0)
+void	pre_render(t_render_two *r, t_raycast_md *md)
+{
+	r->wall_height = (WINDOW_Y / md->dist);
+	r->start = (WINDOW_Y / 2) - (r->wall_height / 2);
+	r->end = (WINDOW_Y / 2) + (r->wall_height / 2);
+	r->old_strt = 0;
+	if (r->start < 0)
 	{
-		old_start = start;
-		start = 0;
+		r->old_strt = r->start;
+		r->start = 0;
 	}
-	if (end > WINDOW_Y)
-		end = WINDOW_Y;
-	if (!side)
-		wallX = ((data->player->p_y - 0.5) / SCALE2D) + (distance
-				* sin(ray_angle));
+	if (r->end > WINDOW_Y)
+		r->end = WINDOW_Y;
+	if (!md->side)
+		r->wallx = ((md->data->player->p_y - 0.5) / SCALE2D)
+			+ (md->dist * sin(md->ray_angle));
 	else
-		wallX = ((data->player->p_x - 0.5) / SCALE2D) + (distance
-				* cos(ray_angle));
-	wallX -= floor(wallX);
-	textX = (int)(wallX * (double)texture->width);
-	if ((side == 0 && cos(ray_angle) < 0) || (side != 0 && sin(ray_angle) > 0))
-		textX = texture->width - textX - 1;
-	textX = fmax(0, fmin(textX, texture->width - 1));
-	y = start;
-	while (y < end)
+		r->wallx = ((md->data->player->p_x - 0.5) / SCALE2D)
+			+ (md->dist * cos(md->ray_angle));
+	r->wallx -= floor(r->wallx);
+	r->textx = (int)(r->wallx * (double)md->texture->width);
+	if ((md->side == 0 && cos(md->ray_angle) < 0)
+		|| (md->side != 0 && sin(md->ray_angle) > 0))
+		r->textx = md->texture->width - r->textx - 1;
+	r->textx = fmax(0, fmin(r->textx, md->texture->width - 1));
+	r->y = r->start;
+}
+
+void	render3d(t_raycast_md *m)
+{
+	t_render_two	r;
+
+	if (m->raw > WINDOW_X)
+		return ;
+	r.pxls = m->texture->pixels;
+	pre_render(&r, m);
+	while (r.y < r.end)
 	{
-		if (y < MINI_HEIGHT && raw < MINI_WIDTH)
-			//? do not overwrite the minimap
+		if (r.y < MINI_HEIGHT && m->raw < MINI_WIDTH)
 		{
-			y++;
+			r.y++;
 			continue ;
 		}
-		if (start)
-			textY = (((y - start) * texture->height / wall_height));
+		if (r.start)
+			r.texty = (((r.y - r.start) * m->texture->height / r.wall_height));
 		else
-			textY = (((y - old_start) * texture->height / wall_height));
-		if (!(textY < 0 || (uint32_t)textY >= texture->height || y >= WINDOW_Y))
+			r.texty = ((r.y - r.old_strt) * m->texture->height / r.wall_height);
+		if ((r.texty >= 0 && (uint32_t)r.texty < m->texture->height
+				&& r.y < WINDOW_Y))
 		{
-			pixel = &(texture->pixels[4 * (textY * texture->width + textX)]);
-			mlx_put_pixel(data->imgs.CUB, raw, y, rgba_to_int(pixel));
+			r.pixel = &(r.pxls[4 * (r.texty * m->texture->width + r.textx)]);
+			mlx_put_pixel(m->data->imgs.CUB, m->raw, r.y, rgba_to_int(r.pixel));
 		}
-		y++;
+		r.y++;
 	}
 }

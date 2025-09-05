@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:09:06 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:36:03 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	ft_memcmp(const void *s1, const void *s2, int n)
 {
-	int				i;
+	int					i;
 	unsigned char		*p1;
 	unsigned char		*p2;
 

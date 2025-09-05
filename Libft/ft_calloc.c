@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:58:43 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:40:19 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	*ft_calloc(int nmemb, int size)
 {
 	void	*p;
-	int	t;
+	int		t;
 
 	t = nmemb * size;
 	if (!t)

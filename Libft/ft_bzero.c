@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:58:33 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:21 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:40:14 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 void	ft_bzero(void *s, int n)
 {
-	int	i;
+	int		i;
 	char	*p;
 
 	p = (char *)s;

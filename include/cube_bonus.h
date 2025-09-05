@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 13:35:03 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 16:05:30 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_frames
 	int				aim_count;
 	int				type;
 	int				fire_count;
-	double			frame_delay;
 	double			last_time;
 	int				max_aim;
 	int				max_fire;
@@ -129,6 +128,24 @@ typedef struct	s_data
 	t_door_info		doors_info[MAX_DOORS];
 }	t_data;
 
+typedef struct s_render
+{
+	double	start_x;
+	double	end_x;
+	double	start_y;
+	double	end_y;
+	int		textx;
+	int		texty;
+	int		wall_height;
+	int		y;
+	int		x;
+	double		dy;
+	double		dx;
+	double	wallx;
+	uint8_t	*pixels;
+	uint8_t	*pxls;
+}	t_render;
+
 typedef struct s_raycast_md
 {
 	int				raw;
@@ -153,7 +170,7 @@ typedef struct s_raycast_md
 
 //CHECK MAP
 void	check_map_validity(char *file);
-void	check_map_header(char *file);
+void	check_map_header(char *file, int chk);
 void	check_map_walls(char **map, int length);
 void	check_map_doors(char **map);
 
@@ -189,7 +206,7 @@ void	render_mini_map(t_data *data);
 void	locate_player(t_data *data, char **map);
 
 // Render3d
-void	render3d(double distance, int raw, mlx_texture_t *texture, t_data *data, int side, double ray_angle);
+void	render3d(t_raycast_md *md);
 
 //Move player
 void	move_player(void *param);

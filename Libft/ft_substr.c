@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:02:00 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:39 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:37:35 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
  */
 char	*ft_substr(char const *s, int start, int len)
 {
-	int	len_s;
-	char			*sub;
+	int		len_s;
+	char	*sub;
 
 	if (s == NULL)
 		return (NULL);

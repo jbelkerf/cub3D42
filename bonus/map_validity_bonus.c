@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
-/*   Updated: 2025/08/29 12:24:30 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:44:14 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_map_validity(char *file)
 	if (!check_the_file_extention(file, ".cub"))
 		put_error("file name not correct", NULL);
 	printf(GREEN "done!\nchecking map's header...\n" RESET);
-	check_map_header(file);
+	check_map_header(file, 0);
 	printf(GREEN "done!\nchecking map's symbols...\n" RESET);
 	map = map_to_str(file, &length, &width);
 	check_map_symbols(map);

@@ -6,43 +6,44 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:50:05 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 13:37:15 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 15:07:43 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube_bonus.h"
 
-void	render_gun(t_data *data, mlx_texture_t *txt)
+void	init_stuct(t_render *rn)
 {
-	uint8_t	*pixels;
-	int		x;
-	int		y;
+	rn->start_x = 0;
+	rn->start_x = 0;
+	rn->end_x = SORD_WIDTH;
+	rn->end_y = SORD_HEIGHT;
+	rn->x = rn->start_x;
+	rn->y = rn->start_y;
+}
 
-	double start_x, end_x;
-	double start_y, end_y;
-	int tx, ty;
-	ft_memset(data->imgs.gun->pixels, 0, SORD_WIDTH * SORD_HEIGHT * 4);
-	start_x = 0;
-	start_y = 0;
-	end_x = SORD_WIDTH;
-	end_y = SORD_HEIGHT;
-	x = start_x;
-	while (x < end_x)
+void	render_gun(t_data *d, mlx_texture_t *txt)
+{
+	t_render	r;
+
+	init_stuct(&r);
+	ft_memset(d->imgs.gun->pixels, 0, SORD_WIDTH * SORD_HEIGHT * 4);
+	while (r.x < r.end_x)
 	{
-		y = start_y;
-		while (y < end_y)
+		r.y = r.start_y;
+		while (r.y < r.end_y)
 		{
-			if (x >= 0 && x < WINDOW_X && y >= 0 && y < WINDOW_Y)
+			if (r.x >= 0 && r.x < WINDOW_X && r.y >= 0 && r.y < WINDOW_Y)
 			{
-				tx = ((x - start_x) * txt->width) / SORD_WIDTH;
-				ty = ((y - start_y) * txt->height) / SORD_HEIGHT;
-				pixels = &txt->pixels[4 * (ty * txt->width + tx)];
-				if (rgba_to_int(pixels) != 0x00000000)
-					mlx_put_pixel(data->imgs.gun, x, y, rgba_to_int(pixels));
+				r.textx = ((r.x - r.start_x) * txt->width) / SORD_WIDTH;
+				r.texty = ((r.y - r.start_y) * txt->height) / SORD_HEIGHT;
+				r.pxls = &txt->pixels[4 * (r.texty * txt->width + r.textx)];
+				if (rgba_to_int(r.pxls) != 0x00000000)
+					mlx_put_pixel(d->imgs.gun, r.x, r.y, rgba_to_int(r.pxls));
 			}
-			y++;
+			r.y++;
 		}
-		x++;
+		r.x++;
 	}
 }
 
@@ -77,24 +78,26 @@ void	render_frames(t_data *data, t_frames *f, int type)
 void	gun_func(void *param)
 {
 	t_data	*data;
+	double	delay;
+	double	last_time;
 
 	data = (t_data *)param;
+	last_time = data->frames.last_time;
+	delay = FRAME_DELAY;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_V))
 		data->frames.type = AIM;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_F))
 		data->frames.type = FIRE;
-	
-	if (data->frames.last_time + FRAME_DELAY < mlx_get_time() && data->frames.type == AIM)
+	if (last_time + delay < mlx_get_time() && data->frames.type == AIM)
 	{
 		render_frames(data, &data->frames, AIM);
 		if (data->frames.aim_count == data->frames.max_aim - 1)
 			data->frames.type = 2;
 	}
-	else if (data->frames.last_time + FRAME_DELAY < mlx_get_time() && data->frames.type == FIRE)
+	else if (last_time + delay < mlx_get_time() && data->frames.type == FIRE)
 	{
 		render_frames(data, &data->frames, FIRE);
 		if (data->frames.fire_count == data->frames.max_fire - 1)
 			data->frames.type = 2;
 	}
-
 }

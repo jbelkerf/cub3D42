@@ -6,7 +6,7 @@
 /*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/04 11:52:58 by JbelkerfIse      ###   ########.fr       */
+/*   Updated: 2025/09/05 14:44:00 by JbelkerfIse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,9 @@ int	match_rgb(char *line)
 	64-> 0100 0000
 */
 
-void	check_map_header(char *file)
+void	check_map_header(char *file, int chk)
 {
 	int		fd;
-	int		chk;
 	char	*ln;
 
 	fd = open(file, O_RDONLY);
@@ -138,9 +137,6 @@ void	check_map_header(char *file)
 		else if (ln && !(chk & 64) && !ft_strncmp(ln, "C ", 2) && match_rgb(ln))
 			chk = chk | 64;
 		else
-		{
-			printf("line = %s", ln);
 			put_error("unexpected line", NULL);
-		}
 	}
 }
