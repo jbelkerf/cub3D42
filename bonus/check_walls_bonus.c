@@ -25,7 +25,8 @@ void	check_map_walls(char **map, int length)
 		{
 			if (ft_strchr2("0NEWSD", map[y][x]))
 			{
-				if (y == 0 || y == length - 1|| x == 0 || x == ft_strlen(map[y]))
+				if (y == 0 || y == length - 1 || x == 0
+					|| x == ft_strlen(map[y]))
 					put_error("map not soronded", map);
 				else if (!(ft_strchr2("0NEWS1D", map[y][x + 1])
 					&& ft_strchr2("0NEWS1D", map[y][x - 1])

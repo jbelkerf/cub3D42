@@ -86,16 +86,16 @@ int	match_rgb(char *line)
 	i = 2;
 	while (line[i] == ' ')
 		i++;
+	if (comma_count(line) != 2)
+		err = "too much comma in rgb";
 	colors = ft_split(line + i, ',');
 	free(line);
 	i = 0;
-	while (colors[i] && i < 3)
+	while (colors[i] && i < 3 && !err)
 	{
 		if (!is_valid_rgb(colors[i++]))
 			err = "invalid rgb";
 	}
-	if (i != 3 || colors[3])
-		err = "invalid rgb";
 	free_arr(colors);
 	if (err)
 		put_error(err, NULL);

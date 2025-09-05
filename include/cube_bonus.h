@@ -182,6 +182,7 @@ char		**map_to_str(char *file, int *length, int *width);
 char		*skipi_abdsami3(int file_fd);
 
 //ERRORS
+int			comma_count(char *line);
 void		put_error(char *err, char **map);
 
 // FREE RESOURCES

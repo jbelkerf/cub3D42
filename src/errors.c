@@ -12,6 +12,20 @@
 
 #include "../include/cube.h"
 
+int	comma_count(char *line)
+{
+	int	c;
+
+	c = 0;
+	while (*line)
+	{
+		if (*line == ',')
+			c++;
+		line++;
+	}
+	return (c);
+}
+
 void	put_error(char *err, char **map)
 {
 	printf(RED "Error\n\t");
