@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_func_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 12:20:17 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/09/05 16:11:40 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:32:54 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:32:57 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 23:15:31 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 15:21:09 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:33:53 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:33:54 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

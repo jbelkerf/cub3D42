@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 18:10:35 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/28 17:07:15 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:35:59 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:36:01 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

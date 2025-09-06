@@ -15,7 +15,7 @@ ORANGE= \033[38;5;208m
 RESET=\033[0m
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS=-Wall -Wextra -Werror 
 MLX=./MLX42/build/libmlx42.a
 
 BONUS_SRC = gnl/get_next_line.c gnl/get_next_line_utils.c \
@@ -58,7 +58,8 @@ $(NAME): $(SRC) include/cube.h
 	$(CC) $(CFLAGS) $(SRC) Libft/libft.a $(MLX) $(LFLAGS) -o $(NAME)
 
 bonus:$(NAME_BONUS)
-$(NAME_BONUS): $(BONUS_SRC)  include/cube_bonus.h $(NAME_BONUS)
+
+$(NAME_BONUS): $(BONUS_SRC)  include/cube_bonus.h 
 	@make -C Libft
 	@echo "$(ORANGE)  _______           ______   ______   ______  $(RESET)"
 	@echo "$(ORANGE) (  ____ \|\     /|(  ___ \ / ___  \ (  __  \ $(RESET)"

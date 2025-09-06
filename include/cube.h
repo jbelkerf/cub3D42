@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 18:48:37 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 16:13:11 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:34:57 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:35:00 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define ROTATE_SPEED 0.07
 # define FOV 60.0
 # define SCALE2D 20
-# define WINDOW_X 1500
+# define WINDOW_X 1000
 # define WINDOW_Y 1000
 # define MOVE_PIX 4
 # define VISIBILTY 255

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_doors_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:16:13 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/09/05 15:09:00 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:31:35 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:32:00 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

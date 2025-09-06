@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 13:41:24 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 20:56:13 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:35:22 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:35:23 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

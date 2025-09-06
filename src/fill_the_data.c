@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_the_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 13:09:17 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/08/27 20:56:31 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:35:48 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:35:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validity_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 21:00:00 by by Jbelkerf       #+#    #+#             */
-/*   Updated: 2025/09/05 14:44:14 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:33:41 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:33:43 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

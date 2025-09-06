@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_func_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 16:29:56 by aidnassa          #+#    #+#             */
-/*   Updated: 2025/09/05 16:12:52 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:33:02 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:33:04 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

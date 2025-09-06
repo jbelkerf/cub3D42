@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_header_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: JbelkerfIsel-mou <minishell>               +#+  +:+       +#+        */
+/*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 18:06:43 by JbelkerfIse       #+#    #+#             */
-/*   Updated: 2025/09/05 14:44:00 by JbelkerfIse      ###   ########.fr       */
+/*   Created: 2025/09/06 11:32:18 by jbelkerf          #+#    #+#             */
+/*   Updated: 2025/09/06 11:32:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
